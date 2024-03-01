@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://cmgsvrgq4y7sj"]
 
-[ext_resource type="PackedScene" uid="uid://bfl6g7v0iluf" path="res://spaceship.tscn" id="1_3tdbs"]
-[ext_resource type="Texture2D" uid="uid://cl87qgtufqlvk" path="res://Textures/spaceBackground.png" id="2_84wld"]
+[ext_resource type="PackedScene" uid="uid://bfl6g7v0iluf" path="res://Assets/Scenes/spaceship.tscn" id="1_mxnnf"]
+[ext_resource type="Texture2D" uid="uid://cl87qgtufqlvk" path="res://Assets/Textures/spaceBackground.png" id="2_h654r"]
 
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_hit8a"]
 b = Vector2(4000, 0)
@@ -14,7 +14,7 @@ b = Vector2(0, -649)
 
 [node name="Node2D" type="Node2D"]
 
-[node name="Spaceship" parent="." instance=ExtResource("1_3tdbs")]
+[node name="Spaceship" parent="." instance=ExtResource("1_mxnnf")]
 position = Vector2(125, 74)
 
 [node name="Camera2D" type="Camera2D" parent="Spaceship"]
@@ -53,4 +53,4 @@ motion_mirroring = Vector2(2000, 650)
 
 [node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer"]
 position = Vector2(1000, 325)
-texture = ExtResource("2_84wld")
+texture = ExtResource("2_h654r")

@@ -1,6 +1,7 @@
 extends RigidBody2D
 
 var direction = Vector2(cos(rotation), sin(rotation));
+var bulletID = preload("res://Assets/Scenes/bullet.tscn");
 
 func _process(delta):
 	direction = Vector2(cos(rotation), sin(rotation));
@@ -21,7 +22,6 @@ func _process(delta):
 		linear_velocity = linear_velocity.limit_length(get_meta("maxSpeed"));
 	
 	if Input.is_action_just_pressed("Fire"):
-		var bulletID = preload("res://bullet.tscn");
 		var bullet = bulletID.instantiate();
 		bullet.position = position;
 		get_parent().add_child(bullet);

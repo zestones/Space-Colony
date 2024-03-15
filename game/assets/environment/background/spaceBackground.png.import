@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dkxbpjurxheu1"
-path="res://.godot/imported/bulletPlaceholder.png-8c5da2b39e85c5c0b4cf5e9f23049fee.ctex"
+uid="uid://cl87qgtufqlvk"
+path="res://.godot/imported/spaceBackground.png-12a643bf987aab7ce555e05bfb975a42.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Textures/bulletPlaceholder.png"
-dest_files=["res://.godot/imported/bulletPlaceholder.png-8c5da2b39e85c5c0b4cf5e9f23049fee.ctex"]
+source_file="res://game/assets/environment/background/spaceBackground.png"
+dest_files=["res://.godot/imported/spaceBackground.png-12a643bf987aab7ce555e05bfb975a42.ctex"]
 
 [params]
 

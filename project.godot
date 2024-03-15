@@ -11,9 +11,8 @@ config_version=5
 [application]
 
 config/name="Spacegame Team"
-run/main_scene="res://Assets/Scenes/spacePrototype.tscn"
-config/features=PackedStringArray("4.2", "C#", "Mobile")
-config/icon="res://Assets/Textures/icon.svg"
+run/main_scene="res://game/src/Scenes/spacePrototype.tscn"
+config/features=PackedStringArray("4.2", "Mobile")
 
 [dotnet]
 

@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://cmgsvrgq4y7sj"]
 
-[ext_resource type="PackedScene" uid="uid://bfl6g7v0iluf" path="res://Assets/Scenes/spaceship.tscn" id="1_mxnnf"]
-[ext_resource type="Texture2D" uid="uid://cl87qgtufqlvk" path="res://Assets/Textures/spaceBackground.png" id="2_h654r"]
+[ext_resource type="PackedScene" uid="uid://bfl6g7v0iluf" path="res://game/src/Player/Spaceship/spaceship.tscn" id="1_mxnnf"]
+[ext_resource type="Texture2D" uid="uid://cl87qgtufqlvk" path="res://game/assets/environment/background/spaceBackground.png" id="2_h654r"]
 
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_hit8a"]
 b = Vector2(4000, 0)
@@ -15,17 +15,17 @@ b = Vector2(0, -649)
 [node name="Node2D" type="Node2D"]
 
 [node name="Spaceship" parent="." instance=ExtResource("1_mxnnf")]
-position = Vector2(125, 74)
+position = Vector2(2092, 324)
 
 [node name="Camera2D" type="Camera2D" parent="Spaceship"]
+zoom = Vector2(1.25, 1.25)
 limit_left = 0
 limit_top = 0
 limit_right = 4000
 limit_bottom = 650
+position_smoothing_speed = 20.0
 drag_horizontal_enabled = true
 drag_vertical_enabled = true
-drag_left_margin = 0.5
-drag_right_margin = 0.5
 editor_draw_drag_margin = true
 
 [node name="WorldBorder" type="StaticBody2D" parent="."]

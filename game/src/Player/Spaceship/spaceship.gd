@@ -1,7 +1,8 @@
 extends RigidBody2D
 
 var direction = Vector2(cos(rotation), sin(rotation));
-var bulletID = preload("res://Assets/Scenes/bullet.tscn");
+var bulletID = preload("res://game/src/Player/Spaceship/Bullet/bullet.tscn");
+
 
 func _process(delta):
 	direction = Vector2(cos(rotation), sin(rotation));

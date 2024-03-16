@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://bfl6g7v0iluf"]
 
-[ext_resource type="Script" path="res://game/src/Player/Spaceship/spaceship.gd" id="1_7fy6d"]
+[ext_resource type="Script" path="res://src/Player/Spaceship/spaceship.gd" id="1_7fy6d"]
 
 [node name="RigidBody2D" type="RigidBody2D"]
 gravity_scale = 0.0

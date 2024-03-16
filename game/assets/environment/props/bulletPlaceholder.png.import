@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://dkxbpjurxheu1"
-path="res://.godot/imported/bulletPlaceholder.png-bae6b2a7d84480741f8d71df956c5a6b.ctex"
+path="res://.godot/imported/bulletPlaceholder.png-c43c132e4d9872f034e2baec2d5b5ba0.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://game/assets/environment/props/bulletPlaceholder.png"
-dest_files=["res://.godot/imported/bulletPlaceholder.png-bae6b2a7d84480741f8d71df956c5a6b.ctex"]
+source_file="res://assets/environment/props/bulletPlaceholder.png"
+dest_files=["res://.godot/imported/bulletPlaceholder.png-c43c132e4d9872f034e2baec2d5b5ba0.ctex"]
 
 [params]
 

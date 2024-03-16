@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://cmgsvrgq4y7sj"]
 
-[ext_resource type="PackedScene" uid="uid://bfl6g7v0iluf" path="res://game/src/Player/Spaceship/spaceship.tscn" id="1_mxnnf"]
-[ext_resource type="Texture2D" uid="uid://cl87qgtufqlvk" path="res://game/assets/environment/background/spaceBackground.png" id="2_h654r"]
+[ext_resource type="PackedScene" uid="uid://bfl6g7v0iluf" path="res://src/Player/Spaceship/spaceship.tscn" id="1_mxnnf"]
+[ext_resource type="Texture2D" uid="uid://cl87qgtufqlvk" path="res://assets/environment/background/spaceBackground.png" id="2_h654r"]
 
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_hit8a"]
 b = Vector2(4000, 0)

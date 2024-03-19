@@ -2,19 +2,18 @@
 
 [ext_resource type="Script" path="res://src/Player/Spaceship/spaceship.gd" id="1_7fy6d"]
 
-[node name="RigidBody2D" type="RigidBody2D"]
-gravity_scale = 0.0
+[node name="Spaceship" type="CharacterBody2D"]
 script = ExtResource("1_7fy6d")
-metadata/rotationalAcceleration = 10.0
-metadata/acceleration = 50.0
 metadata/uniformRotation = true
-metadata/uniformMovement = false
-metadata/maxSpeed = 150.0
-metadata/maxRotationalSpeed = 180.0
+metadata/uniformMovement = true
+metadata/maxSpeed = 200.0
+metadata/acceleration = 50.0
+metadata/maxRotationalSpeed = 360.0
+metadata/rotationalAcceleration = 180.0
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
-polygon = PackedVector2Array(-10, -10, 10, 0, -10, 10)
-
-[node name="Polygon2D" type="Polygon2D" parent="CollisionPolygon2D"]
+[node name="Polygon2D2" type="Polygon2D" parent="."]
 position = Vector2(-30, -20)
 polygon = PackedVector2Array(20, 10, 40, 20, 20, 30)
+
+[node name="CollisionPolygon2D2" type="CollisionPolygon2D" parent="."]
+polygon = PackedVector2Array(-10, -10, 10, 0, -10, 10)

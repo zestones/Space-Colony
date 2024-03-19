@@ -1,10 +1,15 @@
-[gd_scene load_steps=7 format=3 uid="uid://bx4gc8nkycfjg"]
+[gd_scene load_steps=12 format=3 uid="uid://bx4gc8nkycfjg"]
 
 [ext_resource type="Texture2D" uid="uid://dkxbpjurxheu1" path="res://assets/environment/props/bulletPlaceholder.png" id="1_r5t2e"]
 [ext_resource type="Script" path="res://Scripts/Inventory.cs" id="1_trrf8"]
 [ext_resource type="Script" path="res://Scripts/BuildMode.cs" id="3_wvklm"]
 [ext_resource type="Resource" uid="uid://cfgypdlefietr" path="res://Game/Resources/Buildings/HouseResource.tres" id="4_tj8no"]
 [ext_resource type="Resource" uid="uid://buicvh5e8acsx" path="res://Game/Resources/Buildings/MinerResource.tres" id="5_pj40i"]
+[ext_resource type="Script" path="res://Scripts/BuildingButton.cs" id="6_7m0y2"]
+[ext_resource type="Resource" uid="uid://bmno7l8f0ovm6" path="res://Game/Resources/Materials/WoodResource.tres" id="6_s6ryk"]
+[ext_resource type="Script" path="res://Scripts/DebugAddMaterial.cs" id="7_3gy1r"]
+[ext_resource type="Resource" uid="uid://dowdqnhx1ua5o" path="res://Game/Resources/Materials/StoneResource.tres" id="8_wv3nr"]
+[ext_resource type="Resource" uid="uid://dpl3tn7xp6nvq" path="res://Game/Resources/Materials/PureMetalResource.tres" id="9_03ewo"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_jurem"]
 
@@ -25,11 +30,11 @@ texture = ExtResource("1_r5t2e")
 [node name="BuildMode" type="Node" parent="PlayerGround" node_paths=PackedStringArray("buildMenu")]
 script = ExtResource("3_wvklm")
 buildings = Array[Resource]([ExtResource("4_tj8no"), ExtResource("5_pj40i")])
-buildMenu = NodePath("../../CanvasLayer/ColorRect")
+buildMenu = NodePath("../../CanvasLayer/BuildMenu")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
-[node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
+[node name="BuildMenu" type="ColorRect" parent="CanvasLayer"]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -43,7 +48,7 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0, 0, 0, 0.368627)
 
-[node name="Button" type="Button" parent="CanvasLayer/ColorRect"]
+[node name="Button" type="Button" parent="CanvasLayer/BuildMenu" node_paths=PackedStringArray("inventory")]
 layout_mode = 0
 offset_left = 67.0
 offset_top = 96.0
@@ -51,11 +56,53 @@ offset_right = 167.0
 offset_bottom = 138.0
 action_mode = 0
 text = "Building 1"
+script = ExtResource("6_7m0y2")
+building = ExtResource("4_tj8no")
+inventory = NodePath("../../../PlayerGround/Inventory")
 
-[node name="Button2" type="Button" parent="CanvasLayer/ColorRect"]
+[node name="Button2" type="Button" parent="CanvasLayer/BuildMenu" node_paths=PackedStringArray("inventory")]
 layout_mode = 0
 offset_left = 317.0
 offset_top = 96.0
 offset_right = 417.0
 offset_bottom = 138.0
 text = "Building 2"
+script = ExtResource("6_7m0y2")
+building = ExtResource("5_pj40i")
+inventory = NodePath("../../../PlayerGround/Inventory")
+
+[node name="Button" type="Button" parent="CanvasLayer" node_paths=PackedStringArray("inventory")]
+material = ExtResource("6_s6ryk")
+offset_left = 3.0
+offset_top = 3.0
+offset_right = 69.0
+offset_bottom = 34.0
+text = "Wood"
+script = ExtResource("7_3gy1r")
+material = ExtResource("6_s6ryk")
+amount = 10
+inventory = NodePath("../../PlayerGround/Inventory")
+
+[node name="Button2" type="Button" parent="CanvasLayer" node_paths=PackedStringArray("inventory")]
+material = ExtResource("8_wv3nr")
+offset_left = 2.0
+offset_top = 36.0
+offset_right = 68.0
+offset_bottom = 67.0
+text = "Stone"
+script = ExtResource("7_3gy1r")
+material = ExtResource("8_wv3nr")
+amount = 10
+inventory = NodePath("../../PlayerGround/Inventory")
+
+[node name="Button3" type="Button" parent="CanvasLayer" node_paths=PackedStringArray("inventory")]
+material = ExtResource("9_03ewo")
+offset_left = 2.0
+offset_top = 69.0
+offset_right = 95.0
+offset_bottom = 100.0
+text = "Pure Metal"
+script = ExtResource("7_3gy1r")
+material = ExtResource("9_03ewo")
+amount = 10
+inventory = NodePath("../../PlayerGround/Inventory")

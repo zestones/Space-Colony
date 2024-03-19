@@ -1,0 +1,9 @@
+[gd_resource type="Resource" load_steps=2 format=3 uid="uid://1dlrmqiry7d0"]
+
+[ext_resource type="Script" path="res://Scripts/MaterialResource.cs" id="1_tyolp"]
+
+[resource]
+script = ExtResource("1_tyolp")
+materialLocation = 0
+materialType = 0
+materialName = "Pure Metal"

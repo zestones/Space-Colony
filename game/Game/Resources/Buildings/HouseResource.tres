@@ -1,0 +1,13 @@
+[gd_resource type="Resource" load_steps=4 format=3 uid="uid://cfgypdlefietr"]
+
+[ext_resource type="Resource" uid="uid://bmno7l8f0ovm6" path="res://Game/Resources/Materials/WoodResource.tres" id="1_2m63v"]
+[ext_resource type="Resource" uid="uid://dowdqnhx1ua5o" path="res://Game/Resources/Materials/StoneResource.tres" id="2_r1fiy"]
+[ext_resource type="Script" path="res://Scripts/BuildingResource.cs" id="3_epdfv"]
+
+[resource]
+script = ExtResource("3_epdfv")
+buildingName = "House"
+buildingMaterials = {
+ExtResource("1_2m63v"): 25,
+ExtResource("2_r1fiy"): 5
+}

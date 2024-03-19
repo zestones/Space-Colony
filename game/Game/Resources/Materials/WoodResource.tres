@@ -1,0 +1,9 @@
+[gd_resource type="Resource" load_steps=2 format=3 uid="uid://bmno7l8f0ovm6"]
+
+[ext_resource type="Script" path="res://Scripts/MaterialResource.cs" id="1_hcv7f"]
+
+[resource]
+script = ExtResource("1_hcv7f")
+materialLocation = 0
+materialType = 0
+materialName = "Wood"

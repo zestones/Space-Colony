@@ -1,0 +1,61 @@
+[gd_scene load_steps=7 format=3 uid="uid://bx4gc8nkycfjg"]
+
+[ext_resource type="Texture2D" uid="uid://dkxbpjurxheu1" path="res://assets/environment/props/bulletPlaceholder.png" id="1_r5t2e"]
+[ext_resource type="Script" path="res://Scripts/Inventory.cs" id="1_trrf8"]
+[ext_resource type="Script" path="res://Scripts/BuildMode.cs" id="3_wvklm"]
+[ext_resource type="Resource" uid="uid://cfgypdlefietr" path="res://Game/Resources/Buildings/HouseResource.tres" id="4_tj8no"]
+[ext_resource type="Resource" uid="uid://buicvh5e8acsx" path="res://Game/Resources/Buildings/MinerResource.tres" id="5_pj40i"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_jurem"]
+
+[node name="Ground" type="Node2D"]
+
+[node name="PlayerGround" type="CharacterBody2D" parent="."]
+position = Vector2(584, 352)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerGround"]
+shape = SubResource("CircleShape2D_jurem")
+
+[node name="Inventory" type="Node" parent="PlayerGround"]
+script = ExtResource("1_trrf8")
+
+[node name="Sprite2D" type="Sprite2D" parent="PlayerGround"]
+texture = ExtResource("1_r5t2e")
+
+[node name="BuildMode" type="Node" parent="PlayerGround" node_paths=PackedStringArray("buildMenu")]
+script = ExtResource("3_wvklm")
+buildings = Array[Resource]([ExtResource("4_tj8no"), ExtResource("5_pj40i")])
+buildMenu = NodePath("../../CanvasLayer/ColorRect")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -233.0
+offset_top = -125.0
+offset_right = 233.0
+offset_bottom = 125.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.368627)
+
+[node name="Button" type="Button" parent="CanvasLayer/ColorRect"]
+layout_mode = 0
+offset_left = 67.0
+offset_top = 96.0
+offset_right = 167.0
+offset_bottom = 138.0
+action_mode = 0
+text = "Building 1"
+
+[node name="Button2" type="Button" parent="CanvasLayer/ColorRect"]
+layout_mode = 0
+offset_left = 317.0
+offset_top = 96.0
+offset_right = 417.0
+offset_bottom = 138.0
+text = "Building 2"

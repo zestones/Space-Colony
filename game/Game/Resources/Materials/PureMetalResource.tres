@@ -1,0 +1,9 @@
+[gd_resource type="Resource" load_steps=2 format=3 uid="uid://dpl3tn7xp6nvq"]
+
+[ext_resource type="Script" path="res://Scripts/MaterialResource.cs" id="1_jkmaj"]
+
+[resource]
+script = ExtResource("1_jkmaj")
+materialLocation = 0
+materialType = 0
+materialName = "Pure Metal"

@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="UniversalInventory" load_steps=4 format=3 uid="uid://3t24js65homg"]
+
+[ext_resource type="Script" path="res://game/src/Player/Ground/InventoryResources/InventoryResource.gd" id="1_77han"]
+[ext_resource type="Resource" uid="uid://bog1obr4s7rgy" path="res://game/src/Player/Ground/InventoryResources/Minerals/Glofium.tres" id="1_xqai3"]
+[ext_resource type="Resource" uid="uid://clpqh110n4sj7" path="res://game/src/Player/Ground/InventoryResources/Minerals/Rotion.tres" id="2_0rbp1"]
+
+[resource]
+script = ExtResource("1_77han")
+Items = Array[Resource("res://game/src/Player/Ground/InventoryResources/ItemResource.gd")]([ExtResource("1_xqai3"), ExtResource("2_0rbp1"), null, null, null, null, null, null, null, null, null, null])
+Owner = "Player"

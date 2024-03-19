@@ -1,16 +1,7 @@
-[gd_scene load_steps=6 format=3 uid="uid://cmgsvrgq4y7sj"]
+[gd_scene load_steps=3 format=3 uid="uid://cmgsvrgq4y7sj"]
 
 [ext_resource type="PackedScene" uid="uid://bfl6g7v0iluf" path="res://game/src/Player/Spaceship/spaceship.tscn" id="1_mxnnf"]
 [ext_resource type="Texture2D" uid="uid://cl87qgtufqlvk" path="res://game/assets/environment/background/spaceBackground.png" id="2_h654r"]
-
-[sub_resource type="SegmentShape2D" id="SegmentShape2D_hit8a"]
-b = Vector2(4000, 0)
-
-[sub_resource type="SegmentShape2D" id="SegmentShape2D_7ijal"]
-b = Vector2(4000, 0)
-
-[sub_resource type="SegmentShape2D" id="SegmentShape2D_x25mi"]
-b = Vector2(0, -649)
 
 [node name="Node2D" type="Node2D"]
 
@@ -19,32 +10,14 @@ position = Vector2(2092, 324)
 
 [node name="Camera2D" type="Camera2D" parent="Spaceship"]
 zoom = Vector2(1.25, 1.25)
-limit_left = 0
-limit_top = 0
 limit_right = 4000
 limit_bottom = 650
+limit_smoothed = true
+position_smoothing_enabled = true
 position_smoothing_speed = 20.0
 drag_horizontal_enabled = true
 drag_vertical_enabled = true
 editor_draw_drag_margin = true
-
-[node name="WorldBorder" type="StaticBody2D" parent="."]
-
-[node name="Top" type="CollisionShape2D" parent="WorldBorder"]
-position = Vector2(0, -1)
-shape = SubResource("SegmentShape2D_hit8a")
-
-[node name="Bottom" type="CollisionShape2D" parent="WorldBorder"]
-position = Vector2(0, 649)
-shape = SubResource("SegmentShape2D_7ijal")
-
-[node name="Left" type="CollisionShape2D" parent="WorldBorder"]
-position = Vector2(-1, 649)
-shape = SubResource("SegmentShape2D_x25mi")
-
-[node name="Right" type="CollisionShape2D" parent="WorldBorder"]
-position = Vector2(4000, 650)
-shape = SubResource("SegmentShape2D_x25mi")
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
 

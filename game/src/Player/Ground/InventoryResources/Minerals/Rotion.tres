@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="UniversalItem" load_steps=3 format=3 uid="uid://clpqh110n4sj7"]
+
+[ext_resource type="Texture2D" uid="uid://d4dm72hkk2cpb" path="res://game/assets/environment/Resources/Ore-3.png" id="1_oouod"]
+[ext_resource type="Script" path="res://game/src/Player/Ground/InventoryResources/ItemResource.gd" id="2_hg2i8"]
+
+[resource]
+script = ExtResource("2_hg2i8")
+Name = "Rotion"
+IconTex = ExtResource("1_oouod")
+Health = 13.0
+Cost = 25

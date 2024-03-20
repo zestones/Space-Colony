@@ -1,31 +1,50 @@
-[gd_scene load_steps=12 format=3 uid="uid://bx4gc8nkycfjg"]
+[gd_scene load_steps=16 format=3 uid="uid://bx4gc8nkycfjg"]
 
 [ext_resource type="Texture2D" uid="uid://dkxbpjurxheu1" path="res://assets/environment/props/bulletPlaceholder.png" id="1_r5t2e"]
 [ext_resource type="Script" path="res://Scripts/Inventory.cs" id="1_trrf8"]
+[ext_resource type="Script" path="res://Scripts/MoveInputComponent.cs" id="2_ojpan"]
 [ext_resource type="Script" path="res://Scripts/BuildMode.cs" id="3_wvklm"]
 [ext_resource type="Resource" uid="uid://cfgypdlefietr" path="res://Game/Resources/Buildings/HouseResource.tres" id="4_tj8no"]
 [ext_resource type="Resource" uid="uid://buicvh5e8acsx" path="res://Game/Resources/Buildings/MinerResource.tres" id="5_pj40i"]
 [ext_resource type="Script" path="res://Scripts/BuildingButton.cs" id="6_7m0y2"]
+[ext_resource type="Script" path="res://Scripts/MoveComponent.cs" id="6_bo6mw"]
 [ext_resource type="Resource" uid="uid://bmno7l8f0ovm6" path="res://Game/Resources/Materials/WoodResource.tres" id="6_s6ryk"]
 [ext_resource type="Script" path="res://Scripts/DebugAddMaterial.cs" id="7_3gy1r"]
 [ext_resource type="Resource" uid="uid://dowdqnhx1ua5o" path="res://Game/Resources/Materials/StoneResource.tres" id="8_wv3nr"]
 [ext_resource type="Resource" uid="uid://dpl3tn7xp6nvq" path="res://Game/Resources/Materials/PureMetalResource.tres" id="9_03ewo"]
+[ext_resource type="Script" path="res://Scripts/BuildingCSharp.cs" id="13_74lnq"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_jurem"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_h8iem"]
+size = Vector2(20, 40)
 
 [node name="Ground" type="Node2D"]
 
 [node name="PlayerGround" type="CharacterBody2D" parent="."]
-position = Vector2(584, 352)
+z_index = 1
+position = Vector2(585, 352)
+collision_layer = 2
+collision_mask = 2
+
+[node name="Components" type="Node" parent="PlayerGround"]
+
+[node name="MoveComponent" type="Node" parent="PlayerGround/Components" node_paths=PackedStringArray("character")]
+script = ExtResource("6_bo6mw")
+character = NodePath("../..")
+
+[node name="MoveInputComponent" type="Node" parent="PlayerGround/Components" node_paths=PackedStringArray("moveComponent")]
+script = ExtResource("2_ojpan")
+moveComponent = NodePath("../MoveComponent")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerGround"]
 shape = SubResource("CircleShape2D_jurem")
 
-[node name="Inventory" type="Node" parent="PlayerGround"]
-script = ExtResource("1_trrf8")
-
 [node name="Sprite2D" type="Sprite2D" parent="PlayerGround"]
 texture = ExtResource("1_r5t2e")
+
+[node name="Inventory" type="Node" parent="PlayerGround"]
+script = ExtResource("1_trrf8")
 
 [node name="BuildMode" type="Node" parent="PlayerGround" node_paths=PackedStringArray("buildMenu")]
 script = ExtResource("3_wvklm")
@@ -106,3 +125,19 @@ script = ExtResource("7_3gy1r")
 material = ExtResource("9_03ewo")
 amount = 10
 inventory = NodePath("../../PlayerGround/Inventory")
+
+[node name="Area2D" type="Area2D" parent="." node_paths=PackedStringArray("buildMode", "polygon")]
+position = Vector2(540, 356)
+collision_layer = 2
+collision_mask = 3
+script = ExtResource("13_74lnq")
+buildMode = NodePath("../PlayerGround/BuildMode")
+polygon = NodePath("Polygon2D")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(10, -20)
+shape = SubResource("RectangleShape2D_h8iem")
+
+[node name="Polygon2D" type="Polygon2D" parent="Area2D"]
+color = Color(0.961351, 0.514195, 0.637137, 1)
+polygon = PackedVector2Array(20, -40, 20, 0, 0, 0, 0, -40)

@@ -6,7 +6,7 @@ public partial class BuildMode : Node
 	[Export] private BuildingResource[] buildings;
 	[Export] private ColorRect buildMenu;
 
-	private bool inBuildMode;
+	public bool inBuildMode;
 	private bool inBuildMenu;
 
 	public override void _Ready()

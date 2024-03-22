@@ -1,13 +1,13 @@
 extends CharacterBody2D
 
 var direction = Vector2(cos(rotation), sin(rotation));
-var bulletID = preload ("res://src/Player/Spaceship/Bullet/bullet.tscn");
+var bulletID = preload ("res://src/player/spaceship/bullet/bullet.tscn");
 #var linear_velocity = Vector2.ZERO;
 var angular_velocity = 0;
 
 func _process(delta):
 	direction = Vector2(cos(rotation), sin(rotation));
-	var input = Input.get_vector("Left", "Right", "Down", "Up").normalized();#Vector2(Input.get_axis("Left", "Right"), Input.get_axis("Down", "Up"));
+	var input = Input.get_vector("Left", "Right", "Down", "Up").normalized(); # Vector2(Input.get_axis("Left", "Right"), Input.get_axis("Down", "Up"));
 
 	if get_meta("uniformRotation"):
 		angular_velocity = input.x * get_meta("maxRotationalSpeed");
@@ -30,4 +30,3 @@ func _process(delta):
 	
 	move_and_slide();
 	rotate(deg_to_rad(angular_velocity) * delta);
-	print_debug(str(angular_velocity) + ", " + str(rotation_degrees));

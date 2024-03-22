@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cl87qgtufqlvk"
-path="res://.godot/imported/spaceBackground.png-12a643bf987aab7ce555e05bfb975a42.ctex"
+uid="uid://dd6lw5eap0oe7"
+path="res://.godot/imported/SelectOverlay.png-bc82333c3caf776285d6ea33b1dde32f.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://game/assets/environment/background/spaceBackground.png"
-dest_files=["res://.godot/imported/spaceBackground.png-12a643bf987aab7ce555e05bfb975a42.ctex"]
+source_file="res://game/assets/environment/UI-Assets/SelectOverlay.png"
+dest_files=["res://.godot/imported/SelectOverlay.png-bc82333c3caf776285d6ea33b1dde32f.ctex"]
 
 [params]
 

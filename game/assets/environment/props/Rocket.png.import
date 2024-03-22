@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cl87qgtufqlvk"
-path="res://.godot/imported/spaceBackground.png-12a643bf987aab7ce555e05bfb975a42.ctex"
+uid="uid://vm4ty13udaxj"
+path="res://.godot/imported/Rocket.png-cf018c20362d17c536b9bec186b8c533.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://game/assets/environment/background/spaceBackground.png"
-dest_files=["res://.godot/imported/spaceBackground.png-12a643bf987aab7ce555e05bfb975a42.ctex"]
+source_file="res://game/assets/environment/props/Rocket.png"
+dest_files=["res://.godot/imported/Rocket.png-cf018c20362d17c536b9bec186b8c533.ctex"]
 
 [params]
 

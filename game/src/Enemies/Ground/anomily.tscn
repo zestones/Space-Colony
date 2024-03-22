@@ -1,0 +1,114 @@
+[gd_scene load_steps=8 format=3 uid="uid://b8heo8cgbueyl"]
+
+[ext_resource type="Script" path="res://game/src/Enemies/Ground/AnomilyBase.gd" id="1_ufvu6"]
+[ext_resource type="Texture2D" uid="uid://dmnb7t5wv28pe" path="res://game/assets/Entities/Enemy.png" id="2_3etlq"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_yvfjo"]
+size = Vector2(51, 102)
+
+[sub_resource type="Animation" id="Animation_728vr"]
+resource_name = "Idle"
+length = 0.65
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Graphics/Enemy:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3]
+}
+
+[sub_resource type="Animation" id="Animation_bt7fv"]
+resource_name = "Walk"
+length = 0.65
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Graphics/Enemy:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [4, 5, 6, 7]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_niiqf"]
+_data = {
+"Idle": SubResource("Animation_728vr"),
+"Walk": SubResource("Animation_bt7fv")
+}
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_613tt"]
+
+[node name="Anomily" type="CharacterBody2D"]
+script = ExtResource("1_ufvu6")
+JumpDistance = 50.62
+AlertDistance = 80.0
+LOS = 116.2
+UseGravity = false
+
+[node name="Collider" type="CollisionShape2D" parent="."]
+z_index = 1
+position = Vector2(-0.5, -3)
+shape = SubResource("RectangleShape2D_yvfjo")
+
+[node name="AI" type="Node2D" parent="."]
+
+[node name="GroundDetector" type="Node2D" parent="AI"]
+
+[node name="BackRay" type="RayCast2D" parent="AI/GroundDetector"]
+position = Vector2(32, 0)
+
+[node name="FrontRay" type="RayCast2D" parent="AI/GroundDetector"]
+position = Vector2(-34, 0)
+
+[node name="JumpDetector" type="Node2D" parent="AI/GroundDetector"]
+
+[node name="JumpDistanceFront" type="RayCast2D" parent="AI/GroundDetector/JumpDetector"]
+position = Vector2(0, 48)
+target_position = Vector2(50, 0)
+
+[node name="JumpDistanceBack" type="RayCast2D" parent="AI/GroundDetector/JumpDetector"]
+position = Vector2(0, 48)
+target_position = Vector2(-50, 0)
+
+[node name="Eyes" type="Node2D" parent="AI"]
+
+[node name="LOSBack" type="RayCast2D" parent="AI/Eyes"]
+position = Vector2(73, -37)
+target_position = Vector2(100, 0)
+
+[node name="LOSFront" type="RayCast2D" parent="AI/Eyes"]
+position = Vector2(-83, -37)
+target_position = Vector2(-100, 0)
+
+[node name="Graphics" type="Node2D" parent="."]
+
+[node name="Animator" type="AnimationPlayer" parent="Graphics"]
+root_node = NodePath("../..")
+libraries = {
+"": SubResource("AnimationLibrary_niiqf")
+}
+autoplay = "Idle"
+
+[node name="Enemy" type="Sprite2D" parent="Graphics"]
+texture_filter = 1
+position = Vector2(-5.96046e-08, 5.96046e-08)
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("2_3etlq")
+hframes = 4
+vframes = 2
+
+[node name="RangeDetector" type="Area2D" parent="."]
+
+[node name="Detector" type="CollisionShape2D" parent="RangeDetector"]
+scale = Vector2(8, 8)
+shape = SubResource("CircleShape2D_613tt")

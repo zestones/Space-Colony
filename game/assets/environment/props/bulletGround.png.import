@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cl87qgtufqlvk"
-path="res://.godot/imported/spaceBackground.png-12a643bf987aab7ce555e05bfb975a42.ctex"
+uid="uid://c28djl1oqpbon"
+path="res://.godot/imported/bulletGround.png-1073a44013ff124d0e194cfd7b04004b.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://game/assets/environment/background/spaceBackground.png"
-dest_files=["res://.godot/imported/spaceBackground.png-12a643bf987aab7ce555e05bfb975a42.ctex"]
+source_file="res://game/assets/environment/props/bulletGround.png"
+dest_files=["res://.godot/imported/bulletGround.png-1073a44013ff124d0e194cfd7b04004b.ctex"]
 
 [params]
 

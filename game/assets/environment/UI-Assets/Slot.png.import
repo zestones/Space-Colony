@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cl87qgtufqlvk"
-path="res://.godot/imported/spaceBackground.png-12a643bf987aab7ce555e05bfb975a42.ctex"
+uid="uid://bp3sibhpvis8h"
+path="res://.godot/imported/Slot.png-6c09b77d23073104a2b4f08f12d29e2e.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://game/assets/environment/background/spaceBackground.png"
-dest_files=["res://.godot/imported/spaceBackground.png-12a643bf987aab7ce555e05bfb975a42.ctex"]
+source_file="res://game/assets/environment/UI-Assets/Slot.png"
+dest_files=["res://.godot/imported/Slot.png-6c09b77d23073104a2b4f08f12d29e2e.ctex"]
 
 [params]
 

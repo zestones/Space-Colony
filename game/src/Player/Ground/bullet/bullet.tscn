@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=3 uid="uid://nxg0tyh23wdr"]
+
+[ext_resource type="Script" path="res://game/src/Player/Ground/bullet/bullet.gd" id="1_bppbc"]
+[ext_resource type="Texture2D" uid="uid://c28djl1oqpbon" path="res://game/assets/environment/props/bulletGround.png" id="1_v262k"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3c8xn"]
+size = Vector2(18, 4)
+
+[node name="Bullet" type="Area2D"]
+z_index = -1
+script = ExtResource("1_bppbc")
+
+[node name="BulletGround" type="Sprite2D" parent="."]
+position = Vector2(10, 0)
+texture = ExtResource("1_v262k")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(10, 0)
+shape = SubResource("RectangleShape2D_3c8xn")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

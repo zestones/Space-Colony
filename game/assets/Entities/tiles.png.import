@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cl87qgtufqlvk"
-path="res://.godot/imported/spaceBackground.png-12a643bf987aab7ce555e05bfb975a42.ctex"
+uid="uid://dug1c52duihte"
+path="res://.godot/imported/tiles.png-c4e90fe82a58ed531d3feec22e903035.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://game/assets/environment/background/spaceBackground.png"
-dest_files=["res://.godot/imported/spaceBackground.png-12a643bf987aab7ce555e05bfb975a42.ctex"]
+source_file="res://game/assets/Entities/tiles.png"
+dest_files=["res://.godot/imported/tiles.png-c4e90fe82a58ed531d3feec22e903035.ctex"]
 
 [params]
 

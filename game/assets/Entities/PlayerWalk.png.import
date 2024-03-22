@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cl87qgtufqlvk"
-path="res://.godot/imported/spaceBackground.png-12a643bf987aab7ce555e05bfb975a42.ctex"
+uid="uid://dt0ei253ekcak"
+path="res://.godot/imported/PlayerWalk.png-ab03fb2db43d5f76620ccce90eae2858.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://game/assets/environment/background/spaceBackground.png"
-dest_files=["res://.godot/imported/spaceBackground.png-12a643bf987aab7ce555e05bfb975a42.ctex"]
+source_file="res://game/assets/Entities/PlayerWalk.png"
+dest_files=["res://.godot/imported/PlayerWalk.png-ab03fb2db43d5f76620ccce90eae2858.ctex"]
 
 [params]
 

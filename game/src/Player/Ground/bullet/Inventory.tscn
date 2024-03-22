@@ -1,0 +1,76 @@
+[gd_scene load_steps=5 format=3 uid="uid://cj50w8urojt5t"]
+
+[ext_resource type="Texture2D" uid="uid://bwqp5sirhkkg6" path="res://game/assets/environment/UI-Assets/Inventory.png" id="1_jaacp"]
+[ext_resource type="Script" path="res://game/src/Player/Ground/bullet/InventoryManager.gd" id="1_lrxp3"]
+[ext_resource type="FontFile" uid="uid://c4kjrkufs7li7" path="res://game/assets/environment/UI-Assets/Planes_ValMore.ttf" id="2_i4vh6"]
+[ext_resource type="PackedScene" uid="uid://h5634joq3pu1" path="res://game/src/Player/Ground/bullet/Slot.tscn" id="4_eanns"]
+
+[node name="Inventory_UI" type="Control"]
+texture_filter = 1
+layout_mode = 3
+anchors_preset = 0
+offset_left = 1.0
+offset_right = 400.0
+offset_bottom = 393.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_lrxp3")
+
+[node name="Inventory" type="Sprite2D" parent="."]
+position = Vector2(198, 196)
+texture = ExtResource("1_jaacp")
+
+[node name="GridContainer" type="GridContainer" parent="Inventory"]
+offset_left = -152.0
+offset_top = -107.0
+offset_right = 155.0
+offset_bottom = 133.0
+theme_override_constants/h_separation = 80
+theme_override_constants/v_separation = 85
+columns = 4
+
+[node name="Panel1" parent="Inventory/GridContainer" instance=ExtResource("4_eanns")]
+layout_mode = 2
+
+[node name="Panel2" parent="Inventory/GridContainer" instance=ExtResource("4_eanns")]
+layout_mode = 2
+
+[node name="Panel3" parent="Inventory/GridContainer" instance=ExtResource("4_eanns")]
+layout_mode = 2
+
+[node name="Panel4" parent="Inventory/GridContainer" instance=ExtResource("4_eanns")]
+layout_mode = 2
+
+[node name="Panel5" parent="Inventory/GridContainer" instance=ExtResource("4_eanns")]
+layout_mode = 2
+
+[node name="Panel6" parent="Inventory/GridContainer" instance=ExtResource("4_eanns")]
+layout_mode = 2
+
+[node name="Panel7" parent="Inventory/GridContainer" instance=ExtResource("4_eanns")]
+layout_mode = 2
+
+[node name="Panel8" parent="Inventory/GridContainer" instance=ExtResource("4_eanns")]
+layout_mode = 2
+
+[node name="Panel9" parent="Inventory/GridContainer" instance=ExtResource("4_eanns")]
+layout_mode = 2
+
+[node name="Panel10" parent="Inventory/GridContainer" instance=ExtResource("4_eanns")]
+layout_mode = 2
+
+[node name="Panel11" parent="Inventory/GridContainer" instance=ExtResource("4_eanns")]
+layout_mode = 2
+
+[node name="Panel12" parent="Inventory/GridContainer" instance=ExtResource("4_eanns")]
+layout_mode = 2
+
+[node name="Text" type="RichTextLabel" parent="Inventory"]
+texture_filter = 1
+offset_left = -132.0
+offset_top = -174.0
+offset_right = 150.0
+offset_bottom = -109.0
+theme_override_fonts/normal_font = ExtResource("2_i4vh6")
+theme_override_font_sizes/normal_font_size = 60
+text = "Inventory"

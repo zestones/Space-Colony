@@ -10,18 +10,18 @@ b = Vector2(4000, 0)
 b = Vector2(4000, 0)
 
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_x25mi"]
-b = Vector2(0, -649)
+b = Vector2(0, 720)
 
 [node name="Node2D" type="Node2D"]
 
 [node name="Spaceship" parent="." instance=ExtResource("1_mxnnf")]
-position = Vector2(2092, 324)
+position = Vector2(2000, 360)
 
 [node name="Camera2D" type="Camera2D" parent="Spaceship"]
 limit_left = 0
 limit_top = 0
 limit_right = 4000
-limit_bottom = 650
+limit_bottom = 720
 position_smoothing_speed = 20.0
 drag_horizontal_enabled = true
 drag_vertical_enabled = true
@@ -34,15 +34,15 @@ position = Vector2(0, -1)
 shape = SubResource("SegmentShape2D_hit8a")
 
 [node name="Bottom" type="CollisionShape2D" parent="WorldBorder"]
-position = Vector2(0, 649)
+position = Vector2(0, 720)
 shape = SubResource("SegmentShape2D_7ijal")
 
 [node name="Left" type="CollisionShape2D" parent="WorldBorder"]
-position = Vector2(-1, 649)
+position = Vector2(-1, 0)
 shape = SubResource("SegmentShape2D_x25mi")
 
 [node name="Right" type="CollisionShape2D" parent="WorldBorder"]
-position = Vector2(4000, 650)
+position = Vector2(4000, 0)
 shape = SubResource("SegmentShape2D_x25mi")
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]

@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://cmgsvrgq4y7sj"]
 
-[ext_resource type="PackedScene" uid="uid://bfl6g7v0iluf" path="res://src/Player/Spaceship/spaceship.tscn" id="1_mxnnf"]
+[ext_resource type="PackedScene" uid="uid://dm4635q7ek573" path="res://src/Player/Spaceship/spaceshipRevised.tscn" id="1_3gb66"]
 [ext_resource type="Texture2D" uid="uid://cl87qgtufqlvk" path="res://assets/environment/background/spaceBackground.png" id="2_h654r"]
 
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_hit8a"]
@@ -14,10 +14,10 @@ b = Vector2(0, 720)
 
 [node name="Node2D" type="Node2D"]
 
-[node name="Spaceship" parent="." instance=ExtResource("1_mxnnf")]
+[node name="Spaceship2" parent="." instance=ExtResource("1_3gb66")]
 position = Vector2(2000, 360)
 
-[node name="Camera2D" type="Camera2D" parent="Spaceship"]
+[node name="Camera2D" type="Camera2D" parent="Spaceship2"]
 limit_left = 0
 limit_top = 0
 limit_right = 4000

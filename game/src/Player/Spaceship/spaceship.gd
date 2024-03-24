@@ -2,7 +2,6 @@ extends CharacterBody2D
 
 var direction = Vector2(cos(rotation), sin(rotation));
 var bulletID = preload ("res://src/Player/Spaceship/Bullet/bullet.tscn");
-#var linear_velocity = Vector2.ZERO;
 var angular_velocity = 0;
 @onready var anim = get_node("AnimatedSprite2D");
 
@@ -20,7 +19,7 @@ func _process(delta):
 			velocity += direction * -input.y * get_meta("acceleration") * delta;
 	else:
 		if input != Vector2.ZERO:
-			rotation = rotate_toward(rotation, input.angle(), deg_to_rad(get_meta("maxRotationalSpeed")) * delta);
+			anim.rotation = rotate_toward(anim.rotation, input.angle(), deg_to_rad(get_meta("maxRotationalSpeed")) * delta);
 		if get_meta("uniformMovement"):
 			velocity = input * get_meta("maxSpeed");
 		else:
@@ -32,10 +31,8 @@ func _process(delta):
 	
 	if input.x == 0:
 		velocity.x = move_toward(velocity.x, 0, get_meta("drag") * delta);
-		print_debug("xvel = " + str(velocity.x));
 	if input.y == 0:
 		velocity.y = move_toward(velocity.y, 0, get_meta("drag") * delta);
-		print_debug("yvel = " + str(velocity.y));
 	
 	if Input.is_action_just_pressed("Fire"):
 		var bullet = bulletID.instantiate();

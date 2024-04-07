@@ -173,6 +173,7 @@ animations = [{
 
 [node name="Spaceship" type="CharacterBody2D"]
 script = ExtResource("1_pm85u")
+targetMouse = false
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_pedyg")

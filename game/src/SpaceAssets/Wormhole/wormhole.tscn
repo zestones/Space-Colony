@@ -1,0 +1,41 @@
+[gd_scene load_steps=7 format=3 uid="uid://bjo5472rrmt5p"]
+
+[ext_resource type="Texture2D" uid="uid://r7vov2ytuscu" path="res://assets/environment/props/wormholeStripPlaceholder.png" id="1_7rja3"]
+[ext_resource type="Script" path="res://src/SpaceAssets/Wormhole/wormhole.gd" id="1_vogyy"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_r86py"]
+atlas = ExtResource("1_7rja3")
+region = Rect2(128, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_p0tg3"]
+atlas = ExtResource("1_7rja3")
+region = Rect2(0, 0, 128, 128)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_bqyb3"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_r86py")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_p0tg3")
+}],
+"loop": true,
+"name": &"default",
+"speed": 6.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_olnpy"]
+radius = 128.0
+
+[node name="Wormhole" type="Area2D"]
+script = ExtResource("1_vogyy")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_bqyb3")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_olnpy")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]

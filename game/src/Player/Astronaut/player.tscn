@@ -1,0 +1,30 @@
+[gd_scene load_steps=5 format=3 uid="uid://dchsqd1xaupl1"]
+
+[ext_resource type="Script" path="res://src/Player/Astronaut/player.gd" id="1_secmd"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jx4qi"]
+size = Vector2(62, 63)
+
+[sub_resource type="Gradient" id="Gradient_de0jr"]
+offsets = PackedFloat32Array(0, 0.876623, 0.987013, 1)
+colors = PackedColorArray(0, 0, 0.67451, 1, 0.258373, 0.258373, 0.758608, 1, 0.272727, 0.272727, 0.76328, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_ljyvw"]
+gradient = SubResource("Gradient_de0jr")
+
+[node name="Player" type="CharacterBody2D"]
+script = ExtResource("1_secmd")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 0.5)
+shape = SubResource("RectangleShape2D_jx4qi")
+
+[node name="Player" type="Sprite2D" parent="."]
+rotation = -1.5708
+texture = SubResource("GradientTexture2D_ljyvw")
+
+[node name="bulletSpawner" type="Marker2D" parent="."]
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(-5, -264)
+position_smoothing_enabled = true

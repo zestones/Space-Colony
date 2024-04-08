@@ -54,7 +54,7 @@ func _physics_process(delta):
 			#Instantiate and shoot the bullet
 			var bullet = BULLET.instantiate()
 			bullet.position = bullet_spawner.global_position
-			$"..".add_child(bullet)
+			get_tree().root.add_child(bullet)
 			
 
 		#Player Movement

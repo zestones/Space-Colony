@@ -2,26 +2,29 @@
 
 [ext_resource type="Script" path="res://src/Player/Astronaut/player.gd" id="1_secmd"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_jx4qi"]
-size = Vector2(62, 63)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_w1fxn"]
+size = Vector2(95, 86)
 
-[sub_resource type="Gradient" id="Gradient_de0jr"]
-offsets = PackedFloat32Array(0, 0.876623, 0.987013, 1)
-colors = PackedColorArray(0.376174, 0.568753, 0.993662, 1, 0.258373, 0.258373, 0.758608, 1, 0.272727, 0.272727, 0.76328, 1, 1, 1, 1, 0)
+[sub_resource type="Gradient" id="Gradient_7m3y3"]
+offsets = PackedFloat32Array(0, 0.214286, 0.474026, 0.590909, 1)
+colors = PackedColorArray(1, 1, 1, 1, 0.847151, 0.86527, 0.800564, 1, 0.752044, 0.781438, 0.67647, 1, 0.696914, 0.732843, 0.604537, 1, 0.643129, 0.685434, 0.534358, 1)
 
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_ljyvw"]
-gradient = SubResource("Gradient_de0jr")
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_mkn1k"]
+gradient = SubResource("Gradient_7m3y3")
 
 [node name="Player" type="CharacterBody2D" groups=["Dammagable", "Player"]]
 script = ExtResource("1_secmd")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, 0.5)
-shape = SubResource("RectangleShape2D_jx4qi")
+position = Vector2(1.5, 5)
+shape = SubResource("RectangleShape2D_w1fxn")
+debug_color = Color(0.690196, 0.482353, 0.290196, 0.419608)
 
 [node name="Player" type="Sprite2D" parent="."]
+position = Vector2(1, 1)
 rotation = -1.5708
-texture = SubResource("GradientTexture2D_ljyvw")
+scale = Vector2(1.48828, 1.48633)
+texture = SubResource("GradientTexture2D_mkn1k")
 
 [node name="bulletSpawner" type="Marker2D" parent="."]
 

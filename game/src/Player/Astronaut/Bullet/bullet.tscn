@@ -9,7 +9,7 @@ height = 20.0
 
 [node name="Bullet" type="Area2D"]
 script = ExtResource("1_ifyyv")
-metadata/speed = 300.0
+metadata/speed = 420.0
 metadata/targetCursor = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -18,3 +18,5 @@ shape = SubResource("CapsuleShape2D_egc0e")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("2_053c5")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

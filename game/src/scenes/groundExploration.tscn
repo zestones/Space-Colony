@@ -19,7 +19,8 @@ gradient = SubResource("Gradient_lrvcu")
 size = Vector2(2873, 59)
 
 [sub_resource type="Gradient" id="Gradient_v8uby"]
-colors = PackedColorArray(0.308397, 0.477053, 0.36426, 1, 1, 1, 1, 1)
+interpolation_mode = 2
+colors = PackedColorArray(0.446186, 0.649176, 0.511875, 1, 1, 1, 1, 1)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_mhd6r"]
 gradient = SubResource("Gradient_v8uby")
@@ -660,6 +661,17 @@ shape = SubResource("RectangleShape2D_6x4rf")
 position = Vector2(-9.50002, 422.5)
 rotation = 1.5708
 scale = Vector2(14.0997, 85.3412)
+texture = SubResource("GradientTexture2D_mhd6r")
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="Floor"]
+position = Vector2(658, -362)
+rotation = 3.14159
+shape = SubResource("RectangleShape2D_6x4rf")
+
+[node name="Floor" type="Sprite2D" parent="Floor/CollisionShape2D4"]
+position = Vector2(14.4009, 416)
+rotation = -1.5708
+scale = Vector2(14.0997, 85.7349)
 texture = SubResource("GradientTexture2D_mhd6r")
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="Floor"]

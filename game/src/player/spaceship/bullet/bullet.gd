@@ -13,3 +13,8 @@ func _process(delta):
 	
 	if lifespan <= 0:
 		queue_free();
+
+
+func _on_body_entered(body):
+	if not body.is_in_group("Player"):
+		queue_free()

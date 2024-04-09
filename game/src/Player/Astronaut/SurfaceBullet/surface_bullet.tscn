@@ -1,0 +1,28 @@
+[gd_scene load_steps=5 format=3 uid="uid://gwbqswhby4fi"]
+
+[ext_resource type="Script" path="res://src/Player/Astronaut/SurfaceBullet/Surface_Bullet.gd" id="1_ppyfg"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kkdj0"]
+size = Vector2(14.0704, 5.02513)
+
+[sub_resource type="Gradient" id="Gradient_xiyl1"]
+colors = PackedColorArray(0.21754, 0.273897, 0.383379, 1, 0.347766, 0.269291, 0.752306, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_cvxuh"]
+gradient = SubResource("Gradient_xiyl1")
+
+[node name="Surface_Bullet" type="Area2D"]
+position = Vector2(5, 7)
+script = ExtResource("1_ppyfg")
+
+[node name="HitBox" type="CollisionShape2D" parent="."]
+position = Vector2(10, -6)
+scale = Vector2(1.99, 1.99)
+shape = SubResource("RectangleShape2D_kkdj0")
+
+[node name="Sprite2D" type="Sprite2D" parent="HitBox"]
+position = Vector2(9.58467e-07, 4.79233e-07)
+scale = Vector2(0.234375, 0.078125)
+texture = SubResource("GradientTexture2D_cvxuh")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

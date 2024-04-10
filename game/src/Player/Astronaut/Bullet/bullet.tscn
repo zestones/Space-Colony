@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://dovk2o38w61hm"]
 
-[ext_resource type="Script" path="res://src/Player/Spaceship/Bullet/bullet.gd" id="1_ifyyv"]
+[ext_resource type="Script" path="res://src/Player/Spaceship/bullet/bullet.gd" id="1_ifyyv"]
 [ext_resource type="Texture2D" uid="uid://dkxbpjurxheu1" path="res://assets/environment/props/bulletPlaceholder.png" id="2_053c5"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_egc0e"]

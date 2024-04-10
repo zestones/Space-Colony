@@ -1,5 +1,8 @@
 [gd_scene load_steps=27 format=3 uid="uid://bfl6g7v0iluf"]
 
+<<<<<<< HEAD:game/src/player/spaceship/spaceship.tscn
+[ext_resource type="Script" path="res://src/player/spaceship/spaceship.gd" id="1_7fy6d"]
+=======
 [ext_resource type="Script" path="res://src/Player/Spaceship/spaceship.gd" id="1_7fy6d"]
 [ext_resource type="Texture2D" uid="uid://b1c1k1lcw12d0" path="res://assets/environment/props/spaceshipIdlePlaceholder.png" id="2_t3fgr"]
 [ext_resource type="Texture2D" uid="uid://cqg6wd7pevk7v" path="res://assets/environment/props/spaceshipMovingPlaceholder.png" id="3_d8doq"]
@@ -170,6 +173,7 @@ animations = [{
 "name": &"Moving",
 "speed": 12.0
 }]
+>>>>>>> main:game/src/Player/Spaceship/spaceship.tscn
 
 [node name="Spaceship" type="CharacterBody2D"]
 script = ExtResource("1_7fy6d")

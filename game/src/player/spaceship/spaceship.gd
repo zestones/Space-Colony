@@ -1,12 +1,23 @@
 extends CharacterBody2D
 
 var direction = Vector2(cos(rotation), sin(rotation));
+<<<<<<< HEAD:game/src/player/spaceship/spaceship.gd
+var bulletID = preload ("res://src/player/spaceship/bullet/bullet.tscn");
+#var linear_velocity = Vector2.ZERO;
+=======
 var bulletID = preload ("res://src/Player/Spaceship/Bullet/bullet.tscn");
+>>>>>>> main:game/src/Player/Spaceship/spaceship.gd
 var angular_velocity = 0;
 @onready var anim = get_node("AnimatedSprite2D");
 
 func _process(delta):
 	direction = Vector2(cos(rotation), sin(rotation));
+<<<<<<< HEAD:game/src/player/spaceship/spaceship.gd
+	var input = Input.get_vector("Left", "Right", "Down", "Up").normalized(); # Vector2(Input.get_axis("Left", "Right"), Input.get_axis("Down", "Up"));
+
+	if get_meta("uniformRotation"):
+		angular_velocity = input.x * get_meta("maxRotationalSpeed");
+=======
 	var input = Input.get_vector("Left", "Right", "Up", "Down").normalized();
 	if get_meta("controlledRotation"):
 		if get_meta("uniformRotation"):
@@ -17,6 +28,7 @@ func _process(delta):
 			velocity = direction * -input.y * get_meta("maxSpeed");
 		else:
 			velocity += direction * -input.y * get_meta("acceleration") * delta;
+>>>>>>> main:game/src/Player/Spaceship/spaceship.gd
 	else:
 		if input != Vector2.ZERO:
 			anim.rotation = rotate_toward(anim.rotation, input.angle(), deg_to_rad(get_meta("maxRotationalSpeed")) * delta);
@@ -41,6 +53,8 @@ func _process(delta):
 	
 	move_and_slide();
 	rotate(deg_to_rad(angular_velocity) * delta);
+<<<<<<< HEAD:game/src/player/spaceship/spaceship.gd
+=======
 	animate(input);
 
 func animate(input):
@@ -48,3 +62,4 @@ func animate(input):
 		anim.play("Idle");
 	else:
 		anim.play("Moving");
+>>>>>>> main:game/src/Player/Spaceship/spaceship.gd

@@ -1,6 +1,6 @@
 extends CharacterBody2D
 
-var bulletID = preload ("res://src/Player/Spaceship/Bullet/bullet.tscn");
+var bulletID = preload ("res://src/Player/Spaceship/bullet/bullet.tscn");
 @onready var anim = get_node("AnimatedSprite2D");
 ## The maximum speed that the spaceship can move.
 @export var maxSpeed: int = 200;

@@ -1,9 +1,11 @@
-[gd_scene load_steps=8 format=3 uid="uid://cmgsvrgq4y7sj"]
+[gd_scene load_steps=10 format=3 uid="uid://cmgsvrgq4y7sj"]
 
 [ext_resource type="PackedScene" uid="uid://dm4635q7ek573" path="res://src/Player/Spaceship/spaceshipRevised.tscn" id="1_3gb66"]
 [ext_resource type="Texture2D" uid="uid://cl87qgtufqlvk" path="res://assets/environment/background/spaceExploration.png" id="2_h654r"]
 [ext_resource type="PackedScene" uid="uid://bjo5472rrmt5p" path="res://src/SpaceAssets/Wormhole/wormhole.tscn" id="3_l3pe8"]
 [ext_resource type="PackedScene" uid="uid://dxr8yrg58t6tm" path="res://src/SpaceAssets/Wormhole/travel_popup.tscn" id="4_xn80w"]
+[ext_resource type="PackedScene" uid="uid://dp7cfc5xnwnph" path="res://src/SpaceAssets/Planets/planet.tscn" id="5_qlj8x"]
+[ext_resource type="PackedScene" uid="uid://ckinev5mjn2in" path="res://src/Player/Transitions/sceneTransitioner.tscn" id="6_ltb23"]
 
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_hit8a"]
 b = Vector2(4000, 0)
@@ -43,7 +45,7 @@ shape = SubResource("SegmentShape2D_x25mi")
 position = Vector2(4000, 0)
 shape = SubResource("SegmentShape2D_x25mi")
 
-[node name="Spaceship" parent="." instance=ExtResource("1_3gb66")]
+[node name="Spaceship" parent="." groups=["Player"] instance=ExtResource("1_3gb66")]
 unique_name_in_owner = true
 z_index = 1
 position = Vector2(2000, 360)
@@ -67,3 +69,9 @@ travelPopup = NodePath("../CanvasLayer/TravelPopup")
 layer = 5
 
 [node name="TravelPopup" parent="CanvasLayer" instance=ExtResource("4_xn80w")]
+
+[node name="Planet" parent="." instance=ExtResource("5_qlj8x")]
+position = Vector2(759, 467)
+
+[node name="Transitioner" parent="Planet" instance=ExtResource("6_ltb23")]
+Scene = "res://src/scenes/groundExploration.tscn"

@@ -9,7 +9,7 @@ func _ready():
 func  _process(delta):
 	if Inrange:
 		if Input.is_action_just_pressed("Interact"):
-			$"../Transitioner".Transition()
+			$Transitioner.Transition()
 
 func _on_body_entered(body):
 	if body.is_in_group("Player"):

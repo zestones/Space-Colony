@@ -69,9 +69,10 @@ travelPopup = NodePath("../CanvasLayer/TravelPopup")
 layer = 5
 
 [node name="TravelPopup" parent="CanvasLayer" instance=ExtResource("4_xn80w")]
+visible = false
 
 [node name="Planet" parent="." instance=ExtResource("5_qlj8x")]
-position = Vector2(759, 467)
+position = Vector2(1828, 175)
 
 [node name="Transitioner" parent="Planet" instance=ExtResource("6_ltb23")]
 Scene = "res://src/scenes/groundExploration.tscn"

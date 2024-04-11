@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Spacegame Team"
-run/main_scene="res://src/scenes/spaceExploration.tscn"
+run/main_scene="res://src/scenes/groundExploration.tscn"
 config/features=PackedStringArray("4.2", "Mobile")
 
 [dotnet]

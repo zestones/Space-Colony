@@ -1,0 +1,57 @@
+[gd_scene load_steps=6 format=3 uid="uid://bvvkkr4g68138"]
+
+[ext_resource type="Texture2D" uid="uid://b1c1k1lcw12d0" path="res://assets/environment/props/spaceshipIdlePlaceholder.png" id="1_slbnm"]
+[ext_resource type="Script" path="res://src/Player/Astronaut/Rocket/rocket_ship.gd" id="1_v0weu"]
+
+[sub_resource type="Gradient" id="Gradient_4w8xn"]
+interpolation_mode = 1
+colors = PackedColorArray(0.372549, 0.184314, 0.537255, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_b5fud"]
+gradient = SubResource("Gradient_4w8xn")
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_by45i"]
+radius = 44.0114
+
+[node name="RocketShip" type="Area2D"]
+script = ExtResource("1_v0weu")
+
+[node name="SpaceShip" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(1, 13)
+rotation = -1.5708
+texture = ExtResource("1_slbnm")
+hframes = 12
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_left = -574.0
+offset_top = -608.0
+offset_right = -534.0
+offset_bottom = -568.0
+
+[node name="Enter_UI" type="Node2D" parent="Control"]
+position = Vector2(498, 512)
+scale = Vector2(0.317783, 0.331309)
+
+[node name="UI" type="Sprite2D" parent="Control/Enter_UI"]
+position = Vector2(243, 167.5)
+scale = Vector2(2.26563, 0.359375)
+texture = SubResource("GradientTexture2D_b5fud")
+
+[node name="Text" type="RichTextLabel" parent="Control/Enter_UI"]
+texture_filter = 1
+offset_left = 175.031
+offset_top = 156.0
+offset_right = 310.031
+offset_bottom = 284.0
+theme_override_colors/default_color = Color(0.419608, 0.603922, 1, 1)
+text = "E to Leave Planet"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -1)
+shape = SubResource("CircleShape2D_by45i")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]

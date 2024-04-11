@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://d0n8e2vj61dbl"]
+[gd_scene load_steps=12 format=3 uid="uid://dmffxcxl1mkn2"]
 
 [ext_resource type="PackedScene" uid="uid://dchsqd1xaupl1" path="res://src/Player/Astronaut/player.tscn" id="1_asd2u"]
 [ext_resource type="PackedScene" uid="uid://bvvkkr4g68138" path="res://src/Player/Astronaut/Rocket/rocket_ship.tscn" id="2_nn0n2"]

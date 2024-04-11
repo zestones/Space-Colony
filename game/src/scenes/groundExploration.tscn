@@ -1,6 +1,8 @@
-[gd_scene load_steps=10 format=3 uid="uid://dmffxcxl1mkn2"]
+[gd_scene load_steps=12 format=3 uid="uid://d0n8e2vj61dbl"]
 
-[ext_resource type="PackedScene" uid="uid://dchsqd1xaupl1" path="res://src/Player/Astronaut/player.tscn" id="1_l7ah1"]
+[ext_resource type="PackedScene" uid="uid://dchsqd1xaupl1" path="res://src/Player/Astronaut/player.tscn" id="1_asd2u"]
+[ext_resource type="PackedScene" uid="uid://bvvkkr4g68138" path="res://src/Player/Astronaut/Rocket/rocket_ship.tscn" id="2_nn0n2"]
+[ext_resource type="PackedScene" uid="uid://ckinev5mjn2in" path="res://src/Player/Transitions/sceneTransitioner.tscn" id="3_lfdpp"]
 
 [sub_resource type="Gradient" id="Gradient_x0nn5"]
 colors = PackedColorArray(0.221705, 0.380652, 0.295309, 1, 1, 1, 1, 1)
@@ -658,7 +660,7 @@ position = Vector2(636, 640)
 shape = SubResource("RectangleShape2D_6x4rf")
 
 [node name="Floor" type="Sprite2D" parent="Floor/CollisionShape2D"]
-position = Vector2(-9.50002, 422.5)
+position = Vector2(47, 415)
 rotation = 1.5708
 scale = Vector2(14.0997, 85.3412)
 texture = SubResource("GradientTexture2D_mhd6r")
@@ -682,5 +684,12 @@ shape = SubResource("RectangleShape2D_oce0a")
 position = Vector2(2052, 140)
 shape = SubResource("RectangleShape2D_oce0a")
 
-[node name="Player" parent="." instance=ExtResource("1_l7ah1")]
-position = Vector2(246, 182)
+[node name="Player" parent="." instance=ExtResource("1_asd2u")]
+position = Vector2(707, 544)
+
+[node name="RocketShip" parent="." instance=ExtResource("2_nn0n2")]
+position = Vector2(1492, 402)
+scale = Vector2(7, 7)
+
+[node name="Transitioner" parent="RocketShip" instance=ExtResource("3_lfdpp")]
+Scene = "res://src/scenes/spaceExploration.tscn"

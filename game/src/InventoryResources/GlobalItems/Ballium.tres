@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="UniversalItem" load_steps=3 format=3 uid="uid://dqkee55584hxw"]
+
+[ext_resource type="Texture2D" uid="uid://bv3f0ekp7q8g5" path="res://assets/environment/items/Barillium.png" id="1_sb1j3"]
+[ext_resource type="Script" path="res://src/InventoryResources/UniversalItem.gd" id="2_f35pf"]
+
+[resource]
+script = ExtResource("2_f35pf")
+Name = "Barillium"
+Type = "Minable"
+UI_Texture = ExtResource("1_sb1j3")
+RealTexture = ExtResource("1_sb1j3")
+Cost = 100
+Health = 100

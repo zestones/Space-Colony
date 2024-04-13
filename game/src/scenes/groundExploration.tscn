@@ -1,8 +1,10 @@
-[gd_scene load_steps=12 format=3 uid="uid://dmffxcxl1mkn2"]
+[gd_scene load_steps=14 format=3 uid="uid://dmffxcxl1mkn2"]
 
 [ext_resource type="PackedScene" uid="uid://dchsqd1xaupl1" path="res://src/Player/Astronaut/player.tscn" id="1_asd2u"]
+[ext_resource type="Resource" uid="uid://bs36wun8m3nw" path="res://src/Player/Inventory/PlayerInventory.tres" id="2_iaccm"]
 [ext_resource type="PackedScene" uid="uid://bvvkkr4g68138" path="res://src/Player/Astronaut/Rocket/rocket_ship.tscn" id="2_nn0n2"]
 [ext_resource type="PackedScene" uid="uid://ckinev5mjn2in" path="res://src/Player/Transitions/sceneTransitioner.tscn" id="3_lfdpp"]
+[ext_resource type="PackedScene" uid="uid://bxqxwvc2v3tvn" path="res://src/InventoryResources/UI/inventory.tscn" id="4_v5rcm"]
 
 [sub_resource type="Gradient" id="Gradient_x0nn5"]
 colors = PackedColorArray(0.221705, 0.380652, 0.295309, 1, 1, 1, 1, 1)
@@ -686,6 +688,7 @@ shape = SubResource("RectangleShape2D_oce0a")
 
 [node name="Player" parent="." instance=ExtResource("1_asd2u")]
 position = Vector2(707, 544)
+Inventory = ExtResource("2_iaccm")
 
 [node name="RocketShip" parent="." instance=ExtResource("2_nn0n2")]
 position = Vector2(1492, 402)
@@ -693,3 +696,7 @@ scale = Vector2(7, 7)
 
 [node name="Transitioner" parent="RocketShip" instance=ExtResource("3_lfdpp")]
 Scene = "res://src/scenes/spaceExploration.tscn"
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Inventory" parent="CanvasLayer" instance=ExtResource("4_v5rcm")]

@@ -19,7 +19,6 @@ b = Vector2(0, 720)
 [node name="Node2D" type="Node2D"]
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
-scroll_offset = Vector2(-1614.22, -205.2)
 
 [node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
 motion_mirroring = Vector2(2000, 650)

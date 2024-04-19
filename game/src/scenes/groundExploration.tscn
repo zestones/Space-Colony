@@ -1,8 +1,10 @@
-[gd_scene load_steps=12 format=3 uid="uid://d0n8e2vj61dbl"]
+[gd_scene load_steps=13 format=3 uid="uid://dmffxcxl1mkn2"]
 
 [ext_resource type="PackedScene" uid="uid://dchsqd1xaupl1" path="res://src/Player/Astronaut/player.tscn" id="1_asd2u"]
 [ext_resource type="PackedScene" uid="uid://bvvkkr4g68138" path="res://src/Player/Astronaut/Rocket/rocket_ship.tscn" id="2_nn0n2"]
 [ext_resource type="PackedScene" uid="uid://ckinev5mjn2in" path="res://src/Player/Transitions/sceneTransitioner.tscn" id="3_lfdpp"]
+[ext_resource type="PackedScene" uid="uid://c0vix722etvnd" path="res://src/Towers/Tower_1/tower_1.tscn" id="4_dabnt"]
+[ext_resource type="PackedScene" uid="uid://dep4i5w0uyvl2" path="res://src/Aliens/alien.tscn" id="5_ipvrh"]
 
 [sub_resource type="Gradient" id="Gradient_x0nn5"]
 colors = PackedColorArray(0.221705, 0.380652, 0.295309, 1, 1, 1, 1, 1)
@@ -26,9 +28,6 @@ colors = PackedColorArray(0.446186, 0.649176, 0.511875, 1, 1, 1, 1, 1)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_mhd6r"]
 gradient = SubResource("Gradient_v8uby")
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_oce0a"]
-size = Vector2(74, 955)
 
 [node name="GroundScene" type="Node2D"]
 
@@ -676,20 +675,34 @@ rotation = -1.5708
 scale = Vector2(14.0997, 85.7349)
 texture = SubResource("GradientTexture2D_mhd6r")
 
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="Floor"]
-position = Vector2(-750, 137)
-shape = SubResource("RectangleShape2D_oce0a")
-
-[node name="CollisionShape2D3" type="CollisionShape2D" parent="Floor"]
-position = Vector2(2052, 140)
-shape = SubResource("RectangleShape2D_oce0a")
-
 [node name="Player" parent="." instance=ExtResource("1_asd2u")]
-position = Vector2(707, 544)
+position = Vector2(126, 536)
 
-[node name="RocketShip" parent="." instance=ExtResource("2_nn0n2")]
-position = Vector2(1492, 402)
+[node name="RocketShip" type="CharacterBody2D" parent="."]
+position = Vector2(1487, 398)
+
+[node name="RocketShip2" parent="RocketShip" instance=ExtResource("2_nn0n2")]
+position = Vector2(5, 4)
 scale = Vector2(7, 7)
 
-[node name="Transitioner" parent="RocketShip" instance=ExtResource("3_lfdpp")]
+[node name="Transitioner" parent="RocketShip/RocketShip2" instance=ExtResource("3_lfdpp")]
 Scene = "res://src/scenes/spaceExploration.tscn"
+
+[node name="Tower1" parent="." instance=ExtResource("4_dabnt")]
+position = Vector2(274, 303)
+
+[node name="Alien" parent="." node_paths=PackedStringArray("Targets") instance=ExtResource("5_ipvrh")]
+position = Vector2(-335, 556)
+Targets = [NodePath("../RocketShip"), NodePath("../Player")]
+
+[node name="Alien2" parent="." node_paths=PackedStringArray("Targets") instance=ExtResource("5_ipvrh")]
+position = Vector2(-649, 556)
+Targets = [NodePath("../RocketShip"), NodePath("../Player")]
+
+[node name="Alien3" parent="." node_paths=PackedStringArray("Targets") instance=ExtResource("5_ipvrh")]
+position = Vector2(-1052, 552)
+Targets = [NodePath("../RocketShip"), NodePath("../Player")]
+
+[node name="Alien4" parent="." node_paths=PackedStringArray("Targets") instance=ExtResource("5_ipvrh")]
+position = Vector2(-1849, 556)
+Targets = [NodePath("../RocketShip"), NodePath("../Player")]

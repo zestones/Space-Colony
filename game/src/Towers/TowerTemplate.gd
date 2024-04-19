@@ -3,7 +3,7 @@ extends StaticBody2D
 var queue = []
 var CurrentTarget = 0
 var CanShoot = false
-const BULLET = preload("res://src/Towers/Bullets/TowerBullet.tscn")
+const BULLET = preload("res://src/Combat/Bullet/bullet.tscn")
 @onready var spawner = $Graphics/Head/Spawner
 var player
 
@@ -35,9 +35,10 @@ func _process(delta):
 func Shoot():
 	$Graphics/AnimationPlayer.play("Shot")
 	var bullet = BULLET.instantiate()
-	bullet.global_position = spawner.global_position
-	bullet.target = queue[CurrentTarget].global_position
 	get_tree().root.add_child(bullet)
+	bullet.global_position = spawner.global_position
+	bullet.rotation = (queue[CurrentTarget].global_position - bullet.global_position).angle()
+
 
 
 func _on_range_body_entered(body):

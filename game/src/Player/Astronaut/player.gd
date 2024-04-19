@@ -16,7 +16,7 @@ var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 @onready var player = $Player
 
 #Preload bullet scene/prefab
-const BULLET = preload("res://src/Player/Astronaut/Bullet/bullet.tscn")
+const BULLET = preload("res://src/Combat/Bullet/bullet.tscn")
 
 #Reference to the world[root node] and location of the bullet spawner
 @onready var world = $".."
@@ -54,6 +54,7 @@ func _physics_process(delta):
 			#Instantiate and shoot the bullet
 			var bullet = BULLET.instantiate()
 			bullet.position = bullet_spawner.global_position
+			bullet.target = get_global_mouse_position()
 			get_tree().root.add_child(bullet)
 			
 

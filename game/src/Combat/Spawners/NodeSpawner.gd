@@ -6,19 +6,16 @@ extends Node2D
 @export var Targets : Array[CharacterBody2D]
 @export var ParentNode : Node2D
 @export var MaxSpawns : int = 10
-var paused = false
+@export var NextSpawner : Node2D
+
+@export var paused = true
 var CurrentSpawns = 0
-
-func _process(delta):
-	print(CurrentSpawns)
-	if CurrentSpawns >= MaxSpawns:
-		paused = true
-		$DownTime.start()
+@export var CanActivate = false
 	
-		
-
+	
+	
 func _on_spawn_timer_timeout():
-	if not paused:
+	if not paused and CanActivate:
 		var Location = Positions.pick_random()
 		Location = Location.global_position
 		var entity = Entity.instantiate()
@@ -26,10 +23,13 @@ func _on_spawn_timer_timeout():
 		ParentNode.add_child(entity)
 		entity.global_position = Location
 		CurrentSpawns += 1
+		if CurrentSpawns >= MaxSpawns:
+			paused = true
+			$DownTime.start()
 
 
 func _on_down_time_timeout():
-
-	CurrentSpawns = 0
-	paused = false
-	$DownTime.stop()
+	print("Wave-2 has started")
+	if NextSpawner != null:
+		NextSpawner.CanActivate = true
+	

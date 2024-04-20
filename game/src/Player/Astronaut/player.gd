@@ -47,7 +47,7 @@ func _physics_process(delta):
 	if UnderControl:
 		#Allow the player to jump and wall jump
 		if is_on_floor() or is_on_wall():
-			if Input.is_action_just_pressed("Jump") or Input.is_action_just_pressed("Up"):
+			if  Input.is_action_just_pressed("Up"):
 				velocity.y = JUMP_VELOCITY
 				
 		#Check if the player is shooting		

@@ -6,10 +6,11 @@ var CanShoot = false
 const BULLET = preload("res://src/Combat/Bullet/bullet.tscn")
 @onready var spawner = $Graphics/Head/Spawner
 var player
-
+var activated = false
+@export var Spawner : Node2D
 
 func _process(delta):
-	if queue.size() > 0:
+	if queue.size() > 0 and activated:
 		$Graphics/Head.look_at(queue[CurrentTarget].global_position)
 		$Graphics/Head.global_rotation += deg_to_rad(180)
 		$Graphics/Head.global_rotation = clampf($Graphics/Head.global_rotation,deg_to_rad(-40),deg_to_rad(40))
@@ -25,8 +26,12 @@ func _process(delta):
 	if player != null:
 		if abs(player.global_position - global_position).length() < 300:
 			$TextPopUp.visible = true
-			#if Input.is_action_just_pressed("Interact"):
-				#get_tree().change_scene_to_file("res://src/Towers/Tower_1/Unlock.tscn")
+			if Input.is_action_just_pressed("Interact"):
+				Spawner.paused = false
+				$TextPopUp/ColorRect.color = Color(0.098, 0.812, 0.584)
+				$TextPopUp/RichTextLabel.text = "Tower Enabled"
+				print("Tower Activated")
+				activated = true
 		else:
 			$TextPopUp.visible = false
 		
@@ -36,6 +41,7 @@ func Shoot():
 	$Graphics/AnimationPlayer.play("Shot")
 	var bullet = BULLET.instantiate()
 	get_tree().root.add_child(bullet)
+	bullet.Dammage = 50
 	bullet.global_position = spawner.global_position
 	bullet.rotation = (queue[CurrentTarget].global_position - bullet.global_position).angle()
 

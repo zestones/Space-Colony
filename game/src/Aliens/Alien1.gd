@@ -4,6 +4,7 @@ var Hp = 100
 const SPEED = 230.0
 @export var Targets : Array[CharacterBody2D]
 var InstanceTarget
+@onready var animator = $Graphics/AnimationPlayer
 
 func _ready():
 	InstanceTarget = Targets.pick_random()

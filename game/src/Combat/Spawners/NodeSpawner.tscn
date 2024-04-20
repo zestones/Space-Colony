@@ -9,6 +9,7 @@ script = ExtResource("1_hvy7f")
 autostart = true
 
 [node name="DownTime" type="Timer" parent="."]
+one_shot = true
 
 [connection signal="timeout" from="SpawnTimer" to="." method="_on_spawn_timer_timeout"]
 [connection signal="timeout" from="DownTime" to="." method="_on_down_time_timeout"]

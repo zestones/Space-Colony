@@ -68,11 +68,10 @@ position = Vector2(-218, 156)
 shape = SubResource("RectangleShape2D_pub82")
 
 [node name="ShootRate" type="Timer" parent="."]
-wait_time = 0.2
+wait_time = 1.2
 autostart = true
 
 [node name="TextPopUp" type="Control" parent="."]
-visible = false
 layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
@@ -87,11 +86,11 @@ anchor_right = 0.5
 anchor_bottom = 1.0
 offset_left = 89.0
 offset_top = -75.0
-offset_right = 183.0
+offset_right = 246.0
 offset_bottom = -50.0
 grow_horizontal = 2
 grow_vertical = 0
-color = Color(0.0980392, 0.811765, 0.584314, 1)
+color = Color(0.839216, 0.305882, 0.129412, 1)
 
 [node name="RichTextLabel" type="RichTextLabel" parent="TextPopUp"]
 layout_mode = 1
@@ -102,7 +101,7 @@ anchor_right = 0.5
 anchor_bottom = 1.0
 offset_left = 92.0
 offset_top = -75.0
-offset_right = 190.0
+offset_right = 280.0
 offset_bottom = -35.0
 grow_horizontal = 2
 grow_vertical = 0

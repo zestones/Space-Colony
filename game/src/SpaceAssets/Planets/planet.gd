@@ -6,12 +6,14 @@ var player
 @onready var planet = $Planet
 @onready var travel_ui = $TravelPopup
 
+
 @onready var transitioner = $Transitioner
 
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	drawLine = false
+	print(transitioner)
 	
 
 

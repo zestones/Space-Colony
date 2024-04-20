@@ -1,6 +1,6 @@
 extends CharacterBody2D
 
-var bulletID = preload ("res://src/Player/Spaceship/bullet/bullet.tscn");
+var bulletID = preload ("res://src/Combat/Bullet/bullet.tscn");
 @onready var anim = get_node("AnimatedSprite2D");
 ## The maximum speed that the spaceship can move.
 @export var maxSpeed: int = 200;
@@ -48,6 +48,7 @@ func _process(delta):
 	if Input.is_action_pressed("Fire")&&cooldown <= 0:
 		var bullet = bulletID.instantiate();
 		bullet.position = position;
+		bullet.target = get_global_mouse_position()
 		get_parent().add_child(bullet);
 		cooldown = 1.0 / rateOfFire;
 	

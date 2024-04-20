@@ -7,6 +7,7 @@ var InstanceTarget
 
 func _ready():
 	InstanceTarget = Targets.pick_random()
+	print(InstanceTarget)
 
 func _physics_process(delta):
 	if Hp <= 0:

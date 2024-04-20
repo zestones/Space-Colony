@@ -1,10 +1,11 @@
-[gd_scene load_steps=13 format=3 uid="uid://dmffxcxl1mkn2"]
+[gd_scene load_steps=14 format=3 uid="uid://dmffxcxl1mkn2"]
 
 [ext_resource type="PackedScene" uid="uid://dchsqd1xaupl1" path="res://src/Player/Astronaut/player.tscn" id="1_asd2u"]
 [ext_resource type="PackedScene" uid="uid://bvvkkr4g68138" path="res://src/Player/Astronaut/Rocket/rocket_ship.tscn" id="2_nn0n2"]
 [ext_resource type="PackedScene" uid="uid://ckinev5mjn2in" path="res://src/Player/Transitions/sceneTransitioner.tscn" id="3_lfdpp"]
 [ext_resource type="PackedScene" uid="uid://c0vix722etvnd" path="res://src/Towers/Tower_1/tower_1.tscn" id="4_dabnt"]
 [ext_resource type="PackedScene" uid="uid://dep4i5w0uyvl2" path="res://src/Aliens/alien.tscn" id="5_ipvrh"]
+[ext_resource type="PackedScene" uid="uid://cva0bd8hengsa" path="res://src/Combat/Spawners/NodeSpawner.tscn" id="6_w4rbu"]
 
 [sub_resource type="Gradient" id="Gradient_x0nn5"]
 colors = PackedColorArray(0.221705, 0.380652, 0.295309, 1, 1, 1, 1, 1)
@@ -33,7 +34,7 @@ gradient = SubResource("Gradient_v8uby")
 
 [node name="BG" type="Sprite2D" parent="."]
 z_index = -1
-position = Vector2(644.995, -98.4388)
+position = Vector2(665, -101)
 rotation = -1.5708
 scale = Vector2(23.5588, 85.6719)
 texture = SubResource("GradientTexture2D_ylkpd")
@@ -691,18 +692,21 @@ Scene = "res://src/scenes/spaceExploration.tscn"
 [node name="Tower1" parent="." instance=ExtResource("4_dabnt")]
 position = Vector2(274, 303)
 
-[node name="Alien" parent="." node_paths=PackedStringArray("Targets") instance=ExtResource("5_ipvrh")]
-position = Vector2(-335, 556)
+[node name="Spawner" parent="." node_paths=PackedStringArray("Positions", "Targets", "ParentNode") instance=ExtResource("6_w4rbu")]
+position = Vector2(-2578, 96)
+Entity = ExtResource("5_ipvrh")
+Positions = [NodePath("../SpawnLocs/Pos1"), NodePath("../SpawnLocs/Pos2"), NodePath("../SpawnLocs/Pos3")]
 Targets = [NodePath("../RocketShip"), NodePath("../Player")]
+ParentNode = NodePath("..")
+MaxSpawns = 1
 
-[node name="Alien2" parent="." node_paths=PackedStringArray("Targets") instance=ExtResource("5_ipvrh")]
-position = Vector2(-649, 556)
-Targets = [NodePath("../RocketShip"), NodePath("../Player")]
+[node name="SpawnLocs" type="Node2D" parent="."]
 
-[node name="Alien3" parent="." node_paths=PackedStringArray("Targets") instance=ExtResource("5_ipvrh")]
-position = Vector2(-1052, 552)
-Targets = [NodePath("../RocketShip"), NodePath("../Player")]
+[node name="Pos1" type="Marker2D" parent="SpawnLocs"]
+position = Vector2(-547, 551)
 
-[node name="Alien4" parent="." node_paths=PackedStringArray("Targets") instance=ExtResource("5_ipvrh")]
-position = Vector2(-1849, 556)
-Targets = [NodePath("../RocketShip"), NodePath("../Player")]
+[node name="Pos2" type="Marker2D" parent="SpawnLocs"]
+position = Vector2(-366, 551)
+
+[node name="Pos3" type="Marker2D" parent="SpawnLocs"]
+position = Vector2(-230, 551)

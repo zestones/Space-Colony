@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://d0n8e2vj61dbl"]
+[gd_scene load_steps=15 format=3 uid="uid://d0n8e2vj61dbl"]
 
 [ext_resource type="PackedScene" uid="uid://dchsqd1xaupl1" path="res://src/Player/Astronaut/player.tscn" id="1_asd2u"]
 [ext_resource type="PackedScene" uid="uid://bvvkkr4g68138" path="res://src/Player/Astronaut/Rocket/rocket_ship.tscn" id="2_nn0n2"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://c0vix722etvnd" path="res://src/Towers/Tower_1/tower_1.tscn" id="4_dabnt"]
 [ext_resource type="PackedScene" uid="uid://dep4i5w0uyvl2" path="res://src/Aliens/alien.tscn" id="5_ipvrh"]
 [ext_resource type="PackedScene" uid="uid://cva0bd8hengsa" path="res://src/Combat/Spawners/NodeSpawner.tscn" id="6_w4rbu"]
+[ext_resource type="AudioStream" uid="uid://3qcrmhc1p1ra" path="res://assets/audio/GroundScene.wav" id="7_1culb"]
 
 [sub_resource type="Gradient" id="Gradient_x0nn5"]
 colors = PackedColorArray(0.221705, 0.380652, 0.295309, 1, 1, 1, 1, 1)
@@ -3786,6 +3787,12 @@ texture = SubResource("GradientTexture2D_mhd6r")
 [node name="Player" parent="." instance=ExtResource("1_asd2u")]
 position = Vector2(-3610, 381)
 
+[node name="Music" type="AudioStreamPlayer2D" parent="Player"]
+position = Vector2(2, -30)
+stream = ExtResource("7_1culb")
+autoplay = true
+bus = &"Music"
+
 [node name="RocketShip" type="CharacterBody2D" parent="."]
 position = Vector2(10010, 391)
 
@@ -3818,7 +3825,7 @@ Entity = ExtResource("5_ipvrh")
 Positions = [NodePath("SpawnLocs/Pos1"), NodePath("SpawnLocs/Pos2"), NodePath("SpawnLocs/Pos3")]
 Targets = [NodePath("../RocketShip")]
 ParentNode = NodePath("..")
-MaxSpawns = 3
+MaxSpawns = 15
 NextSpawner = NodePath("../Spawner2")
 CanActivate = true
 
@@ -3840,7 +3847,7 @@ Entity = ExtResource("5_ipvrh")
 Positions = [NodePath("SpawnLocs2/Pos1"), NodePath("SpawnLocs2/Pos2"), NodePath("SpawnLocs2/Pos3")]
 Targets = [NodePath("../RocketShip")]
 ParentNode = NodePath("..")
-MaxSpawns = 3
+MaxSpawns = 15
 NextSpawner = NodePath("../Spawner3")
 
 [node name="SpawnLocs2" type="Node2D" parent="Spawner2"]
@@ -3861,7 +3868,7 @@ Entity = ExtResource("5_ipvrh")
 Positions = [NodePath("SpawnLocs2/Pos1"), NodePath("SpawnLocs2/Pos2"), NodePath("SpawnLocs2/Pos3")]
 Targets = [NodePath("../RocketShip")]
 ParentNode = NodePath("..")
-MaxSpawns = 3
+MaxSpawns = 15
 NextSpawner = NodePath("../Spawner4")
 
 [node name="SpawnLocs2" type="Node2D" parent="Spawner3"]
@@ -3882,7 +3889,7 @@ Entity = ExtResource("5_ipvrh")
 Positions = [NodePath("SpawnLocs2/Pos1"), NodePath("SpawnLocs2/Pos2"), NodePath("SpawnLocs2/Pos3")]
 Targets = [NodePath("../RocketShip")]
 ParentNode = NodePath("..")
-MaxSpawns = 3
+MaxSpawns = 15
 
 [node name="SpawnLocs2" type="Node2D" parent="Spawner4"]
 position = Vector2(4665, 415)

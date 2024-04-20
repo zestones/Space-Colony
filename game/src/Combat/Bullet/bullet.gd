@@ -23,3 +23,5 @@ func _on_body_entered(body):
 		body.Hp -= Dammage
 		body.animator.play("Hurt")
 		queue_free()
+	if not body.is_in_group("Player"):
+		queue_free()

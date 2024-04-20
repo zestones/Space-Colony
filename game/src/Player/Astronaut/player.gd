@@ -14,9 +14,12 @@ var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 #References
 @onready var Camera = $Camera2D
 @onready var player = $Player
+@export var Inventory : UniversalInventory
+
 
 #Preload bullet scene/prefab
 const BULLET = preload("res://src/Combat/Bullet/bullet.tscn")
+
 
 #Reference to the world[root node] and location of the bullet spawner
 @onready var world = $".."
@@ -26,8 +29,6 @@ const BULLET = preload("res://src/Combat/Bullet/bullet.tscn")
 #This variable is used to define is the player is allowed to move or not
 var UnderControl = true
 
-func _ready():
-	pass
 
 var currrentDirection = 1
 func _physics_process(delta):

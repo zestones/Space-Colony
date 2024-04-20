@@ -1,8 +1,24 @@
-[gd_scene load_steps=8 format=3 uid="uid://dep4i5w0uyvl2"]
+[gd_scene load_steps=9 format=3 uid="uid://dep4i5w0uyvl2"]
 
 [ext_resource type="Texture2D" uid="uid://c2a7gxxh35dvk" path="res://assets/environment/props/Aliens/Leg_Left.png" id="1_6mu7r"]
 [ext_resource type="Script" path="res://src/Aliens/Alien1.gd" id="1_f7u7r"]
 [ext_resource type="Texture2D" uid="uid://c8jv6tlh04pj4" path="res://assets/environment/props/Aliens/Body.png" id="2_1358m"]
+
+[sub_resource type="Animation" id="Animation_bm6ay"]
+resource_name = "Hurt"
+length = 0.25
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Graphics/Body:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [0, 1, 0]
+}
 
 [sub_resource type="Animation" id="Animation_j1gkb"]
 resource_name = "Walk"
@@ -45,22 +61,6 @@ tracks/2/keys = {
 "values": [Vector2(14, 35), Vector2(14, 32), Vector2(14, 35)]
 }
 
-[sub_resource type="Animation" id="Animation_bm6ay"]
-resource_name = "Hurt"
-length = 0.25
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Graphics/Body:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 1,
-"values": [0, 1, 0]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_lva7d"]
 _data = {
 "Hurt": SubResource("Animation_bm6ay"),
@@ -69,6 +69,9 @@ _data = {
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_x1i1v"]
 size = Vector2(402, 213)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hwfcw"]
+size = Vector2(405.714, 211.429)
 
 [node name="Alien" type="CharacterBody2D" node_paths=PackedStringArray("Targets") groups=["Alien"]]
 texture_filter = 1
@@ -105,3 +108,12 @@ autoplay = "Walk"
 [node name="HiTBox" type="CollisionShape2D" parent="."]
 position = Vector2(12, 32.5)
 shape = SubResource("RectangleShape2D_x1i1v")
+
+[node name="Detector" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Detector"]
+position = Vector2(11.4286, 34.2857)
+scale = Vector2(1, 1)
+shape = SubResource("RectangleShape2D_hwfcw")
+
+[connection signal="area_entered" from="Detector" to="." method="_on_detector_area_entered"]

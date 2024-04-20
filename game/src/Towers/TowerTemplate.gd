@@ -8,8 +8,12 @@ const BULLET = preload("res://src/Combat/Bullet/bullet.tscn")
 var player
 var activated = false
 @export var Spawner : Node2D
-
+var Hp = 100
 func _process(delta):
+	$Health.value = Hp
+	if Hp <= 0:
+		queue_free()
+		
 	if queue.size() > 0 and activated:
 		$Graphics/Head.look_at(queue[CurrentTarget].global_position)
 		$Graphics/Head.global_rotation += deg_to_rad(180)

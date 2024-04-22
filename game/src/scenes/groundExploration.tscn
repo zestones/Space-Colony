@@ -1,8 +1,12 @@
-[gd_scene load_steps=12 format=3 uid="uid://d0n8e2vj61dbl"]
+[gd_scene load_steps=17 format=3 uid="uid://d0n8e2vj61dbl"]
 
 [ext_resource type="PackedScene" uid="uid://dchsqd1xaupl1" path="res://src/Player/Astronaut/player.tscn" id="1_asd2u"]
 [ext_resource type="PackedScene" uid="uid://bvvkkr4g68138" path="res://src/Player/Astronaut/Rocket/rocket_ship.tscn" id="2_nn0n2"]
 [ext_resource type="PackedScene" uid="uid://ckinev5mjn2in" path="res://src/Player/Transitions/sceneTransitioner.tscn" id="3_lfdpp"]
+[ext_resource type="PackedScene" uid="uid://c0vix722etvnd" path="res://src/Towers/Tower_1/tower_1.tscn" id="4_dabnt"]
+[ext_resource type="PackedScene" uid="uid://dep4i5w0uyvl2" path="res://src/Aliens/alien.tscn" id="5_ipvrh"]
+[ext_resource type="PackedScene" uid="uid://cva0bd8hengsa" path="res://src/Combat/Spawners/NodeSpawner.tscn" id="6_w4rbu"]
+[ext_resource type="AudioStream" uid="uid://3qcrmhc1p1ra" path="res://assets/audio/GroundScene.wav" id="7_1culb"]
 
 [sub_resource type="Gradient" id="Gradient_x0nn5"]
 colors = PackedColorArray(0.221705, 0.380652, 0.295309, 1, 1, 1, 1, 1)
@@ -18,7 +22,7 @@ colors = PackedColorArray(0.483997, 0.597041, 0.484372, 1, 1, 1, 1, 1)
 gradient = SubResource("Gradient_lrvcu")
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6x4rf"]
-size = Vector2(2873, 59)
+size = Vector2(3676.42, 59)
 
 [sub_resource type="Gradient" id="Gradient_v8uby"]
 interpolation_mode = 2
@@ -27,14 +31,56 @@ colors = PackedColorArray(0.446186, 0.649176, 0.511875, 1, 1, 1, 1, 1)
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_mhd6r"]
 gradient = SubResource("Gradient_v8uby")
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_oce0a"]
-size = Vector2(74, 955)
+[sub_resource type="Animation" id="Animation_c3oxc"]
+resource_name = "StartIntro"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("UI/Text:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("UI/Text:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.1, 0.2, 1.1, 1.7),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(2, 2), Vector2(1, 1), Vector2(1.2, 1.2), Vector2(1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("UI/Text:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.1, 1.9),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_urmxl"]
+_data = {
+"StartIntro": SubResource("Animation_c3oxc")
+}
 
 [node name="GroundScene" type="Node2D"]
 
 [node name="BG" type="Sprite2D" parent="."]
 z_index = -1
-position = Vector2(644.995, -98.4388)
+position = Vector2(665, -101)
 rotation = -1.5708
 scale = Vector2(23.5588, 85.6719)
 texture = SubResource("GradientTexture2D_ylkpd")
@@ -653,10 +699,3111 @@ polygon = PackedVector2Array(20.9098, 13.0836, -32, 32, -32, -32, 12.2016, -82.0
 uv = PackedVector2Array(58.3333, 64.2857, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 70.2381, 11.9048, 66.6667, 41.6667)
 polygons = [PackedInt32Array(0, 1, 2, 3)]
 
+[node name="BG2" type="Sprite2D" parent="BG"]
+z_index = -1
+position = Vector2(0.764849, -61.0002)
+scale = Vector2(1, 1)
+texture = SubResource("GradientTexture2D_ylkpd")
+
+[node name="Crystal" type="Node2D" parent="BG/BG2"]
+z_index = 1
+position = Vector2(-1.81185, -10.2059)
+rotation = 1.5708
+scale = Vector2(0.0116724, 0.042447)
+
+[node name="Rock1" type="Polygon2D" parent="BG/BG2/Crystal"]
+z_index = -1
+position = Vector2(-428, 591)
+rotation = -1.02498
+scale = Vector2(4.93219, 1.58566)
+color = Color(0.592157, 0.592157, 0.592157, 1)
+texture = SubResource("GradientTexture2D_835mq")
+polygon = PackedVector2Array(32, 32, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 20.3495, -35.4927, 25.4578, 2.8175)
+uv = PackedVector2Array(58.3333, 64.2857, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 70.2381, 11.9048, 66.6667, 41.6667)
+polygons = [PackedInt32Array(0, 1, 2, 3)]
+
+[node name="Rock3" type="Polygon2D" parent="BG/BG2/Crystal"]
+z_index = -1
+position = Vector2(-535, 436)
+rotation = -4.00587
+scale = Vector2(4.93219, 1.58566)
+color = Color(0.592157, 0.592157, 0.592157, 1)
+texture = SubResource("GradientTexture2D_835mq")
+polygon = PackedVector2Array(20.1906, -36.1901, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 20.3495, -35.4927, 25.4578, 2.8175)
+uv = PackedVector2Array(58.3333, 64.2857, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 70.2381, 11.9048, 66.6667, 41.6667)
+polygons = [PackedInt32Array(0, 1, 2, 3)]
+
+[node name="Rock2" type="Polygon2D" parent="BG/BG2/Crystal"]
+z_index = -1
+position = Vector2(-471, 507)
+rotation = -1.57797
+scale = Vector2(7.21547, 1.38208)
+texture = SubResource("GradientTexture2D_835mq")
+polygon = PackedVector2Array(20.9098, 13.0836, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 20.3495, -35.4927, 25.4578, 2.8175)
+uv = PackedVector2Array(58.3333, 64.2857, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 70.2381, 11.9048, 66.6667, 41.6667)
+polygons = [PackedInt32Array(0, 1, 2, 3)]
+
+[node name="Crystal2" type="Node2D" parent="BG/BG2"]
+z_index = 1
+position = Vector2(-1.98164, -6.01546)
+rotation = 1.58718
+scale = Vector2(0.0116739, 0.0424466)
+skew = -0.0151476
+
+[node name="Rock1" type="Polygon2D" parent="BG/BG2/Crystal2"]
+z_index = -1
+position = Vector2(-400.486, 558.81)
+rotation = -1.02498
+scale = Vector2(4.93219, 1.58566)
+color = Color(0.592157, 0.592157, 0.592157, 1)
+texture = SubResource("GradientTexture2D_835mq")
+polygon = PackedVector2Array(32, 32, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 20.3495, -35.4927, 25.4578, 2.8175)
+uv = PackedVector2Array(58.3333, 64.2857, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 70.2381, 11.9048, 66.6667, 41.6667)
+polygons = [PackedInt32Array(0, 1, 2, 3)]
+
+[node name="Rock3" type="Polygon2D" parent="BG/BG2/Crystal2"]
+z_index = -1
+position = Vector2(-535, 436)
+rotation = -4.00587
+scale = Vector2(4.93219, 1.58566)
+color = Color(0.592157, 0.592157, 0.592157, 1)
+texture = SubResource("GradientTexture2D_835mq")
+polygon = PackedVector2Array(20.1906, -36.1901, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 20.3495, -35.4927, 25.4578, 2.8175)
+uv = PackedVector2Array(58.3333, 64.2857, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 70.2381, 11.9048, 66.6667, 41.6667)
+polygons = [PackedInt32Array(0, 1, 2, 3)]
+
+[node name="Rock2" type="Polygon2D" parent="BG/BG2/Crystal2"]
+z_index = -1
+position = Vector2(-512.651, 522.316)
+rotation = -1.86084
+scale = Vector2(7.21547, 1.38208)
+texture = SubResource("GradientTexture2D_835mq")
+polygon = PackedVector2Array(20.9098, 13.0836, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 20.3495, -35.4927, 25.4578, 2.8175)
+uv = PackedVector2Array(58.3333, 64.2857, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 70.2381, 11.9048, 66.6667, 41.6667)
+polygons = [PackedInt32Array(0, 1, 2, 3)]
+
+[node name="Crystal3" type="Node2D" parent="BG/BG2"]
+z_index = 1
+position = Vector2(-8.9005, -1.68499)
+rotation = 1.58718
+scale = Vector2(0.0116739, 0.0424466)
+skew = -0.0151476
+
+[node name="Rock1" type="Polygon2D" parent="BG/BG2/Crystal3"]
+z_index = -1
+position = Vector2(-400.486, 558.81)
+rotation = -1.02498
+scale = Vector2(4.93219, 1.58566)
+color = Color(0.592157, 0.592157, 0.592157, 1)
+texture = SubResource("GradientTexture2D_835mq")
+polygon = PackedVector2Array(32, 32, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 20.3495, -35.4927, 25.4578, 2.8175)
+uv = PackedVector2Array(58.3333, 64.2857, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 70.2381, 11.9048, 66.6667, 41.6667)
+polygons = [PackedInt32Array(0, 1, 2, 3)]
+
+[node name="Rock3" type="Polygon2D" parent="BG/BG2/Crystal3"]
+z_index = -1
+position = Vector2(-535, 436)
+rotation = -4.00587
+scale = Vector2(4.93219, 1.58566)
+color = Color(0.592157, 0.592157, 0.592157, 1)
+texture = SubResource("GradientTexture2D_835mq")
+polygon = PackedVector2Array(20.1906, -36.1901, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 20.3495, -35.4927, 25.4578, 2.8175)
+uv = PackedVector2Array(58.3333, 64.2857, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 70.2381, 11.9048, 66.6667, 41.6667)
+polygons = [PackedInt32Array(0, 1, 2, 3)]
+
+[node name="Rock2" type="Polygon2D" parent="BG/BG2/Crystal3"]
+z_index = -1
+position = Vector2(-512.651, 522.316)
+rotation = -1.86084
+scale = Vector2(7.21547, 1.38208)
+texture = SubResource("GradientTexture2D_835mq")
+polygon = PackedVector2Array(20.9098, 13.0836, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 20.3495, -35.4927, 25.4578, 2.8175)
+uv = PackedVector2Array(58.3333, 64.2857, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 70.2381, 11.9048, 66.6667, 41.6667)
+polygons = [PackedInt32Array(0, 1, 2, 3)]
+
+[node name="Crystal4" type="Node2D" parent="BG/BG2"]
+z_index = 1
+position = Vector2(-11.7444, 4.24462)
+rotation = 1.58718
+scale = Vector2(0.0116739, 0.0424466)
+skew = -0.0151476
+
+[node name="Rock1" type="Polygon2D" parent="BG/BG2/Crystal4"]
+z_index = -1
+position = Vector2(-412.829, 573.983)
+rotation = -1.02498
+scale = Vector2(4.93219, 1.58566)
+color = Color(0.592157, 0.592157, 0.592157, 1)
+texture = SubResource("GradientTexture2D_835mq")
+polygon = PackedVector2Array(22.6078, -63.8625, 21.9434, -32.259, 20.7839, 7.68817, 2.09373, -19.5336, 2.43314, -98.6098)
+polygons = [PackedInt32Array(0, 1, 2, 3)]
+
+[node name="Rock3" type="Polygon2D" parent="BG/BG2/Crystal4"]
+z_index = -1
+position = Vector2(-510.098, 423.303)
+rotation = -4.00587
+scale = Vector2(4.93219, 1.58566)
+color = Color(0.592157, 0.592157, 0.592157, 1)
+texture = SubResource("GradientTexture2D_835mq")
+polygon = PackedVector2Array(20.1906, -36.1901, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 20.3495, -35.4927, 25.4578, 2.8175)
+uv = PackedVector2Array(58.3333, 64.2857, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 70.2381, 11.9048, 66.6667, 41.6667)
+polygons = [PackedInt32Array(0, 1, 2, 3)]
+
+[node name="Rock2" type="Polygon2D" parent="BG/BG2/Crystal4"]
+z_index = -1
+position = Vector2(-485.057, 432.19)
+rotation = -1.53878
+scale = Vector2(7.21547, 1.38208)
+texture = SubResource("GradientTexture2D_835mq")
+polygon = PackedVector2Array(20.9098, 13.0836, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 20.3495, -35.4927, 25.4578, 2.8175)
+uv = PackedVector2Array(58.3333, 64.2857, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 70.2381, 11.9048, 66.6667, 41.6667)
+polygons = [PackedInt32Array(0, 1, 2, 3)]
+
+[node name="Crystal5" type="Node2D" parent="BG/BG2"]
+z_index = 1
+position = Vector2(-11.4049, 12.5554)
+rotation = 1.58718
+scale = Vector2(0.0116739, 0.0424466)
+skew = -0.0151476
+
+[node name="Rock1" type="Polygon2D" parent="BG/BG2/Crystal5"]
+z_index = -1
+position = Vector2(-412.829, 573.983)
+rotation = -1.02498
+scale = Vector2(4.93219, 1.58566)
+color = Color(0.592157, 0.592157, 0.592157, 1)
+texture = SubResource("GradientTexture2D_835mq")
+polygon = PackedVector2Array(22.6078, -63.8625, 21.9434, -32.259, 20.7839, 7.68817, 2.09373, -19.5336, 2.43314, -98.6098)
+polygons = [PackedInt32Array(0, 1, 2, 3)]
+
+[node name="Rock3" type="Polygon2D" parent="BG/BG2/Crystal5"]
+z_index = -1
+position = Vector2(-510.098, 423.303)
+rotation = -4.00587
+scale = Vector2(4.93219, 1.58566)
+color = Color(0.592157, 0.592157, 0.592157, 1)
+texture = SubResource("GradientTexture2D_835mq")
+polygon = PackedVector2Array(20.1906, -36.1901, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 20.3495, -35.4927, 25.4578, 2.8175)
+uv = PackedVector2Array(58.3333, 64.2857, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 70.2381, 11.9048, 66.6667, 41.6667)
+polygons = [PackedInt32Array(0, 1, 2, 3)]
+
+[node name="Rock2" type="Polygon2D" parent="BG/BG2/Crystal5"]
+z_index = -1
+position = Vector2(-485.057, 432.19)
+rotation = -1.53878
+scale = Vector2(7.21547, 1.38208)
+texture = SubResource("GradientTexture2D_835mq")
+polygon = PackedVector2Array(20.9098, 13.0836, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 20.3495, -35.4927, 25.4578, 2.8175)
+uv = PackedVector2Array(58.3333, 64.2857, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 70.2381, 11.9048, 66.6667, 41.6667)
+polygons = [PackedInt32Array(0, 1, 2, 3)]
+
+[node name="Crystal6" type="Node2D" parent="BG/BG2"]
+z_index = 1
+position = Vector2(-14.7582, 16.0455)
+rotation = 2.43509
+scale = Vector2(0.0171139, 0.0405599)
+skew = -0.775921
+
+[node name="Rock1" type="Polygon2D" parent="BG/BG2/Crystal6"]
+z_index = -1
+position = Vector2(-412.829, 573.983)
+rotation = -1.02498
+scale = Vector2(4.93219, 1.58566)
+color = Color(0.592157, 0.592157, 0.592157, 1)
+texture = SubResource("GradientTexture2D_835mq")
+polygon = PackedVector2Array(22.6078, -63.8625, 21.9434, -32.259, 20.7839, 7.68817, 2.09373, -19.5336, 2.43314, -98.6098)
+polygons = [PackedInt32Array(0, 1, 2, 3)]
+
+[node name="Rock3" type="Polygon2D" parent="BG/BG2/Crystal6"]
+z_index = -1
+position = Vector2(-510.098, 423.303)
+rotation = -4.00587
+scale = Vector2(4.93219, 1.58566)
+color = Color(0.592157, 0.592157, 0.592157, 1)
+texture = SubResource("GradientTexture2D_835mq")
+polygon = PackedVector2Array(20.1906, -36.1901, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 20.3495, -35.4927, 25.4578, 2.8175)
+uv = PackedVector2Array(58.3333, 64.2857, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 70.2381, 11.9048, 66.6667, 41.6667)
+polygons = [PackedInt32Array(0, 1, 2, 3)]
+
+[node name="Rock2" type="Polygon2D" parent="BG/BG2/Crystal6"]
+z_index = -1
+position = Vector2(-485.057, 432.19)
+rotation = -1.53878
+scale = Vector2(7.21547, 1.38208)
+texture = SubResource("GradientTexture2D_835mq")
+polygon = PackedVector2Array(20.9098, 13.0836, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 20.3495, -35.4927, 25.4578, 2.8175)
+uv = PackedVector2Array(58.3333, 64.2857, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 70.2381, 11.9048, 66.6667, 41.6667)
+polygons = [PackedInt32Array(0, 1, 2, 3)]
+
+[node name="Crystal7" type="Node2D" parent="BG/BG2"]
+z_index = 1
+position = Vector2(-14.7582, 16.0455)
+rotation = 2.43509
+scale = Vector2(0.0171139, 0.0405599)
+skew = -0.775921
+
+[node name="Rock1" type="Polygon2D" parent="BG/BG2/Crystal7"]
+z_index = -1
+position = Vector2(-412.829, 573.983)
+rotation = -1.02498
+scale = Vector2(4.93219, 1.58566)
+color = Color(0.592157, 0.592157, 0.592157, 1)
+texture = SubResource("GradientTexture2D_835mq")
+polygon = PackedVector2Array(22.6078, -63.8625, 21.9434, -32.259, 20.7839, 7.68817, 2.09373, -19.5336, 2.43314, -98.6098)
+polygons = [PackedInt32Array(0, 1, 2, 3)]
+
+[node name="Rock3" type="Polygon2D" parent="BG/BG2/Crystal7"]
+z_index = -1
+position = Vector2(-510.098, 423.303)
+rotation = -4.00587
+scale = Vector2(4.93219, 1.58566)
+color = Color(0.592157, 0.592157, 0.592157, 1)
+texture = SubResource("GradientTexture2D_835mq")
+polygon = PackedVector2Array(20.1906, -36.1901, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 20.3495, -35.4927, 25.4578, 2.8175)
+uv = PackedVector2Array(58.3333, 64.2857, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 70.2381, 11.9048, 66.6667, 41.6667)
+polygons = [PackedInt32Array(0, 1, 2, 3)]
+
+[node name="Rock2" type="Polygon2D" parent="BG/BG2/Crystal7"]
+z_index = -1
+position = Vector2(-485.057, 432.19)
+rotation = -1.53878
+scale = Vector2(7.21547, 1.38208)
+texture = SubResource("GradientTexture2D_835mq")
+polygon = PackedVector2Array(20.9098, 13.0836, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 20.3495, -35.4927, 25.4578, 2.8175)
+uv = PackedVector2Array(58.3333, 64.2857, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 70.2381, 11.9048, 66.6667, 41.6667)
+polygons = [PackedInt32Array(0, 1, 2, 3)]
+
+[node name="Crystal8" type="Node2D" parent="BG/BG2"]
+z_index = 1
+position = Vector2(0.904748, 18.2749)
+rotation = 1.58718
+scale = Vector2(0.0116739, 0.0424466)
+skew = -0.0151476
+
+[node name="Rock1" type="Polygon2D" parent="BG/BG2/Crystal8"]
+z_index = -1
+position = Vector2(-400.486, 558.81)
+rotation = -1.02498
+scale = Vector2(4.93219, 1.58566)
+color = Color(0.592157, 0.592157, 0.592157, 1)
+texture = SubResource("GradientTexture2D_835mq")
+polygon = PackedVector2Array(32, 32, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 20.3495, -35.4927, 25.4578, 2.8175)
+uv = PackedVector2Array(58.3333, 64.2857, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 70.2381, 11.9048, 66.6667, 41.6667)
+polygons = [PackedInt32Array(0, 1, 2, 3)]
+
+[node name="Rock3" type="Polygon2D" parent="BG/BG2/Crystal8"]
+z_index = -1
+position = Vector2(-535, 436)
+rotation = -4.00587
+scale = Vector2(4.93219, 1.58566)
+color = Color(0.592157, 0.592157, 0.592157, 1)
+texture = SubResource("GradientTexture2D_835mq")
+polygon = PackedVector2Array(20.1906, -36.1901, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 20.3495, -35.4927, 25.4578, 2.8175)
+uv = PackedVector2Array(58.3333, 64.2857, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 70.2381, 11.9048, 66.6667, 41.6667)
+polygons = [PackedInt32Array(0, 1, 2, 3)]
+
+[node name="Rock2" type="Polygon2D" parent="BG/BG2/Crystal8"]
+z_index = -1
+position = Vector2(-512.651, 522.316)
+rotation = -1.86084
+scale = Vector2(7.21547, 1.38208)
+texture = SubResource("GradientTexture2D_835mq")
+polygon = PackedVector2Array(20.9098, 13.0836, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 20.3495, -35.4927, 25.4578, 2.8175)
+uv = PackedVector2Array(58.3333, 64.2857, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 70.2381, 11.9048, 66.6667, 41.6667)
+polygons = [PackedInt32Array(0, 1, 2, 3)]
+
+[node name="Crystal9" type="Node2D" parent="BG/BG2"]
+z_index = 1
+position = Vector2(-3.71151, -3.98025)
+rotation = 1.5708
+scale = Vector2(0.0116724, 0.042447)
+
+[node name="Rock1" type="Polygon2D" parent="BG/BG2/Crystal9"]
+z_index = -1
+position = Vector2(-428, 591)
+rotation = -1.02498
+scale = Vector2(4.93219, 1.58566)
+color = Color(0.592157, 0.592157, 0.592157, 1)
+texture = SubResource("GradientTexture2D_835mq")
+polygon = PackedVector2Array(32, 32, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 20.3495, -35.4927, 25.4578, 2.8175)
+uv = PackedVector2Array(58.3333, 64.2857, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 70.2381, 11.9048, 66.6667, 41.6667)
+polygons = [PackedInt32Array(0, 1, 2, 3)]
+
+[node name="Rock3" type="Polygon2D" parent="BG/BG2/Crystal9"]
+z_index = -1
+position = Vector2(-535, 436)
+rotation = -4.00587
+scale = Vector2(4.93219, 1.58566)
+color = Color(0.592157, 0.592157, 0.592157, 1)
+texture = SubResource("GradientTexture2D_835mq")
+polygon = PackedVector2Array(20.1906, -36.1901, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 20.3495, -35.4927, 25.4578, 2.8175)
+uv = PackedVector2Array(58.3333, 64.2857, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 70.2381, 11.9048, 66.6667, 41.6667)
+polygons = [PackedInt32Array(0, 1, 2, 3)]
+
+[node name="Rock2" type="Polygon2D" parent="BG/BG2/Crystal9"]
+z_index = -1
+position = Vector2(-471, 507)
+rotation = -1.57797
+scale = Vector2(7.21547, 1.38208)
+texture = SubResource("GradientTexture2D_835mq")
+polygon = PackedVector2Array(20.9098, 13.0836, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 20.3495, -35.4927, 25.4578, 2.8175)
+uv = PackedVector2Array(58.3333, 64.2857, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 70.2381, 11.9048, 66.6667, 41.6667)
+polygons = [PackedInt32Array(0, 1, 2, 3)]
+
+[node name="Crystal10" type="Node2D" parent="BG/BG2"]
+z_index = 1
+position = Vector2(-3.8813, 0.210161)
+rotation = 1.58718
+scale = Vector2(0.0116739, 0.0424466)
+skew = -0.0151476
+
+[node name="Rock1" type="Polygon2D" parent="BG/BG2/Crystal10"]
+z_index = -1
+position = Vector2(-400.486, 558.81)
+rotation = -1.02498
+scale = Vector2(4.93219, 1.58566)
+color = Color(0.592157, 0.592157, 0.592157, 1)
+texture = SubResource("GradientTexture2D_835mq")
+polygon = PackedVector2Array(32, 32, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 20.3495, -35.4927, 25.4578, 2.8175)
+uv = PackedVector2Array(58.3333, 64.2857, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 70.2381, 11.9048, 66.6667, 41.6667)
+polygons = [PackedInt32Array(0, 1, 2, 3)]
+
+[node name="Rock3" type="Polygon2D" parent="BG/BG2/Crystal10"]
+z_index = -1
+position = Vector2(-535, 436)
+rotation = -4.00587
+scale = Vector2(4.93219, 1.58566)
+color = Color(0.592157, 0.592157, 0.592157, 1)
+texture = SubResource("GradientTexture2D_835mq")
+polygon = PackedVector2Array(20.1906, -36.1901, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 20.3495, -35.4927, 25.4578, 2.8175)
+uv = PackedVector2Array(58.3333, 64.2857, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 70.2381, 11.9048, 66.6667, 41.6667)
+polygons = [PackedInt32Array(0, 1, 2, 3)]
+
+[node name="Rock2" type="Polygon2D" parent="BG/BG2/Crystal10"]
+z_index = -1
+position = Vector2(-512.651, 522.316)
+rotation = -1.86084
+scale = Vector2(7.21547, 1.38208)
+texture = SubResource("GradientTexture2D_835mq")
+polygon = PackedVector2Array(20.9098, 13.0836, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 20.3495, -35.4927, 25.4578, 2.8175)
+uv = PackedVector2Array(58.3333, 64.2857, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 70.2381, 11.9048, 66.6667, 41.6667)
+polygons = [PackedInt32Array(0, 1, 2, 3)]
+
+[node name="Crystal11" type="Node2D" parent="BG/BG2"]
+z_index = 1
+position = Vector2(-10.8002, 4.54064)
+rotation = 1.58718
+scale = Vector2(0.0116739, 0.0424466)
+skew = -0.0151476
+
+[node name="Rock1" type="Polygon2D" parent="BG/BG2/Crystal11"]
+z_index = -1
+position = Vector2(-400.486, 558.81)
+rotation = -1.02498
+scale = Vector2(4.93219, 1.58566)
+color = Color(0.592157, 0.592157, 0.592157, 1)
+texture = SubResource("GradientTexture2D_835mq")
+polygon = PackedVector2Array(32, 32, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 20.3495, -35.4927, 25.4578, 2.8175)
+uv = PackedVector2Array(58.3333, 64.2857, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 70.2381, 11.9048, 66.6667, 41.6667)
+polygons = [PackedInt32Array(0, 1, 2, 3)]
+
+[node name="Rock3" type="Polygon2D" parent="BG/BG2/Crystal11"]
+z_index = -1
+position = Vector2(-535, 436)
+rotation = -4.00587
+scale = Vector2(4.93219, 1.58566)
+color = Color(0.592157, 0.592157, 0.592157, 1)
+texture = SubResource("GradientTexture2D_835mq")
+polygon = PackedVector2Array(20.1906, -36.1901, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 20.3495, -35.4927, 25.4578, 2.8175)
+uv = PackedVector2Array(58.3333, 64.2857, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 70.2381, 11.9048, 66.6667, 41.6667)
+polygons = [PackedInt32Array(0, 1, 2, 3)]
+
+[node name="Rock2" type="Polygon2D" parent="BG/BG2/Crystal11"]
+z_index = -1
+position = Vector2(-512.651, 522.316)
+rotation = -1.86084
+scale = Vector2(7.21547, 1.38208)
+texture = SubResource("GradientTexture2D_835mq")
+polygon = PackedVector2Array(20.9098, 13.0836, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 20.3495, -35.4927, 25.4578, 2.8175)
+uv = PackedVector2Array(58.3333, 64.2857, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 70.2381, 11.9048, 66.6667, 41.6667)
+polygons = [PackedInt32Array(0, 1, 2, 3)]
+
+[node name="Crystal12" type="Node2D" parent="BG/BG2"]
+z_index = 1
+position = Vector2(-13.6441, 10.4702)
+rotation = 1.58718
+scale = Vector2(0.0116739, 0.0424466)
+skew = -0.0151476
+
+[node name="Rock1" type="Polygon2D" parent="BG/BG2/Crystal12"]
+z_index = -1
+position = Vector2(-412.829, 573.983)
+rotation = -1.02498
+scale = Vector2(4.93219, 1.58566)
+color = Color(0.592157, 0.592157, 0.592157, 1)
+texture = SubResource("GradientTexture2D_835mq")
+polygon = PackedVector2Array(22.6078, -63.8625, 21.9434, -32.259, 20.7839, 7.68817, 2.09373, -19.5336, 2.43314, -98.6098)
+polygons = [PackedInt32Array(0, 1, 2, 3)]
+
+[node name="Rock3" type="Polygon2D" parent="BG/BG2/Crystal12"]
+z_index = -1
+position = Vector2(-510.098, 423.303)
+rotation = -4.00587
+scale = Vector2(4.93219, 1.58566)
+color = Color(0.592157, 0.592157, 0.592157, 1)
+texture = SubResource("GradientTexture2D_835mq")
+polygon = PackedVector2Array(20.1906, -36.1901, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 20.3495, -35.4927, 25.4578, 2.8175)
+uv = PackedVector2Array(58.3333, 64.2857, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 70.2381, 11.9048, 66.6667, 41.6667)
+polygons = [PackedInt32Array(0, 1, 2, 3)]
+
+[node name="Rock2" type="Polygon2D" parent="BG/BG2/Crystal12"]
+z_index = -1
+position = Vector2(-485.057, 432.19)
+rotation = -1.53878
+scale = Vector2(7.21547, 1.38208)
+texture = SubResource("GradientTexture2D_835mq")
+polygon = PackedVector2Array(20.9098, 13.0836, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 20.3495, -35.4927, 25.4578, 2.8175)
+uv = PackedVector2Array(58.3333, 64.2857, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 70.2381, 11.9048, 66.6667, 41.6667)
+polygons = [PackedInt32Array(0, 1, 2, 3)]
+
+[node name="Crystal13" type="Node2D" parent="BG/BG2"]
+z_index = 1
+position = Vector2(-13.3045, 18.781)
+rotation = 1.58718
+scale = Vector2(0.0116739, 0.0424466)
+skew = -0.0151476
+
+[node name="Rock1" type="Polygon2D" parent="BG/BG2/Crystal13"]
+z_index = -1
+position = Vector2(-412.829, 573.983)
+rotation = -1.02498
+scale = Vector2(4.93219, 1.58566)
+color = Color(0.592157, 0.592157, 0.592157, 1)
+texture = SubResource("GradientTexture2D_835mq")
+polygon = PackedVector2Array(22.6078, -63.8625, 21.9434, -32.259, 20.7839, 7.68817, 2.09373, -19.5336, 2.43314, -98.6098)
+polygons = [PackedInt32Array(0, 1, 2, 3)]
+
+[node name="Rock3" type="Polygon2D" parent="BG/BG2/Crystal13"]
+z_index = -1
+position = Vector2(-510.098, 423.303)
+rotation = -4.00587
+scale = Vector2(4.93219, 1.58566)
+color = Color(0.592157, 0.592157, 0.592157, 1)
+texture = SubResource("GradientTexture2D_835mq")
+polygon = PackedVector2Array(20.1906, -36.1901, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 20.3495, -35.4927, 25.4578, 2.8175)
+uv = PackedVector2Array(58.3333, 64.2857, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 70.2381, 11.9048, 66.6667, 41.6667)
+polygons = [PackedInt32Array(0, 1, 2, 3)]
+
+[node name="Rock2" type="Polygon2D" parent="BG/BG2/Crystal13"]
+z_index = -1
+position = Vector2(-485.057, 432.19)
+rotation = -1.53878
+scale = Vector2(7.21547, 1.38208)
+texture = SubResource("GradientTexture2D_835mq")
+polygon = PackedVector2Array(20.9098, 13.0836, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 20.3495, -35.4927, 25.4578, 2.8175)
+uv = PackedVector2Array(58.3333, 64.2857, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 70.2381, 11.9048, 66.6667, 41.6667)
+polygons = [PackedInt32Array(0, 1, 2, 3)]
+
+[node name="Crystal14" type="Node2D" parent="BG/BG2"]
+z_index = 1
+position = Vector2(-16.6578, 22.2711)
+rotation = 2.43509
+scale = Vector2(0.0171139, 0.0405599)
+skew = -0.775921
+
+[node name="Rock1" type="Polygon2D" parent="BG/BG2/Crystal14"]
+z_index = -1
+position = Vector2(-412.829, 573.983)
+rotation = -1.02498
+scale = Vector2(4.93219, 1.58566)
+color = Color(0.592157, 0.592157, 0.592157, 1)
+texture = SubResource("GradientTexture2D_835mq")
+polygon = PackedVector2Array(22.6078, -63.8625, 21.9434, -32.259, 20.7839, 7.68817, 2.09373, -19.5336, 2.43314, -98.6098)
+polygons = [PackedInt32Array(0, 1, 2, 3)]
+
+[node name="Rock3" type="Polygon2D" parent="BG/BG2/Crystal14"]
+z_index = -1
+position = Vector2(-510.098, 423.303)
+rotation = -4.00587
+scale = Vector2(4.93219, 1.58566)
+color = Color(0.592157, 0.592157, 0.592157, 1)
+texture = SubResource("GradientTexture2D_835mq")
+polygon = PackedVector2Array(20.1906, -36.1901, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 20.3495, -35.4927, 25.4578, 2.8175)
+uv = PackedVector2Array(58.3333, 64.2857, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 70.2381, 11.9048, 66.6667, 41.6667)
+polygons = [PackedInt32Array(0, 1, 2, 3)]
+
+[node name="Rock2" type="Polygon2D" parent="BG/BG2/Crystal14"]
+z_index = -1
+position = Vector2(-485.057, 432.19)
+rotation = -1.53878
+scale = Vector2(7.21547, 1.38208)
+texture = SubResource("GradientTexture2D_835mq")
+polygon = PackedVector2Array(20.9098, 13.0836, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 20.3495, -35.4927, 25.4578, 2.8175)
+uv = PackedVector2Array(58.3333, 64.2857, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 70.2381, 11.9048, 66.6667, 41.6667)
+polygons = [PackedInt32Array(0, 1, 2, 3)]
+
+[node name="Crystal15" type="Node2D" parent="BG/BG2"]
+z_index = 1
+position = Vector2(-16.6578, 22.2711)
+rotation = 2.43509
+scale = Vector2(0.0171139, 0.0405599)
+skew = -0.775921
+
+[node name="Rock1" type="Polygon2D" parent="BG/BG2/Crystal15"]
+z_index = -1
+position = Vector2(-412.829, 573.983)
+rotation = -1.02498
+scale = Vector2(4.93219, 1.58566)
+color = Color(0.592157, 0.592157, 0.592157, 1)
+texture = SubResource("GradientTexture2D_835mq")
+polygon = PackedVector2Array(22.6078, -63.8625, 21.9434, -32.259, 20.7839, 7.68817, 2.09373, -19.5336, 2.43314, -98.6098)
+polygons = [PackedInt32Array(0, 1, 2, 3)]
+
+[node name="Rock3" type="Polygon2D" parent="BG/BG2/Crystal15"]
+z_index = -1
+position = Vector2(-510.098, 423.303)
+rotation = -4.00587
+scale = Vector2(4.93219, 1.58566)
+color = Color(0.592157, 0.592157, 0.592157, 1)
+texture = SubResource("GradientTexture2D_835mq")
+polygon = PackedVector2Array(20.1906, -36.1901, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 20.3495, -35.4927, 25.4578, 2.8175)
+uv = PackedVector2Array(58.3333, 64.2857, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 70.2381, 11.9048, 66.6667, 41.6667)
+polygons = [PackedInt32Array(0, 1, 2, 3)]
+
+[node name="Rock2" type="Polygon2D" parent="BG/BG2/Crystal15"]
+z_index = -1
+position = Vector2(-485.057, 432.19)
+rotation = -1.53878
+scale = Vector2(7.21547, 1.38208)
+texture = SubResource("GradientTexture2D_835mq")
+polygon = PackedVector2Array(20.9098, 13.0836, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 20.3495, -35.4927, 25.4578, 2.8175)
+uv = PackedVector2Array(58.3333, 64.2857, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 70.2381, 11.9048, 66.6667, 41.6667)
+polygons = [PackedInt32Array(0, 1, 2, 3)]
+
+[node name="Crystal16" type="Node2D" parent="BG/BG2"]
+z_index = 1
+position = Vector2(-0.994911, 24.5005)
+rotation = 1.58718
+scale = Vector2(0.0116739, 0.0424466)
+skew = -0.0151476
+
+[node name="Rock1" type="Polygon2D" parent="BG/BG2/Crystal16"]
+z_index = -1
+position = Vector2(-400.486, 558.81)
+rotation = -1.02498
+scale = Vector2(4.93219, 1.58566)
+color = Color(0.592157, 0.592157, 0.592157, 1)
+texture = SubResource("GradientTexture2D_835mq")
+polygon = PackedVector2Array(32, 32, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 20.3495, -35.4927, 25.4578, 2.8175)
+uv = PackedVector2Array(58.3333, 64.2857, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 70.2381, 11.9048, 66.6667, 41.6667)
+polygons = [PackedInt32Array(0, 1, 2, 3)]
+
+[node name="Rock3" type="Polygon2D" parent="BG/BG2/Crystal16"]
+z_index = -1
+position = Vector2(-535, 436)
+rotation = -4.00587
+scale = Vector2(4.93219, 1.58566)
+color = Color(0.592157, 0.592157, 0.592157, 1)
+texture = SubResource("GradientTexture2D_835mq")
+polygon = PackedVector2Array(20.1906, -36.1901, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 20.3495, -35.4927, 25.4578, 2.8175)
+uv = PackedVector2Array(58.3333, 64.2857, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 70.2381, 11.9048, 66.6667, 41.6667)
+polygons = [PackedInt32Array(0, 1, 2, 3)]
+
+[node name="Rock2" type="Polygon2D" parent="BG/BG2/Crystal16"]
+z_index = -1
+position = Vector2(-512.651, 522.316)
+rotation = -1.86084
+scale = Vector2(7.21547, 1.38208)
+texture = SubResource("GradientTexture2D_835mq")
+polygon = PackedVector2Array(20.9098, 13.0836, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 20.3495, -35.4927, 25.4578, 2.8175)
+uv = PackedVector2Array(58.3333, 64.2857, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 70.2381, 11.9048, 66.6667, 41.6667)
+polygons = [PackedInt32Array(0, 1, 2, 3)]
+
+[node name="BG3" type="Sprite2D" parent="BG"]
+z_index = -1
+position = Vector2(-4.28563, -115.09)
+scale = Vector2(1, 1)
+texture = SubResource("GradientTexture2D_ylkpd")
+
+[node name="Crystal" type="Node2D" parent="BG/BG3"]
+z_index = 1
+position = Vector2(-1.81185, -10.2059)
+rotation = 1.5708
+scale = Vector2(0.0116724, 0.042447)
+
+[node name="Rock1" type="Polygon2D" parent="BG/BG3/Crystal"]
+z_index = -1
+position = Vector2(-428, 591)
+rotation = -1.02498
+scale = Vector2(4.93219, 1.58566)
+color = Color(0.592157, 0.592157, 0.592157, 1)
+texture = SubResource("GradientTexture2D_835mq")
+polygon = PackedVector2Array(32, 32, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 20.3495, -35.4927, 25.4578, 2.8175)
+uv = PackedVector2Array(58.3333, 64.2857, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 70.2381, 11.9048, 66.6667, 41.6667)
+polygons = [PackedInt32Array(0, 1, 2, 3)]
+
+[node name="Rock3" type="Polygon2D" parent="BG/BG3/Crystal"]
+z_index = -1
+position = Vector2(-535, 436)
+rotation = -4.00587
+scale = Vector2(4.93219, 1.58566)
+color = Color(0.592157, 0.592157, 0.592157, 1)
+texture = SubResource("GradientTexture2D_835mq")
+polygon = PackedVector2Array(20.1906, -36.1901, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 20.3495, -35.4927, 25.4578, 2.8175)
+uv = PackedVector2Array(58.3333, 64.2857, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 70.2381, 11.9048, 66.6667, 41.6667)
+polygons = [PackedInt32Array(0, 1, 2, 3)]
+
+[node name="Rock2" type="Polygon2D" parent="BG/BG3/Crystal"]
+z_index = -1
+position = Vector2(-471, 507)
+rotation = -1.57797
+scale = Vector2(7.21547, 1.38208)
+texture = SubResource("GradientTexture2D_835mq")
+polygon = PackedVector2Array(20.9098, 13.0836, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 20.3495, -35.4927, 25.4578, 2.8175)
+uv = PackedVector2Array(58.3333, 64.2857, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 70.2381, 11.9048, 66.6667, 41.6667)
+polygons = [PackedInt32Array(0, 1, 2, 3)]
+
+[node name="Crystal2" type="Node2D" parent="BG/BG3"]
+z_index = 1
+position = Vector2(-1.98164, -6.01546)
+rotation = 1.58718
+scale = Vector2(0.0116739, 0.0424466)
+skew = -0.0151476
+
+[node name="Rock1" type="Polygon2D" parent="BG/BG3/Crystal2"]
+z_index = -1
+position = Vector2(-400.486, 558.81)
+rotation = -1.02498
+scale = Vector2(4.93219, 1.58566)
+color = Color(0.592157, 0.592157, 0.592157, 1)
+texture = SubResource("GradientTexture2D_835mq")
+polygon = PackedVector2Array(32, 32, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 20.3495, -35.4927, 25.4578, 2.8175)
+uv = PackedVector2Array(58.3333, 64.2857, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 70.2381, 11.9048, 66.6667, 41.6667)
+polygons = [PackedInt32Array(0, 1, 2, 3)]
+
+[node name="Rock3" type="Polygon2D" parent="BG/BG3/Crystal2"]
+z_index = -1
+position = Vector2(-535, 436)
+rotation = -4.00587
+scale = Vector2(4.93219, 1.58566)
+color = Color(0.592157, 0.592157, 0.592157, 1)
+texture = SubResource("GradientTexture2D_835mq")
+polygon = PackedVector2Array(20.1906, -36.1901, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 20.3495, -35.4927, 25.4578, 2.8175)
+uv = PackedVector2Array(58.3333, 64.2857, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 70.2381, 11.9048, 66.6667, 41.6667)
+polygons = [PackedInt32Array(0, 1, 2, 3)]
+
+[node name="Rock2" type="Polygon2D" parent="BG/BG3/Crystal2"]
+z_index = -1
+position = Vector2(-512.651, 522.316)
+rotation = -1.86084
+scale = Vector2(7.21547, 1.38208)
+texture = SubResource("GradientTexture2D_835mq")
+polygon = PackedVector2Array(20.9098, 13.0836, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 20.3495, -35.4927, 25.4578, 2.8175)
+uv = PackedVector2Array(58.3333, 64.2857, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 70.2381, 11.9048, 66.6667, 41.6667)
+polygons = [PackedInt32Array(0, 1, 2, 3)]
+
+[node name="Crystal3" type="Node2D" parent="BG/BG3"]
+z_index = 1
+position = Vector2(-8.9005, -1.68499)
+rotation = 1.58718
+scale = Vector2(0.0116739, 0.0424466)
+skew = -0.0151476
+
+[node name="Rock1" type="Polygon2D" parent="BG/BG3/Crystal3"]
+z_index = -1
+position = Vector2(-400.486, 558.81)
+rotation = -1.02498
+scale = Vector2(4.93219, 1.58566)
+color = Color(0.592157, 0.592157, 0.592157, 1)
+texture = SubResource("GradientTexture2D_835mq")
+polygon = PackedVector2Array(32, 32, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 20.3495, -35.4927, 25.4578, 2.8175)
+uv = PackedVector2Array(58.3333, 64.2857, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 70.2381, 11.9048, 66.6667, 41.6667)
+polygons = [PackedInt32Array(0, 1, 2, 3)]
+
+[node name="Rock3" type="Polygon2D" parent="BG/BG3/Crystal3"]
+z_index = -1
+position = Vector2(-535, 436)
+rotation = -4.00587
+scale = Vector2(4.93219, 1.58566)
+color = Color(0.592157, 0.592157, 0.592157, 1)
+texture = SubResource("GradientTexture2D_835mq")
+polygon = PackedVector2Array(20.1906, -36.1901, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 20.3495, -35.4927, 25.4578, 2.8175)
+uv = PackedVector2Array(58.3333, 64.2857, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 70.2381, 11.9048, 66.6667, 41.6667)
+polygons = [PackedInt32Array(0, 1, 2, 3)]
+
+[node name="Rock2" type="Polygon2D" parent="BG/BG3/Crystal3"]
+z_index = -1
+position = Vector2(-512.651, 522.316)
+rotation = -1.86084
+scale = Vector2(7.21547, 1.38208)
+texture = SubResource("GradientTexture2D_835mq")
+polygon = PackedVector2Array(20.9098, 13.0836, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 20.3495, -35.4927, 25.4578, 2.8175)
+uv = PackedVector2Array(58.3333, 64.2857, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 70.2381, 11.9048, 66.6667, 41.6667)
+polygons = [PackedInt32Array(0, 1, 2, 3)]
+
+[node name="Crystal4" type="Node2D" parent="BG/BG3"]
+z_index = 1
+position = Vector2(-11.7444, 4.24462)
+rotation = 1.58718
+scale = Vector2(0.0116739, 0.0424466)
+skew = -0.0151476
+
+[node name="Rock1" type="Polygon2D" parent="BG/BG3/Crystal4"]
+z_index = -1
+position = Vector2(-412.829, 573.983)
+rotation = -1.02498
+scale = Vector2(4.93219, 1.58566)
+color = Color(0.592157, 0.592157, 0.592157, 1)
+texture = SubResource("GradientTexture2D_835mq")
+polygon = PackedVector2Array(22.6078, -63.8625, 21.9434, -32.259, 20.7839, 7.68817, 2.09373, -19.5336, 2.43314, -98.6098)
+polygons = [PackedInt32Array(0, 1, 2, 3)]
+
+[node name="Rock3" type="Polygon2D" parent="BG/BG3/Crystal4"]
+z_index = -1
+position = Vector2(-510.098, 423.303)
+rotation = -4.00587
+scale = Vector2(4.93219, 1.58566)
+color = Color(0.592157, 0.592157, 0.592157, 1)
+texture = SubResource("GradientTexture2D_835mq")
+polygon = PackedVector2Array(20.1906, -36.1901, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 20.3495, -35.4927, 25.4578, 2.8175)
+uv = PackedVector2Array(58.3333, 64.2857, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 70.2381, 11.9048, 66.6667, 41.6667)
+polygons = [PackedInt32Array(0, 1, 2, 3)]
+
+[node name="Rock2" type="Polygon2D" parent="BG/BG3/Crystal4"]
+z_index = -1
+position = Vector2(-485.057, 432.19)
+rotation = -1.53878
+scale = Vector2(7.21547, 1.38208)
+texture = SubResource("GradientTexture2D_835mq")
+polygon = PackedVector2Array(20.9098, 13.0836, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 20.3495, -35.4927, 25.4578, 2.8175)
+uv = PackedVector2Array(58.3333, 64.2857, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 70.2381, 11.9048, 66.6667, 41.6667)
+polygons = [PackedInt32Array(0, 1, 2, 3)]
+
+[node name="Crystal5" type="Node2D" parent="BG/BG3"]
+z_index = 1
+position = Vector2(-11.4049, 12.5554)
+rotation = 1.58718
+scale = Vector2(0.0116739, 0.0424466)
+skew = -0.0151476
+
+[node name="Rock1" type="Polygon2D" parent="BG/BG3/Crystal5"]
+z_index = -1
+position = Vector2(-412.829, 573.983)
+rotation = -1.02498
+scale = Vector2(4.93219, 1.58566)
+color = Color(0.592157, 0.592157, 0.592157, 1)
+texture = SubResource("GradientTexture2D_835mq")
+polygon = PackedVector2Array(22.6078, -63.8625, 21.9434, -32.259, 20.7839, 7.68817, 2.09373, -19.5336, 2.43314, -98.6098)
+polygons = [PackedInt32Array(0, 1, 2, 3)]
+
+[node name="Rock3" type="Polygon2D" parent="BG/BG3/Crystal5"]
+z_index = -1
+position = Vector2(-510.098, 423.303)
+rotation = -4.00587
+scale = Vector2(4.93219, 1.58566)
+color = Color(0.592157, 0.592157, 0.592157, 1)
+texture = SubResource("GradientTexture2D_835mq")
+polygon = PackedVector2Array(20.1906, -36.1901, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 20.3495, -35.4927, 25.4578, 2.8175)
+uv = PackedVector2Array(58.3333, 64.2857, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 70.2381, 11.9048, 66.6667, 41.6667)
+polygons = [PackedInt32Array(0, 1, 2, 3)]
+
+[node name="Rock2" type="Polygon2D" parent="BG/BG3/Crystal5"]
+z_index = -1
+position = Vector2(-485.057, 432.19)
+rotation = -1.53878
+scale = Vector2(7.21547, 1.38208)
+texture = SubResource("GradientTexture2D_835mq")
+polygon = PackedVector2Array(20.9098, 13.0836, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 20.3495, -35.4927, 25.4578, 2.8175)
+uv = PackedVector2Array(58.3333, 64.2857, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 70.2381, 11.9048, 66.6667, 41.6667)
+polygons = [PackedInt32Array(0, 1, 2, 3)]
+
+[node name="Crystal6" type="Node2D" parent="BG/BG3"]
+z_index = 1
+position = Vector2(-14.7582, 16.0455)
+rotation = 2.43509
+scale = Vector2(0.0171139, 0.0405599)
+skew = -0.775921
+
+[node name="Rock1" type="Polygon2D" parent="BG/BG3/Crystal6"]
+z_index = -1
+position = Vector2(-412.829, 573.983)
+rotation = -1.02498
+scale = Vector2(4.93219, 1.58566)
+color = Color(0.592157, 0.592157, 0.592157, 1)
+texture = SubResource("GradientTexture2D_835mq")
+polygon = PackedVector2Array(22.6078, -63.8625, 21.9434, -32.259, 20.7839, 7.68817, 2.09373, -19.5336, 2.43314, -98.6098)
+polygons = [PackedInt32Array(0, 1, 2, 3)]
+
+[node name="Rock3" type="Polygon2D" parent="BG/BG3/Crystal6"]
+z_index = -1
+position = Vector2(-510.098, 423.303)
+rotation = -4.00587
+scale = Vector2(4.93219, 1.58566)
+color = Color(0.592157, 0.592157, 0.592157, 1)
+texture = SubResource("GradientTexture2D_835mq")
+polygon = PackedVector2Array(20.1906, -36.1901, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 20.3495, -35.4927, 25.4578, 2.8175)
+uv = PackedVector2Array(58.3333, 64.2857, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 70.2381, 11.9048, 66.6667, 41.6667)
+polygons = [PackedInt32Array(0, 1, 2, 3)]
+
+[node name="Rock2" type="Polygon2D" parent="BG/BG3/Crystal6"]
+z_index = -1
+position = Vector2(-485.057, 432.19)
+rotation = -1.53878
+scale = Vector2(7.21547, 1.38208)
+texture = SubResource("GradientTexture2D_835mq")
+polygon = PackedVector2Array(20.9098, 13.0836, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 20.3495, -35.4927, 25.4578, 2.8175)
+uv = PackedVector2Array(58.3333, 64.2857, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 70.2381, 11.9048, 66.6667, 41.6667)
+polygons = [PackedInt32Array(0, 1, 2, 3)]
+
+[node name="Crystal7" type="Node2D" parent="BG/BG3"]
+z_index = 1
+position = Vector2(-14.7582, 16.0455)
+rotation = 2.43509
+scale = Vector2(0.0171139, 0.0405599)
+skew = -0.775921
+
+[node name="Rock1" type="Polygon2D" parent="BG/BG3/Crystal7"]
+z_index = -1
+position = Vector2(-412.829, 573.983)
+rotation = -1.02498
+scale = Vector2(4.93219, 1.58566)
+color = Color(0.592157, 0.592157, 0.592157, 1)
+texture = SubResource("GradientTexture2D_835mq")
+polygon = PackedVector2Array(22.6078, -63.8625, 21.9434, -32.259, 20.7839, 7.68817, 2.09373, -19.5336, 2.43314, -98.6098)
+polygons = [PackedInt32Array(0, 1, 2, 3)]
+
+[node name="Rock3" type="Polygon2D" parent="BG/BG3/Crystal7"]
+z_index = -1
+position = Vector2(-510.098, 423.303)
+rotation = -4.00587
+scale = Vector2(4.93219, 1.58566)
+color = Color(0.592157, 0.592157, 0.592157, 1)
+texture = SubResource("GradientTexture2D_835mq")
+polygon = PackedVector2Array(20.1906, -36.1901, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 20.3495, -35.4927, 25.4578, 2.8175)
+uv = PackedVector2Array(58.3333, 64.2857, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 70.2381, 11.9048, 66.6667, 41.6667)
+polygons = [PackedInt32Array(0, 1, 2, 3)]
+
+[node name="Rock2" type="Polygon2D" parent="BG/BG3/Crystal7"]
+z_index = -1
+position = Vector2(-485.057, 432.19)
+rotation = -1.53878
+scale = Vector2(7.21547, 1.38208)
+texture = SubResource("GradientTexture2D_835mq")
+polygon = PackedVector2Array(20.9098, 13.0836, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 20.3495, -35.4927, 25.4578, 2.8175)
+uv = PackedVector2Array(58.3333, 64.2857, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 70.2381, 11.9048, 66.6667, 41.6667)
+polygons = [PackedInt32Array(0, 1, 2, 3)]
+
+[node name="Crystal8" type="Node2D" parent="BG/BG3"]
+z_index = 1
+position = Vector2(0.904748, 18.2749)
+rotation = 1.58718
+scale = Vector2(0.0116739, 0.0424466)
+skew = -0.0151476
+
+[node name="Rock1" type="Polygon2D" parent="BG/BG3/Crystal8"]
+z_index = -1
+position = Vector2(-400.486, 558.81)
+rotation = -1.02498
+scale = Vector2(4.93219, 1.58566)
+color = Color(0.592157, 0.592157, 0.592157, 1)
+texture = SubResource("GradientTexture2D_835mq")
+polygon = PackedVector2Array(32, 32, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 20.3495, -35.4927, 25.4578, 2.8175)
+uv = PackedVector2Array(58.3333, 64.2857, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 70.2381, 11.9048, 66.6667, 41.6667)
+polygons = [PackedInt32Array(0, 1, 2, 3)]
+
+[node name="Rock3" type="Polygon2D" parent="BG/BG3/Crystal8"]
+z_index = -1
+position = Vector2(-535, 436)
+rotation = -4.00587
+scale = Vector2(4.93219, 1.58566)
+color = Color(0.592157, 0.592157, 0.592157, 1)
+texture = SubResource("GradientTexture2D_835mq")
+polygon = PackedVector2Array(20.1906, -36.1901, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 20.3495, -35.4927, 25.4578, 2.8175)
+uv = PackedVector2Array(58.3333, 64.2857, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 70.2381, 11.9048, 66.6667, 41.6667)
+polygons = [PackedInt32Array(0, 1, 2, 3)]
+
+[node name="Rock2" type="Polygon2D" parent="BG/BG3/Crystal8"]
+z_index = -1
+position = Vector2(-512.651, 522.316)
+rotation = -1.86084
+scale = Vector2(7.21547, 1.38208)
+texture = SubResource("GradientTexture2D_835mq")
+polygon = PackedVector2Array(20.9098, 13.0836, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 20.3495, -35.4927, 25.4578, 2.8175)
+uv = PackedVector2Array(58.3333, 64.2857, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 70.2381, 11.9048, 66.6667, 41.6667)
+polygons = [PackedInt32Array(0, 1, 2, 3)]
+
+[node name="Crystal9" type="Node2D" parent="BG/BG3"]
+z_index = 1
+position = Vector2(-3.71151, -3.98025)
+rotation = 1.5708
+scale = Vector2(0.0116724, 0.042447)
+
+[node name="Rock1" type="Polygon2D" parent="BG/BG3/Crystal9"]
+z_index = -1
+position = Vector2(-428, 591)
+rotation = -1.02498
+scale = Vector2(4.93219, 1.58566)
+color = Color(0.592157, 0.592157, 0.592157, 1)
+texture = SubResource("GradientTexture2D_835mq")
+polygon = PackedVector2Array(32, 32, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 20.3495, -35.4927, 25.4578, 2.8175)
+uv = PackedVector2Array(58.3333, 64.2857, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 70.2381, 11.9048, 66.6667, 41.6667)
+polygons = [PackedInt32Array(0, 1, 2, 3)]
+
+[node name="Rock3" type="Polygon2D" parent="BG/BG3/Crystal9"]
+z_index = -1
+position = Vector2(-535, 436)
+rotation = -4.00587
+scale = Vector2(4.93219, 1.58566)
+color = Color(0.592157, 0.592157, 0.592157, 1)
+texture = SubResource("GradientTexture2D_835mq")
+polygon = PackedVector2Array(20.1906, -36.1901, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 20.3495, -35.4927, 25.4578, 2.8175)
+uv = PackedVector2Array(58.3333, 64.2857, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 70.2381, 11.9048, 66.6667, 41.6667)
+polygons = [PackedInt32Array(0, 1, 2, 3)]
+
+[node name="Rock2" type="Polygon2D" parent="BG/BG3/Crystal9"]
+z_index = -1
+position = Vector2(-471, 507)
+rotation = -1.57797
+scale = Vector2(7.21547, 1.38208)
+texture = SubResource("GradientTexture2D_835mq")
+polygon = PackedVector2Array(20.9098, 13.0836, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 20.3495, -35.4927, 25.4578, 2.8175)
+uv = PackedVector2Array(58.3333, 64.2857, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 70.2381, 11.9048, 66.6667, 41.6667)
+polygons = [PackedInt32Array(0, 1, 2, 3)]
+
+[node name="Crystal10" type="Node2D" parent="BG/BG3"]
+z_index = 1
+position = Vector2(-3.8813, 0.210161)
+rotation = 1.58718
+scale = Vector2(0.0116739, 0.0424466)
+skew = -0.0151476
+
+[node name="Rock1" type="Polygon2D" parent="BG/BG3/Crystal10"]
+z_index = -1
+position = Vector2(-400.486, 558.81)
+rotation = -1.02498
+scale = Vector2(4.93219, 1.58566)
+color = Color(0.592157, 0.592157, 0.592157, 1)
+texture = SubResource("GradientTexture2D_835mq")
+polygon = PackedVector2Array(32, 32, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 20.3495, -35.4927, 25.4578, 2.8175)
+uv = PackedVector2Array(58.3333, 64.2857, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 70.2381, 11.9048, 66.6667, 41.6667)
+polygons = [PackedInt32Array(0, 1, 2, 3)]
+
+[node name="Rock3" type="Polygon2D" parent="BG/BG3/Crystal10"]
+z_index = -1
+position = Vector2(-535, 436)
+rotation = -4.00587
+scale = Vector2(4.93219, 1.58566)
+color = Color(0.592157, 0.592157, 0.592157, 1)
+texture = SubResource("GradientTexture2D_835mq")
+polygon = PackedVector2Array(20.1906, -36.1901, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 20.3495, -35.4927, 25.4578, 2.8175)
+uv = PackedVector2Array(58.3333, 64.2857, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 70.2381, 11.9048, 66.6667, 41.6667)
+polygons = [PackedInt32Array(0, 1, 2, 3)]
+
+[node name="Rock2" type="Polygon2D" parent="BG/BG3/Crystal10"]
+z_index = -1
+position = Vector2(-512.651, 522.316)
+rotation = -1.86084
+scale = Vector2(7.21547, 1.38208)
+texture = SubResource("GradientTexture2D_835mq")
+polygon = PackedVector2Array(20.9098, 13.0836, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 20.3495, -35.4927, 25.4578, 2.8175)
+uv = PackedVector2Array(58.3333, 64.2857, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 70.2381, 11.9048, 66.6667, 41.6667)
+polygons = [PackedInt32Array(0, 1, 2, 3)]
+
+[node name="Crystal11" type="Node2D" parent="BG/BG3"]
+z_index = 1
+position = Vector2(-10.8002, 4.54064)
+rotation = 1.58718
+scale = Vector2(0.0116739, 0.0424466)
+skew = -0.0151476
+
+[node name="Rock1" type="Polygon2D" parent="BG/BG3/Crystal11"]
+z_index = -1
+position = Vector2(-400.486, 558.81)
+rotation = -1.02498
+scale = Vector2(4.93219, 1.58566)
+color = Color(0.592157, 0.592157, 0.592157, 1)
+texture = SubResource("GradientTexture2D_835mq")
+polygon = PackedVector2Array(32, 32, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 20.3495, -35.4927, 25.4578, 2.8175)
+uv = PackedVector2Array(58.3333, 64.2857, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 70.2381, 11.9048, 66.6667, 41.6667)
+polygons = [PackedInt32Array(0, 1, 2, 3)]
+
+[node name="Rock3" type="Polygon2D" parent="BG/BG3/Crystal11"]
+z_index = -1
+position = Vector2(-535, 436)
+rotation = -4.00587
+scale = Vector2(4.93219, 1.58566)
+color = Color(0.592157, 0.592157, 0.592157, 1)
+texture = SubResource("GradientTexture2D_835mq")
+polygon = PackedVector2Array(20.1906, -36.1901, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 20.3495, -35.4927, 25.4578, 2.8175)
+uv = PackedVector2Array(58.3333, 64.2857, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 70.2381, 11.9048, 66.6667, 41.6667)
+polygons = [PackedInt32Array(0, 1, 2, 3)]
+
+[node name="Rock2" type="Polygon2D" parent="BG/BG3/Crystal11"]
+z_index = -1
+position = Vector2(-512.651, 522.316)
+rotation = -1.86084
+scale = Vector2(7.21547, 1.38208)
+texture = SubResource("GradientTexture2D_835mq")
+polygon = PackedVector2Array(20.9098, 13.0836, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 20.3495, -35.4927, 25.4578, 2.8175)
+uv = PackedVector2Array(58.3333, 64.2857, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 70.2381, 11.9048, 66.6667, 41.6667)
+polygons = [PackedInt32Array(0, 1, 2, 3)]
+
+[node name="Crystal12" type="Node2D" parent="BG/BG3"]
+z_index = 1
+position = Vector2(-13.6441, 10.4702)
+rotation = 1.58718
+scale = Vector2(0.0116739, 0.0424466)
+skew = -0.0151476
+
+[node name="Rock1" type="Polygon2D" parent="BG/BG3/Crystal12"]
+z_index = -1
+position = Vector2(-412.829, 573.983)
+rotation = -1.02498
+scale = Vector2(4.93219, 1.58566)
+color = Color(0.592157, 0.592157, 0.592157, 1)
+texture = SubResource("GradientTexture2D_835mq")
+polygon = PackedVector2Array(22.6078, -63.8625, 21.9434, -32.259, 20.7839, 7.68817, 2.09373, -19.5336, 2.43314, -98.6098)
+polygons = [PackedInt32Array(0, 1, 2, 3)]
+
+[node name="Rock3" type="Polygon2D" parent="BG/BG3/Crystal12"]
+z_index = -1
+position = Vector2(-510.098, 423.303)
+rotation = -4.00587
+scale = Vector2(4.93219, 1.58566)
+color = Color(0.592157, 0.592157, 0.592157, 1)
+texture = SubResource("GradientTexture2D_835mq")
+polygon = PackedVector2Array(20.1906, -36.1901, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 20.3495, -35.4927, 25.4578, 2.8175)
+uv = PackedVector2Array(58.3333, 64.2857, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 70.2381, 11.9048, 66.6667, 41.6667)
+polygons = [PackedInt32Array(0, 1, 2, 3)]
+
+[node name="Rock2" type="Polygon2D" parent="BG/BG3/Crystal12"]
+z_index = -1
+position = Vector2(-485.057, 432.19)
+rotation = -1.53878
+scale = Vector2(7.21547, 1.38208)
+texture = SubResource("GradientTexture2D_835mq")
+polygon = PackedVector2Array(20.9098, 13.0836, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 20.3495, -35.4927, 25.4578, 2.8175)
+uv = PackedVector2Array(58.3333, 64.2857, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 70.2381, 11.9048, 66.6667, 41.6667)
+polygons = [PackedInt32Array(0, 1, 2, 3)]
+
+[node name="Crystal13" type="Node2D" parent="BG/BG3"]
+z_index = 1
+position = Vector2(-13.3045, 18.781)
+rotation = 1.58718
+scale = Vector2(0.0116739, 0.0424466)
+skew = -0.0151476
+
+[node name="Rock1" type="Polygon2D" parent="BG/BG3/Crystal13"]
+z_index = -1
+position = Vector2(-412.829, 573.983)
+rotation = -1.02498
+scale = Vector2(4.93219, 1.58566)
+color = Color(0.592157, 0.592157, 0.592157, 1)
+texture = SubResource("GradientTexture2D_835mq")
+polygon = PackedVector2Array(22.6078, -63.8625, 21.9434, -32.259, 20.7839, 7.68817, 2.09373, -19.5336, 2.43314, -98.6098)
+polygons = [PackedInt32Array(0, 1, 2, 3)]
+
+[node name="Rock3" type="Polygon2D" parent="BG/BG3/Crystal13"]
+z_index = -1
+position = Vector2(-510.098, 423.303)
+rotation = -4.00587
+scale = Vector2(4.93219, 1.58566)
+color = Color(0.592157, 0.592157, 0.592157, 1)
+texture = SubResource("GradientTexture2D_835mq")
+polygon = PackedVector2Array(20.1906, -36.1901, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 20.3495, -35.4927, 25.4578, 2.8175)
+uv = PackedVector2Array(58.3333, 64.2857, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 70.2381, 11.9048, 66.6667, 41.6667)
+polygons = [PackedInt32Array(0, 1, 2, 3)]
+
+[node name="Rock2" type="Polygon2D" parent="BG/BG3/Crystal13"]
+z_index = -1
+position = Vector2(-485.057, 432.19)
+rotation = -1.53878
+scale = Vector2(7.21547, 1.38208)
+texture = SubResource("GradientTexture2D_835mq")
+polygon = PackedVector2Array(20.9098, 13.0836, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 20.3495, -35.4927, 25.4578, 2.8175)
+uv = PackedVector2Array(58.3333, 64.2857, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 70.2381, 11.9048, 66.6667, 41.6667)
+polygons = [PackedInt32Array(0, 1, 2, 3)]
+
+[node name="Crystal14" type="Node2D" parent="BG/BG3"]
+z_index = 1
+position = Vector2(-16.6578, 22.2711)
+rotation = 2.43509
+scale = Vector2(0.0171139, 0.0405599)
+skew = -0.775921
+
+[node name="Rock1" type="Polygon2D" parent="BG/BG3/Crystal14"]
+z_index = -1
+position = Vector2(-412.829, 573.983)
+rotation = -1.02498
+scale = Vector2(4.93219, 1.58566)
+color = Color(0.592157, 0.592157, 0.592157, 1)
+texture = SubResource("GradientTexture2D_835mq")
+polygon = PackedVector2Array(22.6078, -63.8625, 21.9434, -32.259, 20.7839, 7.68817, 2.09373, -19.5336, 2.43314, -98.6098)
+polygons = [PackedInt32Array(0, 1, 2, 3)]
+
+[node name="Rock3" type="Polygon2D" parent="BG/BG3/Crystal14"]
+z_index = -1
+position = Vector2(-510.098, 423.303)
+rotation = -4.00587
+scale = Vector2(4.93219, 1.58566)
+color = Color(0.592157, 0.592157, 0.592157, 1)
+texture = SubResource("GradientTexture2D_835mq")
+polygon = PackedVector2Array(20.1906, -36.1901, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 20.3495, -35.4927, 25.4578, 2.8175)
+uv = PackedVector2Array(58.3333, 64.2857, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 70.2381, 11.9048, 66.6667, 41.6667)
+polygons = [PackedInt32Array(0, 1, 2, 3)]
+
+[node name="Rock2" type="Polygon2D" parent="BG/BG3/Crystal14"]
+z_index = -1
+position = Vector2(-485.057, 432.19)
+rotation = -1.53878
+scale = Vector2(7.21547, 1.38208)
+texture = SubResource("GradientTexture2D_835mq")
+polygon = PackedVector2Array(20.9098, 13.0836, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 20.3495, -35.4927, 25.4578, 2.8175)
+uv = PackedVector2Array(58.3333, 64.2857, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 70.2381, 11.9048, 66.6667, 41.6667)
+polygons = [PackedInt32Array(0, 1, 2, 3)]
+
+[node name="Crystal15" type="Node2D" parent="BG/BG3"]
+z_index = 1
+position = Vector2(-16.6578, 22.2711)
+rotation = 2.43509
+scale = Vector2(0.0171139, 0.0405599)
+skew = -0.775921
+
+[node name="Rock1" type="Polygon2D" parent="BG/BG3/Crystal15"]
+z_index = -1
+position = Vector2(-412.829, 573.983)
+rotation = -1.02498
+scale = Vector2(4.93219, 1.58566)
+color = Color(0.592157, 0.592157, 0.592157, 1)
+texture = SubResource("GradientTexture2D_835mq")
+polygon = PackedVector2Array(22.6078, -63.8625, 21.9434, -32.259, 20.7839, 7.68817, 2.09373, -19.5336, 2.43314, -98.6098)
+polygons = [PackedInt32Array(0, 1, 2, 3)]
+
+[node name="Rock3" type="Polygon2D" parent="BG/BG3/Crystal15"]
+z_index = -1
+position = Vector2(-510.098, 423.303)
+rotation = -4.00587
+scale = Vector2(4.93219, 1.58566)
+color = Color(0.592157, 0.592157, 0.592157, 1)
+texture = SubResource("GradientTexture2D_835mq")
+polygon = PackedVector2Array(20.1906, -36.1901, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 20.3495, -35.4927, 25.4578, 2.8175)
+uv = PackedVector2Array(58.3333, 64.2857, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 70.2381, 11.9048, 66.6667, 41.6667)
+polygons = [PackedInt32Array(0, 1, 2, 3)]
+
+[node name="Rock2" type="Polygon2D" parent="BG/BG3/Crystal15"]
+z_index = -1
+position = Vector2(-485.057, 432.19)
+rotation = -1.53878
+scale = Vector2(7.21547, 1.38208)
+texture = SubResource("GradientTexture2D_835mq")
+polygon = PackedVector2Array(20.9098, 13.0836, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 20.3495, -35.4927, 25.4578, 2.8175)
+uv = PackedVector2Array(58.3333, 64.2857, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 70.2381, 11.9048, 66.6667, 41.6667)
+polygons = [PackedInt32Array(0, 1, 2, 3)]
+
+[node name="Crystal16" type="Node2D" parent="BG/BG3"]
+z_index = 1
+position = Vector2(-0.994911, 24.5005)
+rotation = 1.58718
+scale = Vector2(0.0116739, 0.0424466)
+skew = -0.0151476
+
+[node name="Rock1" type="Polygon2D" parent="BG/BG3/Crystal16"]
+z_index = -1
+position = Vector2(-400.486, 558.81)
+rotation = -1.02498
+scale = Vector2(4.93219, 1.58566)
+color = Color(0.592157, 0.592157, 0.592157, 1)
+texture = SubResource("GradientTexture2D_835mq")
+polygon = PackedVector2Array(32, 32, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 20.3495, -35.4927, 25.4578, 2.8175)
+uv = PackedVector2Array(58.3333, 64.2857, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 70.2381, 11.9048, 66.6667, 41.6667)
+polygons = [PackedInt32Array(0, 1, 2, 3)]
+
+[node name="Rock3" type="Polygon2D" parent="BG/BG3/Crystal16"]
+z_index = -1
+position = Vector2(-535, 436)
+rotation = -4.00587
+scale = Vector2(4.93219, 1.58566)
+color = Color(0.592157, 0.592157, 0.592157, 1)
+texture = SubResource("GradientTexture2D_835mq")
+polygon = PackedVector2Array(20.1906, -36.1901, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 20.3495, -35.4927, 25.4578, 2.8175)
+uv = PackedVector2Array(58.3333, 64.2857, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 70.2381, 11.9048, 66.6667, 41.6667)
+polygons = [PackedInt32Array(0, 1, 2, 3)]
+
+[node name="Rock2" type="Polygon2D" parent="BG/BG3/Crystal16"]
+z_index = -1
+position = Vector2(-512.651, 522.316)
+rotation = -1.86084
+scale = Vector2(7.21547, 1.38208)
+texture = SubResource("GradientTexture2D_835mq")
+polygon = PackedVector2Array(20.9098, 13.0836, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 20.3495, -35.4927, 25.4578, 2.8175)
+uv = PackedVector2Array(58.3333, 64.2857, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 70.2381, 11.9048, 66.6667, 41.6667)
+polygons = [PackedInt32Array(0, 1, 2, 3)]
+
+[node name="BG4" type="Sprite2D" parent="BG"]
+z_index = -1
+position = Vector2(0.678405, 56.7047)
+scale = Vector2(1, 1)
+texture = SubResource("GradientTexture2D_ylkpd")
+
+[node name="Crystal" type="Node2D" parent="BG/BG4"]
+z_index = 1
+position = Vector2(-1.81185, -10.2059)
+rotation = 1.5708
+scale = Vector2(0.0116724, 0.042447)
+
+[node name="Rock1" type="Polygon2D" parent="BG/BG4/Crystal"]
+z_index = -1
+position = Vector2(-428, 591)
+rotation = -1.02498
+scale = Vector2(4.93219, 1.58566)
+color = Color(0.592157, 0.592157, 0.592157, 1)
+texture = SubResource("GradientTexture2D_835mq")
+polygon = PackedVector2Array(32, 32, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 20.3495, -35.4927, 25.4578, 2.8175)
+uv = PackedVector2Array(58.3333, 64.2857, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 70.2381, 11.9048, 66.6667, 41.6667)
+polygons = [PackedInt32Array(0, 1, 2, 3)]
+
+[node name="Rock3" type="Polygon2D" parent="BG/BG4/Crystal"]
+z_index = -1
+position = Vector2(-535, 436)
+rotation = -4.00587
+scale = Vector2(4.93219, 1.58566)
+color = Color(0.592157, 0.592157, 0.592157, 1)
+texture = SubResource("GradientTexture2D_835mq")
+polygon = PackedVector2Array(20.1906, -36.1901, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 20.3495, -35.4927, 25.4578, 2.8175)
+uv = PackedVector2Array(58.3333, 64.2857, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 70.2381, 11.9048, 66.6667, 41.6667)
+polygons = [PackedInt32Array(0, 1, 2, 3)]
+
+[node name="Rock2" type="Polygon2D" parent="BG/BG4/Crystal"]
+z_index = -1
+position = Vector2(-471, 507)
+rotation = -1.57797
+scale = Vector2(7.21547, 1.38208)
+texture = SubResource("GradientTexture2D_835mq")
+polygon = PackedVector2Array(20.9098, 13.0836, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 20.3495, -35.4927, 25.4578, 2.8175)
+uv = PackedVector2Array(58.3333, 64.2857, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 70.2381, 11.9048, 66.6667, 41.6667)
+polygons = [PackedInt32Array(0, 1, 2, 3)]
+
+[node name="Crystal2" type="Node2D" parent="BG/BG4"]
+z_index = 1
+position = Vector2(-1.98164, -6.01546)
+rotation = 1.58718
+scale = Vector2(0.0116739, 0.0424466)
+skew = -0.0151476
+
+[node name="Rock1" type="Polygon2D" parent="BG/BG4/Crystal2"]
+z_index = -1
+position = Vector2(-400.486, 558.81)
+rotation = -1.02498
+scale = Vector2(4.93219, 1.58566)
+color = Color(0.592157, 0.592157, 0.592157, 1)
+texture = SubResource("GradientTexture2D_835mq")
+polygon = PackedVector2Array(32, 32, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 20.3495, -35.4927, 25.4578, 2.8175)
+uv = PackedVector2Array(58.3333, 64.2857, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 70.2381, 11.9048, 66.6667, 41.6667)
+polygons = [PackedInt32Array(0, 1, 2, 3)]
+
+[node name="Rock3" type="Polygon2D" parent="BG/BG4/Crystal2"]
+z_index = -1
+position = Vector2(-535, 436)
+rotation = -4.00587
+scale = Vector2(4.93219, 1.58566)
+color = Color(0.592157, 0.592157, 0.592157, 1)
+texture = SubResource("GradientTexture2D_835mq")
+polygon = PackedVector2Array(20.1906, -36.1901, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 20.3495, -35.4927, 25.4578, 2.8175)
+uv = PackedVector2Array(58.3333, 64.2857, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 70.2381, 11.9048, 66.6667, 41.6667)
+polygons = [PackedInt32Array(0, 1, 2, 3)]
+
+[node name="Rock2" type="Polygon2D" parent="BG/BG4/Crystal2"]
+z_index = -1
+position = Vector2(-512.651, 522.316)
+rotation = -1.86084
+scale = Vector2(7.21547, 1.38208)
+texture = SubResource("GradientTexture2D_835mq")
+polygon = PackedVector2Array(20.9098, 13.0836, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 20.3495, -35.4927, 25.4578, 2.8175)
+uv = PackedVector2Array(58.3333, 64.2857, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 70.2381, 11.9048, 66.6667, 41.6667)
+polygons = [PackedInt32Array(0, 1, 2, 3)]
+
+[node name="Crystal3" type="Node2D" parent="BG/BG4"]
+z_index = 1
+position = Vector2(-8.9005, -1.68499)
+rotation = 1.58718
+scale = Vector2(0.0116739, 0.0424466)
+skew = -0.0151476
+
+[node name="Rock1" type="Polygon2D" parent="BG/BG4/Crystal3"]
+z_index = -1
+position = Vector2(-400.486, 558.81)
+rotation = -1.02498
+scale = Vector2(4.93219, 1.58566)
+color = Color(0.592157, 0.592157, 0.592157, 1)
+texture = SubResource("GradientTexture2D_835mq")
+polygon = PackedVector2Array(32, 32, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 20.3495, -35.4927, 25.4578, 2.8175)
+uv = PackedVector2Array(58.3333, 64.2857, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 70.2381, 11.9048, 66.6667, 41.6667)
+polygons = [PackedInt32Array(0, 1, 2, 3)]
+
+[node name="Rock3" type="Polygon2D" parent="BG/BG4/Crystal3"]
+z_index = -1
+position = Vector2(-535, 436)
+rotation = -4.00587
+scale = Vector2(4.93219, 1.58566)
+color = Color(0.592157, 0.592157, 0.592157, 1)
+texture = SubResource("GradientTexture2D_835mq")
+polygon = PackedVector2Array(20.1906, -36.1901, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 20.3495, -35.4927, 25.4578, 2.8175)
+uv = PackedVector2Array(58.3333, 64.2857, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 70.2381, 11.9048, 66.6667, 41.6667)
+polygons = [PackedInt32Array(0, 1, 2, 3)]
+
+[node name="Rock2" type="Polygon2D" parent="BG/BG4/Crystal3"]
+z_index = -1
+position = Vector2(-512.651, 522.316)
+rotation = -1.86084
+scale = Vector2(7.21547, 1.38208)
+texture = SubResource("GradientTexture2D_835mq")
+polygon = PackedVector2Array(20.9098, 13.0836, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 20.3495, -35.4927, 25.4578, 2.8175)
+uv = PackedVector2Array(58.3333, 64.2857, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 70.2381, 11.9048, 66.6667, 41.6667)
+polygons = [PackedInt32Array(0, 1, 2, 3)]
+
+[node name="Crystal4" type="Node2D" parent="BG/BG4"]
+z_index = 1
+position = Vector2(-11.7444, 4.24462)
+rotation = 1.58718
+scale = Vector2(0.0116739, 0.0424466)
+skew = -0.0151476
+
+[node name="Rock1" type="Polygon2D" parent="BG/BG4/Crystal4"]
+z_index = -1
+position = Vector2(-412.829, 573.983)
+rotation = -1.02498
+scale = Vector2(4.93219, 1.58566)
+color = Color(0.592157, 0.592157, 0.592157, 1)
+texture = SubResource("GradientTexture2D_835mq")
+polygon = PackedVector2Array(22.6078, -63.8625, 21.9434, -32.259, 20.7839, 7.68817, 2.09373, -19.5336, 2.43314, -98.6098)
+polygons = [PackedInt32Array(0, 1, 2, 3)]
+
+[node name="Rock3" type="Polygon2D" parent="BG/BG4/Crystal4"]
+z_index = -1
+position = Vector2(-510.098, 423.303)
+rotation = -4.00587
+scale = Vector2(4.93219, 1.58566)
+color = Color(0.592157, 0.592157, 0.592157, 1)
+texture = SubResource("GradientTexture2D_835mq")
+polygon = PackedVector2Array(20.1906, -36.1901, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 20.3495, -35.4927, 25.4578, 2.8175)
+uv = PackedVector2Array(58.3333, 64.2857, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 70.2381, 11.9048, 66.6667, 41.6667)
+polygons = [PackedInt32Array(0, 1, 2, 3)]
+
+[node name="Rock2" type="Polygon2D" parent="BG/BG4/Crystal4"]
+z_index = -1
+position = Vector2(-485.057, 432.19)
+rotation = -1.53878
+scale = Vector2(7.21547, 1.38208)
+texture = SubResource("GradientTexture2D_835mq")
+polygon = PackedVector2Array(20.9098, 13.0836, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 20.3495, -35.4927, 25.4578, 2.8175)
+uv = PackedVector2Array(58.3333, 64.2857, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 70.2381, 11.9048, 66.6667, 41.6667)
+polygons = [PackedInt32Array(0, 1, 2, 3)]
+
+[node name="Crystal5" type="Node2D" parent="BG/BG4"]
+z_index = 1
+position = Vector2(-11.4049, 12.5554)
+rotation = 1.58718
+scale = Vector2(0.0116739, 0.0424466)
+skew = -0.0151476
+
+[node name="Rock1" type="Polygon2D" parent="BG/BG4/Crystal5"]
+z_index = -1
+position = Vector2(-412.829, 573.983)
+rotation = -1.02498
+scale = Vector2(4.93219, 1.58566)
+color = Color(0.592157, 0.592157, 0.592157, 1)
+texture = SubResource("GradientTexture2D_835mq")
+polygon = PackedVector2Array(22.6078, -63.8625, 21.9434, -32.259, 20.7839, 7.68817, 2.09373, -19.5336, 2.43314, -98.6098)
+polygons = [PackedInt32Array(0, 1, 2, 3)]
+
+[node name="Rock3" type="Polygon2D" parent="BG/BG4/Crystal5"]
+z_index = -1
+position = Vector2(-510.098, 423.303)
+rotation = -4.00587
+scale = Vector2(4.93219, 1.58566)
+color = Color(0.592157, 0.592157, 0.592157, 1)
+texture = SubResource("GradientTexture2D_835mq")
+polygon = PackedVector2Array(20.1906, -36.1901, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 20.3495, -35.4927, 25.4578, 2.8175)
+uv = PackedVector2Array(58.3333, 64.2857, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 70.2381, 11.9048, 66.6667, 41.6667)
+polygons = [PackedInt32Array(0, 1, 2, 3)]
+
+[node name="Rock2" type="Polygon2D" parent="BG/BG4/Crystal5"]
+z_index = -1
+position = Vector2(-485.057, 432.19)
+rotation = -1.53878
+scale = Vector2(7.21547, 1.38208)
+texture = SubResource("GradientTexture2D_835mq")
+polygon = PackedVector2Array(20.9098, 13.0836, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 20.3495, -35.4927, 25.4578, 2.8175)
+uv = PackedVector2Array(58.3333, 64.2857, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 70.2381, 11.9048, 66.6667, 41.6667)
+polygons = [PackedInt32Array(0, 1, 2, 3)]
+
+[node name="Crystal6" type="Node2D" parent="BG/BG4"]
+z_index = 1
+position = Vector2(-14.7582, 16.0455)
+rotation = 2.43509
+scale = Vector2(0.0171139, 0.0405599)
+skew = -0.775921
+
+[node name="Rock1" type="Polygon2D" parent="BG/BG4/Crystal6"]
+z_index = -1
+position = Vector2(-412.829, 573.983)
+rotation = -1.02498
+scale = Vector2(4.93219, 1.58566)
+color = Color(0.592157, 0.592157, 0.592157, 1)
+texture = SubResource("GradientTexture2D_835mq")
+polygon = PackedVector2Array(22.6078, -63.8625, 21.9434, -32.259, 20.7839, 7.68817, 2.09373, -19.5336, 2.43314, -98.6098)
+polygons = [PackedInt32Array(0, 1, 2, 3)]
+
+[node name="Rock3" type="Polygon2D" parent="BG/BG4/Crystal6"]
+z_index = -1
+position = Vector2(-510.098, 423.303)
+rotation = -4.00587
+scale = Vector2(4.93219, 1.58566)
+color = Color(0.592157, 0.592157, 0.592157, 1)
+texture = SubResource("GradientTexture2D_835mq")
+polygon = PackedVector2Array(20.1906, -36.1901, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 20.3495, -35.4927, 25.4578, 2.8175)
+uv = PackedVector2Array(58.3333, 64.2857, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 70.2381, 11.9048, 66.6667, 41.6667)
+polygons = [PackedInt32Array(0, 1, 2, 3)]
+
+[node name="Rock2" type="Polygon2D" parent="BG/BG4/Crystal6"]
+z_index = -1
+position = Vector2(-485.057, 432.19)
+rotation = -1.53878
+scale = Vector2(7.21547, 1.38208)
+texture = SubResource("GradientTexture2D_835mq")
+polygon = PackedVector2Array(20.9098, 13.0836, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 20.3495, -35.4927, 25.4578, 2.8175)
+uv = PackedVector2Array(58.3333, 64.2857, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 70.2381, 11.9048, 66.6667, 41.6667)
+polygons = [PackedInt32Array(0, 1, 2, 3)]
+
+[node name="Crystal7" type="Node2D" parent="BG/BG4"]
+z_index = 1
+position = Vector2(-14.7582, 16.0455)
+rotation = 2.43509
+scale = Vector2(0.0171139, 0.0405599)
+skew = -0.775921
+
+[node name="Rock1" type="Polygon2D" parent="BG/BG4/Crystal7"]
+z_index = -1
+position = Vector2(-412.829, 573.983)
+rotation = -1.02498
+scale = Vector2(4.93219, 1.58566)
+color = Color(0.592157, 0.592157, 0.592157, 1)
+texture = SubResource("GradientTexture2D_835mq")
+polygon = PackedVector2Array(22.6078, -63.8625, 21.9434, -32.259, 20.7839, 7.68817, 2.09373, -19.5336, 2.43314, -98.6098)
+polygons = [PackedInt32Array(0, 1, 2, 3)]
+
+[node name="Rock3" type="Polygon2D" parent="BG/BG4/Crystal7"]
+z_index = -1
+position = Vector2(-510.098, 423.303)
+rotation = -4.00587
+scale = Vector2(4.93219, 1.58566)
+color = Color(0.592157, 0.592157, 0.592157, 1)
+texture = SubResource("GradientTexture2D_835mq")
+polygon = PackedVector2Array(20.1906, -36.1901, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 20.3495, -35.4927, 25.4578, 2.8175)
+uv = PackedVector2Array(58.3333, 64.2857, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 70.2381, 11.9048, 66.6667, 41.6667)
+polygons = [PackedInt32Array(0, 1, 2, 3)]
+
+[node name="Rock2" type="Polygon2D" parent="BG/BG4/Crystal7"]
+z_index = -1
+position = Vector2(-485.057, 432.19)
+rotation = -1.53878
+scale = Vector2(7.21547, 1.38208)
+texture = SubResource("GradientTexture2D_835mq")
+polygon = PackedVector2Array(20.9098, 13.0836, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 20.3495, -35.4927, 25.4578, 2.8175)
+uv = PackedVector2Array(58.3333, 64.2857, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 70.2381, 11.9048, 66.6667, 41.6667)
+polygons = [PackedInt32Array(0, 1, 2, 3)]
+
+[node name="Crystal8" type="Node2D" parent="BG/BG4"]
+z_index = 1
+position = Vector2(0.904748, 18.2749)
+rotation = 1.58718
+scale = Vector2(0.0116739, 0.0424466)
+skew = -0.0151476
+
+[node name="Rock1" type="Polygon2D" parent="BG/BG4/Crystal8"]
+z_index = -1
+position = Vector2(-400.486, 558.81)
+rotation = -1.02498
+scale = Vector2(4.93219, 1.58566)
+color = Color(0.592157, 0.592157, 0.592157, 1)
+texture = SubResource("GradientTexture2D_835mq")
+polygon = PackedVector2Array(32, 32, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 20.3495, -35.4927, 25.4578, 2.8175)
+uv = PackedVector2Array(58.3333, 64.2857, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 70.2381, 11.9048, 66.6667, 41.6667)
+polygons = [PackedInt32Array(0, 1, 2, 3)]
+
+[node name="Rock3" type="Polygon2D" parent="BG/BG4/Crystal8"]
+z_index = -1
+position = Vector2(-535, 436)
+rotation = -4.00587
+scale = Vector2(4.93219, 1.58566)
+color = Color(0.592157, 0.592157, 0.592157, 1)
+texture = SubResource("GradientTexture2D_835mq")
+polygon = PackedVector2Array(20.1906, -36.1901, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 20.3495, -35.4927, 25.4578, 2.8175)
+uv = PackedVector2Array(58.3333, 64.2857, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 70.2381, 11.9048, 66.6667, 41.6667)
+polygons = [PackedInt32Array(0, 1, 2, 3)]
+
+[node name="Rock2" type="Polygon2D" parent="BG/BG4/Crystal8"]
+z_index = -1
+position = Vector2(-512.651, 522.316)
+rotation = -1.86084
+scale = Vector2(7.21547, 1.38208)
+texture = SubResource("GradientTexture2D_835mq")
+polygon = PackedVector2Array(20.9098, 13.0836, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 20.3495, -35.4927, 25.4578, 2.8175)
+uv = PackedVector2Array(58.3333, 64.2857, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 70.2381, 11.9048, 66.6667, 41.6667)
+polygons = [PackedInt32Array(0, 1, 2, 3)]
+
+[node name="Crystal9" type="Node2D" parent="BG/BG4"]
+z_index = 1
+position = Vector2(-3.71151, -3.98025)
+rotation = 1.5708
+scale = Vector2(0.0116724, 0.042447)
+
+[node name="Rock1" type="Polygon2D" parent="BG/BG4/Crystal9"]
+z_index = -1
+position = Vector2(-428, 591)
+rotation = -1.02498
+scale = Vector2(4.93219, 1.58566)
+color = Color(0.592157, 0.592157, 0.592157, 1)
+texture = SubResource("GradientTexture2D_835mq")
+polygon = PackedVector2Array(32, 32, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 20.3495, -35.4927, 25.4578, 2.8175)
+uv = PackedVector2Array(58.3333, 64.2857, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 70.2381, 11.9048, 66.6667, 41.6667)
+polygons = [PackedInt32Array(0, 1, 2, 3)]
+
+[node name="Rock3" type="Polygon2D" parent="BG/BG4/Crystal9"]
+z_index = -1
+position = Vector2(-535, 436)
+rotation = -4.00587
+scale = Vector2(4.93219, 1.58566)
+color = Color(0.592157, 0.592157, 0.592157, 1)
+texture = SubResource("GradientTexture2D_835mq")
+polygon = PackedVector2Array(20.1906, -36.1901, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 20.3495, -35.4927, 25.4578, 2.8175)
+uv = PackedVector2Array(58.3333, 64.2857, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 70.2381, 11.9048, 66.6667, 41.6667)
+polygons = [PackedInt32Array(0, 1, 2, 3)]
+
+[node name="Rock2" type="Polygon2D" parent="BG/BG4/Crystal9"]
+z_index = -1
+position = Vector2(-471, 507)
+rotation = -1.57797
+scale = Vector2(7.21547, 1.38208)
+texture = SubResource("GradientTexture2D_835mq")
+polygon = PackedVector2Array(20.9098, 13.0836, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 20.3495, -35.4927, 25.4578, 2.8175)
+uv = PackedVector2Array(58.3333, 64.2857, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 70.2381, 11.9048, 66.6667, 41.6667)
+polygons = [PackedInt32Array(0, 1, 2, 3)]
+
+[node name="Crystal10" type="Node2D" parent="BG/BG4"]
+z_index = 1
+position = Vector2(-3.8813, 0.210161)
+rotation = 1.58718
+scale = Vector2(0.0116739, 0.0424466)
+skew = -0.0151476
+
+[node name="Rock1" type="Polygon2D" parent="BG/BG4/Crystal10"]
+z_index = -1
+position = Vector2(-400.486, 558.81)
+rotation = -1.02498
+scale = Vector2(4.93219, 1.58566)
+color = Color(0.592157, 0.592157, 0.592157, 1)
+texture = SubResource("GradientTexture2D_835mq")
+polygon = PackedVector2Array(32, 32, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 20.3495, -35.4927, 25.4578, 2.8175)
+uv = PackedVector2Array(58.3333, 64.2857, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 70.2381, 11.9048, 66.6667, 41.6667)
+polygons = [PackedInt32Array(0, 1, 2, 3)]
+
+[node name="Rock3" type="Polygon2D" parent="BG/BG4/Crystal10"]
+z_index = -1
+position = Vector2(-535, 436)
+rotation = -4.00587
+scale = Vector2(4.93219, 1.58566)
+color = Color(0.592157, 0.592157, 0.592157, 1)
+texture = SubResource("GradientTexture2D_835mq")
+polygon = PackedVector2Array(20.1906, -36.1901, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 20.3495, -35.4927, 25.4578, 2.8175)
+uv = PackedVector2Array(58.3333, 64.2857, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 70.2381, 11.9048, 66.6667, 41.6667)
+polygons = [PackedInt32Array(0, 1, 2, 3)]
+
+[node name="Rock2" type="Polygon2D" parent="BG/BG4/Crystal10"]
+z_index = -1
+position = Vector2(-512.651, 522.316)
+rotation = -1.86084
+scale = Vector2(7.21547, 1.38208)
+texture = SubResource("GradientTexture2D_835mq")
+polygon = PackedVector2Array(20.9098, 13.0836, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 20.3495, -35.4927, 25.4578, 2.8175)
+uv = PackedVector2Array(58.3333, 64.2857, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 70.2381, 11.9048, 66.6667, 41.6667)
+polygons = [PackedInt32Array(0, 1, 2, 3)]
+
+[node name="Crystal11" type="Node2D" parent="BG/BG4"]
+z_index = 1
+position = Vector2(-10.8002, 4.54064)
+rotation = 1.58718
+scale = Vector2(0.0116739, 0.0424466)
+skew = -0.0151476
+
+[node name="Rock1" type="Polygon2D" parent="BG/BG4/Crystal11"]
+z_index = -1
+position = Vector2(-400.486, 558.81)
+rotation = -1.02498
+scale = Vector2(4.93219, 1.58566)
+color = Color(0.592157, 0.592157, 0.592157, 1)
+texture = SubResource("GradientTexture2D_835mq")
+polygon = PackedVector2Array(32, 32, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 20.3495, -35.4927, 25.4578, 2.8175)
+uv = PackedVector2Array(58.3333, 64.2857, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 70.2381, 11.9048, 66.6667, 41.6667)
+polygons = [PackedInt32Array(0, 1, 2, 3)]
+
+[node name="Rock3" type="Polygon2D" parent="BG/BG4/Crystal11"]
+z_index = -1
+position = Vector2(-535, 436)
+rotation = -4.00587
+scale = Vector2(4.93219, 1.58566)
+color = Color(0.592157, 0.592157, 0.592157, 1)
+texture = SubResource("GradientTexture2D_835mq")
+polygon = PackedVector2Array(20.1906, -36.1901, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 20.3495, -35.4927, 25.4578, 2.8175)
+uv = PackedVector2Array(58.3333, 64.2857, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 70.2381, 11.9048, 66.6667, 41.6667)
+polygons = [PackedInt32Array(0, 1, 2, 3)]
+
+[node name="Rock2" type="Polygon2D" parent="BG/BG4/Crystal11"]
+z_index = -1
+position = Vector2(-512.651, 522.316)
+rotation = -1.86084
+scale = Vector2(7.21547, 1.38208)
+texture = SubResource("GradientTexture2D_835mq")
+polygon = PackedVector2Array(20.9098, 13.0836, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 20.3495, -35.4927, 25.4578, 2.8175)
+uv = PackedVector2Array(58.3333, 64.2857, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 70.2381, 11.9048, 66.6667, 41.6667)
+polygons = [PackedInt32Array(0, 1, 2, 3)]
+
+[node name="Crystal12" type="Node2D" parent="BG/BG4"]
+z_index = 1
+position = Vector2(-13.6441, 10.4702)
+rotation = 1.58718
+scale = Vector2(0.0116739, 0.0424466)
+skew = -0.0151476
+
+[node name="Rock1" type="Polygon2D" parent="BG/BG4/Crystal12"]
+z_index = -1
+position = Vector2(-412.829, 573.983)
+rotation = -1.02498
+scale = Vector2(4.93219, 1.58566)
+color = Color(0.592157, 0.592157, 0.592157, 1)
+texture = SubResource("GradientTexture2D_835mq")
+polygon = PackedVector2Array(22.6078, -63.8625, 21.9434, -32.259, 20.7839, 7.68817, 2.09373, -19.5336, 2.43314, -98.6098)
+polygons = [PackedInt32Array(0, 1, 2, 3)]
+
+[node name="Rock3" type="Polygon2D" parent="BG/BG4/Crystal12"]
+z_index = -1
+position = Vector2(-510.098, 423.303)
+rotation = -4.00587
+scale = Vector2(4.93219, 1.58566)
+color = Color(0.592157, 0.592157, 0.592157, 1)
+texture = SubResource("GradientTexture2D_835mq")
+polygon = PackedVector2Array(20.1906, -36.1901, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 20.3495, -35.4927, 25.4578, 2.8175)
+uv = PackedVector2Array(58.3333, 64.2857, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 70.2381, 11.9048, 66.6667, 41.6667)
+polygons = [PackedInt32Array(0, 1, 2, 3)]
+
+[node name="Rock2" type="Polygon2D" parent="BG/BG4/Crystal12"]
+z_index = -1
+position = Vector2(-485.057, 432.19)
+rotation = -1.53878
+scale = Vector2(7.21547, 1.38208)
+texture = SubResource("GradientTexture2D_835mq")
+polygon = PackedVector2Array(20.9098, 13.0836, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 20.3495, -35.4927, 25.4578, 2.8175)
+uv = PackedVector2Array(58.3333, 64.2857, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 70.2381, 11.9048, 66.6667, 41.6667)
+polygons = [PackedInt32Array(0, 1, 2, 3)]
+
+[node name="Crystal13" type="Node2D" parent="BG/BG4"]
+z_index = 1
+position = Vector2(-13.3045, 18.781)
+rotation = 1.58718
+scale = Vector2(0.0116739, 0.0424466)
+skew = -0.0151476
+
+[node name="Rock1" type="Polygon2D" parent="BG/BG4/Crystal13"]
+z_index = -1
+position = Vector2(-412.829, 573.983)
+rotation = -1.02498
+scale = Vector2(4.93219, 1.58566)
+color = Color(0.592157, 0.592157, 0.592157, 1)
+texture = SubResource("GradientTexture2D_835mq")
+polygon = PackedVector2Array(22.6078, -63.8625, 21.9434, -32.259, 20.7839, 7.68817, 2.09373, -19.5336, 2.43314, -98.6098)
+polygons = [PackedInt32Array(0, 1, 2, 3)]
+
+[node name="Rock3" type="Polygon2D" parent="BG/BG4/Crystal13"]
+z_index = -1
+position = Vector2(-510.098, 423.303)
+rotation = -4.00587
+scale = Vector2(4.93219, 1.58566)
+color = Color(0.592157, 0.592157, 0.592157, 1)
+texture = SubResource("GradientTexture2D_835mq")
+polygon = PackedVector2Array(20.1906, -36.1901, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 20.3495, -35.4927, 25.4578, 2.8175)
+uv = PackedVector2Array(58.3333, 64.2857, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 70.2381, 11.9048, 66.6667, 41.6667)
+polygons = [PackedInt32Array(0, 1, 2, 3)]
+
+[node name="Rock2" type="Polygon2D" parent="BG/BG4/Crystal13"]
+z_index = -1
+position = Vector2(-485.057, 432.19)
+rotation = -1.53878
+scale = Vector2(7.21547, 1.38208)
+texture = SubResource("GradientTexture2D_835mq")
+polygon = PackedVector2Array(20.9098, 13.0836, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 20.3495, -35.4927, 25.4578, 2.8175)
+uv = PackedVector2Array(58.3333, 64.2857, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 70.2381, 11.9048, 66.6667, 41.6667)
+polygons = [PackedInt32Array(0, 1, 2, 3)]
+
+[node name="Crystal14" type="Node2D" parent="BG/BG4"]
+z_index = 1
+position = Vector2(-16.6578, 22.2711)
+rotation = 2.43509
+scale = Vector2(0.0171139, 0.0405599)
+skew = -0.775921
+
+[node name="Rock1" type="Polygon2D" parent="BG/BG4/Crystal14"]
+z_index = -1
+position = Vector2(-412.829, 573.983)
+rotation = -1.02498
+scale = Vector2(4.93219, 1.58566)
+color = Color(0.592157, 0.592157, 0.592157, 1)
+texture = SubResource("GradientTexture2D_835mq")
+polygon = PackedVector2Array(22.6078, -63.8625, 21.9434, -32.259, 20.7839, 7.68817, 2.09373, -19.5336, 2.43314, -98.6098)
+polygons = [PackedInt32Array(0, 1, 2, 3)]
+
+[node name="Rock3" type="Polygon2D" parent="BG/BG4/Crystal14"]
+z_index = -1
+position = Vector2(-510.098, 423.303)
+rotation = -4.00587
+scale = Vector2(4.93219, 1.58566)
+color = Color(0.592157, 0.592157, 0.592157, 1)
+texture = SubResource("GradientTexture2D_835mq")
+polygon = PackedVector2Array(20.1906, -36.1901, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 20.3495, -35.4927, 25.4578, 2.8175)
+uv = PackedVector2Array(58.3333, 64.2857, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 70.2381, 11.9048, 66.6667, 41.6667)
+polygons = [PackedInt32Array(0, 1, 2, 3)]
+
+[node name="Rock2" type="Polygon2D" parent="BG/BG4/Crystal14"]
+z_index = -1
+position = Vector2(-485.057, 432.19)
+rotation = -1.53878
+scale = Vector2(7.21547, 1.38208)
+texture = SubResource("GradientTexture2D_835mq")
+polygon = PackedVector2Array(20.9098, 13.0836, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 20.3495, -35.4927, 25.4578, 2.8175)
+uv = PackedVector2Array(58.3333, 64.2857, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 70.2381, 11.9048, 66.6667, 41.6667)
+polygons = [PackedInt32Array(0, 1, 2, 3)]
+
+[node name="Crystal15" type="Node2D" parent="BG/BG4"]
+z_index = 1
+position = Vector2(-16.6578, 22.2711)
+rotation = 2.43509
+scale = Vector2(0.0171139, 0.0405599)
+skew = -0.775921
+
+[node name="Rock1" type="Polygon2D" parent="BG/BG4/Crystal15"]
+z_index = -1
+position = Vector2(-412.829, 573.983)
+rotation = -1.02498
+scale = Vector2(4.93219, 1.58566)
+color = Color(0.592157, 0.592157, 0.592157, 1)
+texture = SubResource("GradientTexture2D_835mq")
+polygon = PackedVector2Array(22.6078, -63.8625, 21.9434, -32.259, 20.7839, 7.68817, 2.09373, -19.5336, 2.43314, -98.6098)
+polygons = [PackedInt32Array(0, 1, 2, 3)]
+
+[node name="Rock3" type="Polygon2D" parent="BG/BG4/Crystal15"]
+z_index = -1
+position = Vector2(-510.098, 423.303)
+rotation = -4.00587
+scale = Vector2(4.93219, 1.58566)
+color = Color(0.592157, 0.592157, 0.592157, 1)
+texture = SubResource("GradientTexture2D_835mq")
+polygon = PackedVector2Array(20.1906, -36.1901, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 20.3495, -35.4927, 25.4578, 2.8175)
+uv = PackedVector2Array(58.3333, 64.2857, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 70.2381, 11.9048, 66.6667, 41.6667)
+polygons = [PackedInt32Array(0, 1, 2, 3)]
+
+[node name="Rock2" type="Polygon2D" parent="BG/BG4/Crystal15"]
+z_index = -1
+position = Vector2(-485.057, 432.19)
+rotation = -1.53878
+scale = Vector2(7.21547, 1.38208)
+texture = SubResource("GradientTexture2D_835mq")
+polygon = PackedVector2Array(20.9098, 13.0836, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 20.3495, -35.4927, 25.4578, 2.8175)
+uv = PackedVector2Array(58.3333, 64.2857, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 70.2381, 11.9048, 66.6667, 41.6667)
+polygons = [PackedInt32Array(0, 1, 2, 3)]
+
+[node name="Crystal16" type="Node2D" parent="BG/BG4"]
+z_index = 1
+position = Vector2(-0.994911, 24.5005)
+rotation = 1.58718
+scale = Vector2(0.0116739, 0.0424466)
+skew = -0.0151476
+
+[node name="Rock1" type="Polygon2D" parent="BG/BG4/Crystal16"]
+z_index = -1
+position = Vector2(-400.486, 558.81)
+rotation = -1.02498
+scale = Vector2(4.93219, 1.58566)
+color = Color(0.592157, 0.592157, 0.592157, 1)
+texture = SubResource("GradientTexture2D_835mq")
+polygon = PackedVector2Array(32, 32, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 20.3495, -35.4927, 25.4578, 2.8175)
+uv = PackedVector2Array(58.3333, 64.2857, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 70.2381, 11.9048, 66.6667, 41.6667)
+polygons = [PackedInt32Array(0, 1, 2, 3)]
+
+[node name="Rock3" type="Polygon2D" parent="BG/BG4/Crystal16"]
+z_index = -1
+position = Vector2(-535, 436)
+rotation = -4.00587
+scale = Vector2(4.93219, 1.58566)
+color = Color(0.592157, 0.592157, 0.592157, 1)
+texture = SubResource("GradientTexture2D_835mq")
+polygon = PackedVector2Array(20.1906, -36.1901, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 20.3495, -35.4927, 25.4578, 2.8175)
+uv = PackedVector2Array(58.3333, 64.2857, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 70.2381, 11.9048, 66.6667, 41.6667)
+polygons = [PackedInt32Array(0, 1, 2, 3)]
+
+[node name="Rock2" type="Polygon2D" parent="BG/BG4/Crystal16"]
+z_index = -1
+position = Vector2(-512.651, 522.316)
+rotation = -1.86084
+scale = Vector2(7.21547, 1.38208)
+texture = SubResource("GradientTexture2D_835mq")
+polygon = PackedVector2Array(20.9098, 13.0836, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 20.3495, -35.4927, 25.4578, 2.8175)
+uv = PackedVector2Array(58.3333, 64.2857, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 70.2381, 11.9048, 66.6667, 41.6667)
+polygons = [PackedInt32Array(0, 1, 2, 3)]
+
+[node name="BG5" type="Sprite2D" parent="BG"]
+z_index = -1
+position = Vector2(-4.28862, 112.359)
+scale = Vector2(1, 1)
+texture = SubResource("GradientTexture2D_ylkpd")
+
+[node name="Crystal" type="Node2D" parent="BG/BG5"]
+z_index = 1
+position = Vector2(-1.81185, -10.2059)
+rotation = 1.5708
+scale = Vector2(0.0116724, 0.042447)
+
+[node name="Rock1" type="Polygon2D" parent="BG/BG5/Crystal"]
+z_index = -1
+position = Vector2(-428, 591)
+rotation = -1.02498
+scale = Vector2(4.93219, 1.58566)
+color = Color(0.592157, 0.592157, 0.592157, 1)
+texture = SubResource("GradientTexture2D_835mq")
+polygon = PackedVector2Array(32, 32, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 20.3495, -35.4927, 25.4578, 2.8175)
+uv = PackedVector2Array(58.3333, 64.2857, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 70.2381, 11.9048, 66.6667, 41.6667)
+polygons = [PackedInt32Array(0, 1, 2, 3)]
+
+[node name="Rock3" type="Polygon2D" parent="BG/BG5/Crystal"]
+z_index = -1
+position = Vector2(-535, 436)
+rotation = -4.00587
+scale = Vector2(4.93219, 1.58566)
+color = Color(0.592157, 0.592157, 0.592157, 1)
+texture = SubResource("GradientTexture2D_835mq")
+polygon = PackedVector2Array(20.1906, -36.1901, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 20.3495, -35.4927, 25.4578, 2.8175)
+uv = PackedVector2Array(58.3333, 64.2857, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 70.2381, 11.9048, 66.6667, 41.6667)
+polygons = [PackedInt32Array(0, 1, 2, 3)]
+
+[node name="Rock2" type="Polygon2D" parent="BG/BG5/Crystal"]
+z_index = -1
+position = Vector2(-471, 507)
+rotation = -1.57797
+scale = Vector2(7.21547, 1.38208)
+texture = SubResource("GradientTexture2D_835mq")
+polygon = PackedVector2Array(20.9098, 13.0836, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 20.3495, -35.4927, 25.4578, 2.8175)
+uv = PackedVector2Array(58.3333, 64.2857, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 70.2381, 11.9048, 66.6667, 41.6667)
+polygons = [PackedInt32Array(0, 1, 2, 3)]
+
+[node name="Crystal2" type="Node2D" parent="BG/BG5"]
+z_index = 1
+position = Vector2(-1.98164, -6.01546)
+rotation = 1.58718
+scale = Vector2(0.0116739, 0.0424466)
+skew = -0.0151476
+
+[node name="Rock1" type="Polygon2D" parent="BG/BG5/Crystal2"]
+z_index = -1
+position = Vector2(-400.486, 558.81)
+rotation = -1.02498
+scale = Vector2(4.93219, 1.58566)
+color = Color(0.592157, 0.592157, 0.592157, 1)
+texture = SubResource("GradientTexture2D_835mq")
+polygon = PackedVector2Array(32, 32, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 20.3495, -35.4927, 25.4578, 2.8175)
+uv = PackedVector2Array(58.3333, 64.2857, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 70.2381, 11.9048, 66.6667, 41.6667)
+polygons = [PackedInt32Array(0, 1, 2, 3)]
+
+[node name="Rock3" type="Polygon2D" parent="BG/BG5/Crystal2"]
+z_index = -1
+position = Vector2(-535, 436)
+rotation = -4.00587
+scale = Vector2(4.93219, 1.58566)
+color = Color(0.592157, 0.592157, 0.592157, 1)
+texture = SubResource("GradientTexture2D_835mq")
+polygon = PackedVector2Array(20.1906, -36.1901, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 20.3495, -35.4927, 25.4578, 2.8175)
+uv = PackedVector2Array(58.3333, 64.2857, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 70.2381, 11.9048, 66.6667, 41.6667)
+polygons = [PackedInt32Array(0, 1, 2, 3)]
+
+[node name="Rock2" type="Polygon2D" parent="BG/BG5/Crystal2"]
+z_index = -1
+position = Vector2(-512.651, 522.316)
+rotation = -1.86084
+scale = Vector2(7.21547, 1.38208)
+texture = SubResource("GradientTexture2D_835mq")
+polygon = PackedVector2Array(20.9098, 13.0836, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 20.3495, -35.4927, 25.4578, 2.8175)
+uv = PackedVector2Array(58.3333, 64.2857, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 70.2381, 11.9048, 66.6667, 41.6667)
+polygons = [PackedInt32Array(0, 1, 2, 3)]
+
+[node name="Crystal3" type="Node2D" parent="BG/BG5"]
+z_index = 1
+position = Vector2(-8.9005, -1.68499)
+rotation = 1.58718
+scale = Vector2(0.0116739, 0.0424466)
+skew = -0.0151476
+
+[node name="Rock1" type="Polygon2D" parent="BG/BG5/Crystal3"]
+z_index = -1
+position = Vector2(-400.486, 558.81)
+rotation = -1.02498
+scale = Vector2(4.93219, 1.58566)
+color = Color(0.592157, 0.592157, 0.592157, 1)
+texture = SubResource("GradientTexture2D_835mq")
+polygon = PackedVector2Array(32, 32, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 20.3495, -35.4927, 25.4578, 2.8175)
+uv = PackedVector2Array(58.3333, 64.2857, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 70.2381, 11.9048, 66.6667, 41.6667)
+polygons = [PackedInt32Array(0, 1, 2, 3)]
+
+[node name="Rock3" type="Polygon2D" parent="BG/BG5/Crystal3"]
+z_index = -1
+position = Vector2(-535, 436)
+rotation = -4.00587
+scale = Vector2(4.93219, 1.58566)
+color = Color(0.592157, 0.592157, 0.592157, 1)
+texture = SubResource("GradientTexture2D_835mq")
+polygon = PackedVector2Array(20.1906, -36.1901, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 20.3495, -35.4927, 25.4578, 2.8175)
+uv = PackedVector2Array(58.3333, 64.2857, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 70.2381, 11.9048, 66.6667, 41.6667)
+polygons = [PackedInt32Array(0, 1, 2, 3)]
+
+[node name="Rock2" type="Polygon2D" parent="BG/BG5/Crystal3"]
+z_index = -1
+position = Vector2(-512.651, 522.316)
+rotation = -1.86084
+scale = Vector2(7.21547, 1.38208)
+texture = SubResource("GradientTexture2D_835mq")
+polygon = PackedVector2Array(20.9098, 13.0836, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 20.3495, -35.4927, 25.4578, 2.8175)
+uv = PackedVector2Array(58.3333, 64.2857, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 70.2381, 11.9048, 66.6667, 41.6667)
+polygons = [PackedInt32Array(0, 1, 2, 3)]
+
+[node name="Crystal4" type="Node2D" parent="BG/BG5"]
+z_index = 1
+position = Vector2(-11.7444, 4.24462)
+rotation = 1.58718
+scale = Vector2(0.0116739, 0.0424466)
+skew = -0.0151476
+
+[node name="Rock1" type="Polygon2D" parent="BG/BG5/Crystal4"]
+z_index = -1
+position = Vector2(-412.829, 573.983)
+rotation = -1.02498
+scale = Vector2(4.93219, 1.58566)
+color = Color(0.592157, 0.592157, 0.592157, 1)
+texture = SubResource("GradientTexture2D_835mq")
+polygon = PackedVector2Array(22.6078, -63.8625, 21.9434, -32.259, 20.7839, 7.68817, 2.09373, -19.5336, 2.43314, -98.6098)
+polygons = [PackedInt32Array(0, 1, 2, 3)]
+
+[node name="Rock3" type="Polygon2D" parent="BG/BG5/Crystal4"]
+z_index = -1
+position = Vector2(-510.098, 423.303)
+rotation = -4.00587
+scale = Vector2(4.93219, 1.58566)
+color = Color(0.592157, 0.592157, 0.592157, 1)
+texture = SubResource("GradientTexture2D_835mq")
+polygon = PackedVector2Array(20.1906, -36.1901, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 20.3495, -35.4927, 25.4578, 2.8175)
+uv = PackedVector2Array(58.3333, 64.2857, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 70.2381, 11.9048, 66.6667, 41.6667)
+polygons = [PackedInt32Array(0, 1, 2, 3)]
+
+[node name="Rock2" type="Polygon2D" parent="BG/BG5/Crystal4"]
+z_index = -1
+position = Vector2(-485.057, 432.19)
+rotation = -1.53878
+scale = Vector2(7.21547, 1.38208)
+texture = SubResource("GradientTexture2D_835mq")
+polygon = PackedVector2Array(20.9098, 13.0836, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 20.3495, -35.4927, 25.4578, 2.8175)
+uv = PackedVector2Array(58.3333, 64.2857, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 70.2381, 11.9048, 66.6667, 41.6667)
+polygons = [PackedInt32Array(0, 1, 2, 3)]
+
+[node name="Crystal5" type="Node2D" parent="BG/BG5"]
+z_index = 1
+position = Vector2(-11.4049, 12.5554)
+rotation = 1.58718
+scale = Vector2(0.0116739, 0.0424466)
+skew = -0.0151476
+
+[node name="Rock1" type="Polygon2D" parent="BG/BG5/Crystal5"]
+z_index = -1
+position = Vector2(-412.829, 573.983)
+rotation = -1.02498
+scale = Vector2(4.93219, 1.58566)
+color = Color(0.592157, 0.592157, 0.592157, 1)
+texture = SubResource("GradientTexture2D_835mq")
+polygon = PackedVector2Array(22.6078, -63.8625, 21.9434, -32.259, 20.7839, 7.68817, 2.09373, -19.5336, 2.43314, -98.6098)
+polygons = [PackedInt32Array(0, 1, 2, 3)]
+
+[node name="Rock3" type="Polygon2D" parent="BG/BG5/Crystal5"]
+z_index = -1
+position = Vector2(-510.098, 423.303)
+rotation = -4.00587
+scale = Vector2(4.93219, 1.58566)
+color = Color(0.592157, 0.592157, 0.592157, 1)
+texture = SubResource("GradientTexture2D_835mq")
+polygon = PackedVector2Array(20.1906, -36.1901, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 20.3495, -35.4927, 25.4578, 2.8175)
+uv = PackedVector2Array(58.3333, 64.2857, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 70.2381, 11.9048, 66.6667, 41.6667)
+polygons = [PackedInt32Array(0, 1, 2, 3)]
+
+[node name="Rock2" type="Polygon2D" parent="BG/BG5/Crystal5"]
+z_index = -1
+position = Vector2(-485.057, 432.19)
+rotation = -1.53878
+scale = Vector2(7.21547, 1.38208)
+texture = SubResource("GradientTexture2D_835mq")
+polygon = PackedVector2Array(20.9098, 13.0836, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 20.3495, -35.4927, 25.4578, 2.8175)
+uv = PackedVector2Array(58.3333, 64.2857, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 70.2381, 11.9048, 66.6667, 41.6667)
+polygons = [PackedInt32Array(0, 1, 2, 3)]
+
+[node name="Crystal6" type="Node2D" parent="BG/BG5"]
+z_index = 1
+position = Vector2(-14.7582, 16.0455)
+rotation = 2.43509
+scale = Vector2(0.0171139, 0.0405599)
+skew = -0.775921
+
+[node name="Rock1" type="Polygon2D" parent="BG/BG5/Crystal6"]
+z_index = -1
+position = Vector2(-412.829, 573.983)
+rotation = -1.02498
+scale = Vector2(4.93219, 1.58566)
+color = Color(0.592157, 0.592157, 0.592157, 1)
+texture = SubResource("GradientTexture2D_835mq")
+polygon = PackedVector2Array(22.6078, -63.8625, 21.9434, -32.259, 20.7839, 7.68817, 2.09373, -19.5336, 2.43314, -98.6098)
+polygons = [PackedInt32Array(0, 1, 2, 3)]
+
+[node name="Rock3" type="Polygon2D" parent="BG/BG5/Crystal6"]
+z_index = -1
+position = Vector2(-510.098, 423.303)
+rotation = -4.00587
+scale = Vector2(4.93219, 1.58566)
+color = Color(0.592157, 0.592157, 0.592157, 1)
+texture = SubResource("GradientTexture2D_835mq")
+polygon = PackedVector2Array(20.1906, -36.1901, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 20.3495, -35.4927, 25.4578, 2.8175)
+uv = PackedVector2Array(58.3333, 64.2857, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 70.2381, 11.9048, 66.6667, 41.6667)
+polygons = [PackedInt32Array(0, 1, 2, 3)]
+
+[node name="Rock2" type="Polygon2D" parent="BG/BG5/Crystal6"]
+z_index = -1
+position = Vector2(-485.057, 432.19)
+rotation = -1.53878
+scale = Vector2(7.21547, 1.38208)
+texture = SubResource("GradientTexture2D_835mq")
+polygon = PackedVector2Array(20.9098, 13.0836, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 20.3495, -35.4927, 25.4578, 2.8175)
+uv = PackedVector2Array(58.3333, 64.2857, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 70.2381, 11.9048, 66.6667, 41.6667)
+polygons = [PackedInt32Array(0, 1, 2, 3)]
+
+[node name="Crystal7" type="Node2D" parent="BG/BG5"]
+z_index = 1
+position = Vector2(-14.7582, 16.0455)
+rotation = 2.43509
+scale = Vector2(0.0171139, 0.0405599)
+skew = -0.775921
+
+[node name="Rock1" type="Polygon2D" parent="BG/BG5/Crystal7"]
+z_index = -1
+position = Vector2(-412.829, 573.983)
+rotation = -1.02498
+scale = Vector2(4.93219, 1.58566)
+color = Color(0.592157, 0.592157, 0.592157, 1)
+texture = SubResource("GradientTexture2D_835mq")
+polygon = PackedVector2Array(22.6078, -63.8625, 21.9434, -32.259, 20.7839, 7.68817, 2.09373, -19.5336, 2.43314, -98.6098)
+polygons = [PackedInt32Array(0, 1, 2, 3)]
+
+[node name="Rock3" type="Polygon2D" parent="BG/BG5/Crystal7"]
+z_index = -1
+position = Vector2(-510.098, 423.303)
+rotation = -4.00587
+scale = Vector2(4.93219, 1.58566)
+color = Color(0.592157, 0.592157, 0.592157, 1)
+texture = SubResource("GradientTexture2D_835mq")
+polygon = PackedVector2Array(20.1906, -36.1901, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 20.3495, -35.4927, 25.4578, 2.8175)
+uv = PackedVector2Array(58.3333, 64.2857, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 70.2381, 11.9048, 66.6667, 41.6667)
+polygons = [PackedInt32Array(0, 1, 2, 3)]
+
+[node name="Rock2" type="Polygon2D" parent="BG/BG5/Crystal7"]
+z_index = -1
+position = Vector2(-485.057, 432.19)
+rotation = -1.53878
+scale = Vector2(7.21547, 1.38208)
+texture = SubResource("GradientTexture2D_835mq")
+polygon = PackedVector2Array(20.9098, 13.0836, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 20.3495, -35.4927, 25.4578, 2.8175)
+uv = PackedVector2Array(58.3333, 64.2857, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 70.2381, 11.9048, 66.6667, 41.6667)
+polygons = [PackedInt32Array(0, 1, 2, 3)]
+
+[node name="Crystal8" type="Node2D" parent="BG/BG5"]
+z_index = 1
+position = Vector2(0.904748, 18.2749)
+rotation = 1.58718
+scale = Vector2(0.0116739, 0.0424466)
+skew = -0.0151476
+
+[node name="Rock1" type="Polygon2D" parent="BG/BG5/Crystal8"]
+z_index = -1
+position = Vector2(-400.486, 558.81)
+rotation = -1.02498
+scale = Vector2(4.93219, 1.58566)
+color = Color(0.592157, 0.592157, 0.592157, 1)
+texture = SubResource("GradientTexture2D_835mq")
+polygon = PackedVector2Array(32, 32, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 20.3495, -35.4927, 25.4578, 2.8175)
+uv = PackedVector2Array(58.3333, 64.2857, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 70.2381, 11.9048, 66.6667, 41.6667)
+polygons = [PackedInt32Array(0, 1, 2, 3)]
+
+[node name="Rock3" type="Polygon2D" parent="BG/BG5/Crystal8"]
+z_index = -1
+position = Vector2(-535, 436)
+rotation = -4.00587
+scale = Vector2(4.93219, 1.58566)
+color = Color(0.592157, 0.592157, 0.592157, 1)
+texture = SubResource("GradientTexture2D_835mq")
+polygon = PackedVector2Array(20.1906, -36.1901, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 20.3495, -35.4927, 25.4578, 2.8175)
+uv = PackedVector2Array(58.3333, 64.2857, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 70.2381, 11.9048, 66.6667, 41.6667)
+polygons = [PackedInt32Array(0, 1, 2, 3)]
+
+[node name="Rock2" type="Polygon2D" parent="BG/BG5/Crystal8"]
+z_index = -1
+position = Vector2(-512.651, 522.316)
+rotation = -1.86084
+scale = Vector2(7.21547, 1.38208)
+texture = SubResource("GradientTexture2D_835mq")
+polygon = PackedVector2Array(20.9098, 13.0836, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 20.3495, -35.4927, 25.4578, 2.8175)
+uv = PackedVector2Array(58.3333, 64.2857, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 70.2381, 11.9048, 66.6667, 41.6667)
+polygons = [PackedInt32Array(0, 1, 2, 3)]
+
+[node name="Crystal9" type="Node2D" parent="BG/BG5"]
+z_index = 1
+position = Vector2(-3.71151, -3.98025)
+rotation = 1.5708
+scale = Vector2(0.0116724, 0.042447)
+
+[node name="Rock1" type="Polygon2D" parent="BG/BG5/Crystal9"]
+z_index = -1
+position = Vector2(-428, 591)
+rotation = -1.02498
+scale = Vector2(4.93219, 1.58566)
+color = Color(0.592157, 0.592157, 0.592157, 1)
+texture = SubResource("GradientTexture2D_835mq")
+polygon = PackedVector2Array(32, 32, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 20.3495, -35.4927, 25.4578, 2.8175)
+uv = PackedVector2Array(58.3333, 64.2857, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 70.2381, 11.9048, 66.6667, 41.6667)
+polygons = [PackedInt32Array(0, 1, 2, 3)]
+
+[node name="Rock3" type="Polygon2D" parent="BG/BG5/Crystal9"]
+z_index = -1
+position = Vector2(-535, 436)
+rotation = -4.00587
+scale = Vector2(4.93219, 1.58566)
+color = Color(0.592157, 0.592157, 0.592157, 1)
+texture = SubResource("GradientTexture2D_835mq")
+polygon = PackedVector2Array(20.1906, -36.1901, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 20.3495, -35.4927, 25.4578, 2.8175)
+uv = PackedVector2Array(58.3333, 64.2857, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 70.2381, 11.9048, 66.6667, 41.6667)
+polygons = [PackedInt32Array(0, 1, 2, 3)]
+
+[node name="Rock2" type="Polygon2D" parent="BG/BG5/Crystal9"]
+z_index = -1
+position = Vector2(-471, 507)
+rotation = -1.57797
+scale = Vector2(7.21547, 1.38208)
+texture = SubResource("GradientTexture2D_835mq")
+polygon = PackedVector2Array(20.9098, 13.0836, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 20.3495, -35.4927, 25.4578, 2.8175)
+uv = PackedVector2Array(58.3333, 64.2857, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 70.2381, 11.9048, 66.6667, 41.6667)
+polygons = [PackedInt32Array(0, 1, 2, 3)]
+
+[node name="Crystal10" type="Node2D" parent="BG/BG5"]
+z_index = 1
+position = Vector2(-3.8813, 0.210161)
+rotation = 1.58718
+scale = Vector2(0.0116739, 0.0424466)
+skew = -0.0151476
+
+[node name="Rock1" type="Polygon2D" parent="BG/BG5/Crystal10"]
+z_index = -1
+position = Vector2(-400.486, 558.81)
+rotation = -1.02498
+scale = Vector2(4.93219, 1.58566)
+color = Color(0.592157, 0.592157, 0.592157, 1)
+texture = SubResource("GradientTexture2D_835mq")
+polygon = PackedVector2Array(32, 32, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 20.3495, -35.4927, 25.4578, 2.8175)
+uv = PackedVector2Array(58.3333, 64.2857, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 70.2381, 11.9048, 66.6667, 41.6667)
+polygons = [PackedInt32Array(0, 1, 2, 3)]
+
+[node name="Rock3" type="Polygon2D" parent="BG/BG5/Crystal10"]
+z_index = -1
+position = Vector2(-535, 436)
+rotation = -4.00587
+scale = Vector2(4.93219, 1.58566)
+color = Color(0.592157, 0.592157, 0.592157, 1)
+texture = SubResource("GradientTexture2D_835mq")
+polygon = PackedVector2Array(20.1906, -36.1901, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 20.3495, -35.4927, 25.4578, 2.8175)
+uv = PackedVector2Array(58.3333, 64.2857, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 70.2381, 11.9048, 66.6667, 41.6667)
+polygons = [PackedInt32Array(0, 1, 2, 3)]
+
+[node name="Rock2" type="Polygon2D" parent="BG/BG5/Crystal10"]
+z_index = -1
+position = Vector2(-512.651, 522.316)
+rotation = -1.86084
+scale = Vector2(7.21547, 1.38208)
+texture = SubResource("GradientTexture2D_835mq")
+polygon = PackedVector2Array(20.9098, 13.0836, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 20.3495, -35.4927, 25.4578, 2.8175)
+uv = PackedVector2Array(58.3333, 64.2857, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 70.2381, 11.9048, 66.6667, 41.6667)
+polygons = [PackedInt32Array(0, 1, 2, 3)]
+
+[node name="Crystal11" type="Node2D" parent="BG/BG5"]
+z_index = 1
+position = Vector2(-10.8002, 4.54064)
+rotation = 1.58718
+scale = Vector2(0.0116739, 0.0424466)
+skew = -0.0151476
+
+[node name="Rock1" type="Polygon2D" parent="BG/BG5/Crystal11"]
+z_index = -1
+position = Vector2(-400.486, 558.81)
+rotation = -1.02498
+scale = Vector2(4.93219, 1.58566)
+color = Color(0.592157, 0.592157, 0.592157, 1)
+texture = SubResource("GradientTexture2D_835mq")
+polygon = PackedVector2Array(32, 32, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 20.3495, -35.4927, 25.4578, 2.8175)
+uv = PackedVector2Array(58.3333, 64.2857, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 70.2381, 11.9048, 66.6667, 41.6667)
+polygons = [PackedInt32Array(0, 1, 2, 3)]
+
+[node name="Rock3" type="Polygon2D" parent="BG/BG5/Crystal11"]
+z_index = -1
+position = Vector2(-535, 436)
+rotation = -4.00587
+scale = Vector2(4.93219, 1.58566)
+color = Color(0.592157, 0.592157, 0.592157, 1)
+texture = SubResource("GradientTexture2D_835mq")
+polygon = PackedVector2Array(20.1906, -36.1901, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 20.3495, -35.4927, 25.4578, 2.8175)
+uv = PackedVector2Array(58.3333, 64.2857, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 70.2381, 11.9048, 66.6667, 41.6667)
+polygons = [PackedInt32Array(0, 1, 2, 3)]
+
+[node name="Rock2" type="Polygon2D" parent="BG/BG5/Crystal11"]
+z_index = -1
+position = Vector2(-512.651, 522.316)
+rotation = -1.86084
+scale = Vector2(7.21547, 1.38208)
+texture = SubResource("GradientTexture2D_835mq")
+polygon = PackedVector2Array(20.9098, 13.0836, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 20.3495, -35.4927, 25.4578, 2.8175)
+uv = PackedVector2Array(58.3333, 64.2857, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 70.2381, 11.9048, 66.6667, 41.6667)
+polygons = [PackedInt32Array(0, 1, 2, 3)]
+
+[node name="Crystal12" type="Node2D" parent="BG/BG5"]
+z_index = 1
+position = Vector2(-13.6441, 10.4702)
+rotation = 1.58718
+scale = Vector2(0.0116739, 0.0424466)
+skew = -0.0151476
+
+[node name="Rock1" type="Polygon2D" parent="BG/BG5/Crystal12"]
+z_index = -1
+position = Vector2(-412.829, 573.983)
+rotation = -1.02498
+scale = Vector2(4.93219, 1.58566)
+color = Color(0.592157, 0.592157, 0.592157, 1)
+texture = SubResource("GradientTexture2D_835mq")
+polygon = PackedVector2Array(22.6078, -63.8625, 21.9434, -32.259, 20.7839, 7.68817, 2.09373, -19.5336, 2.43314, -98.6098)
+polygons = [PackedInt32Array(0, 1, 2, 3)]
+
+[node name="Rock3" type="Polygon2D" parent="BG/BG5/Crystal12"]
+z_index = -1
+position = Vector2(-510.098, 423.303)
+rotation = -4.00587
+scale = Vector2(4.93219, 1.58566)
+color = Color(0.592157, 0.592157, 0.592157, 1)
+texture = SubResource("GradientTexture2D_835mq")
+polygon = PackedVector2Array(20.1906, -36.1901, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 20.3495, -35.4927, 25.4578, 2.8175)
+uv = PackedVector2Array(58.3333, 64.2857, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 70.2381, 11.9048, 66.6667, 41.6667)
+polygons = [PackedInt32Array(0, 1, 2, 3)]
+
+[node name="Rock2" type="Polygon2D" parent="BG/BG5/Crystal12"]
+z_index = -1
+position = Vector2(-485.057, 432.19)
+rotation = -1.53878
+scale = Vector2(7.21547, 1.38208)
+texture = SubResource("GradientTexture2D_835mq")
+polygon = PackedVector2Array(20.9098, 13.0836, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 20.3495, -35.4927, 25.4578, 2.8175)
+uv = PackedVector2Array(58.3333, 64.2857, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 70.2381, 11.9048, 66.6667, 41.6667)
+polygons = [PackedInt32Array(0, 1, 2, 3)]
+
+[node name="Crystal13" type="Node2D" parent="BG/BG5"]
+z_index = 1
+position = Vector2(-13.3045, 18.781)
+rotation = 1.58718
+scale = Vector2(0.0116739, 0.0424466)
+skew = -0.0151476
+
+[node name="Rock1" type="Polygon2D" parent="BG/BG5/Crystal13"]
+z_index = -1
+position = Vector2(-412.829, 573.983)
+rotation = -1.02498
+scale = Vector2(4.93219, 1.58566)
+color = Color(0.592157, 0.592157, 0.592157, 1)
+texture = SubResource("GradientTexture2D_835mq")
+polygon = PackedVector2Array(22.6078, -63.8625, 21.9434, -32.259, 20.7839, 7.68817, 2.09373, -19.5336, 2.43314, -98.6098)
+polygons = [PackedInt32Array(0, 1, 2, 3)]
+
+[node name="Rock3" type="Polygon2D" parent="BG/BG5/Crystal13"]
+z_index = -1
+position = Vector2(-510.098, 423.303)
+rotation = -4.00587
+scale = Vector2(4.93219, 1.58566)
+color = Color(0.592157, 0.592157, 0.592157, 1)
+texture = SubResource("GradientTexture2D_835mq")
+polygon = PackedVector2Array(20.1906, -36.1901, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 20.3495, -35.4927, 25.4578, 2.8175)
+uv = PackedVector2Array(58.3333, 64.2857, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 70.2381, 11.9048, 66.6667, 41.6667)
+polygons = [PackedInt32Array(0, 1, 2, 3)]
+
+[node name="Rock2" type="Polygon2D" parent="BG/BG5/Crystal13"]
+z_index = -1
+position = Vector2(-485.057, 432.19)
+rotation = -1.53878
+scale = Vector2(7.21547, 1.38208)
+texture = SubResource("GradientTexture2D_835mq")
+polygon = PackedVector2Array(20.9098, 13.0836, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 20.3495, -35.4927, 25.4578, 2.8175)
+uv = PackedVector2Array(58.3333, 64.2857, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 70.2381, 11.9048, 66.6667, 41.6667)
+polygons = [PackedInt32Array(0, 1, 2, 3)]
+
+[node name="Crystal14" type="Node2D" parent="BG/BG5"]
+z_index = 1
+position = Vector2(-16.6578, 22.2711)
+rotation = 2.43509
+scale = Vector2(0.0171139, 0.0405599)
+skew = -0.775921
+
+[node name="Rock1" type="Polygon2D" parent="BG/BG5/Crystal14"]
+z_index = -1
+position = Vector2(-412.829, 573.983)
+rotation = -1.02498
+scale = Vector2(4.93219, 1.58566)
+color = Color(0.592157, 0.592157, 0.592157, 1)
+texture = SubResource("GradientTexture2D_835mq")
+polygon = PackedVector2Array(22.6078, -63.8625, 21.9434, -32.259, 20.7839, 7.68817, 2.09373, -19.5336, 2.43314, -98.6098)
+polygons = [PackedInt32Array(0, 1, 2, 3)]
+
+[node name="Rock3" type="Polygon2D" parent="BG/BG5/Crystal14"]
+z_index = -1
+position = Vector2(-510.098, 423.303)
+rotation = -4.00587
+scale = Vector2(4.93219, 1.58566)
+color = Color(0.592157, 0.592157, 0.592157, 1)
+texture = SubResource("GradientTexture2D_835mq")
+polygon = PackedVector2Array(20.1906, -36.1901, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 20.3495, -35.4927, 25.4578, 2.8175)
+uv = PackedVector2Array(58.3333, 64.2857, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 70.2381, 11.9048, 66.6667, 41.6667)
+polygons = [PackedInt32Array(0, 1, 2, 3)]
+
+[node name="Rock2" type="Polygon2D" parent="BG/BG5/Crystal14"]
+z_index = -1
+position = Vector2(-485.057, 432.19)
+rotation = -1.53878
+scale = Vector2(7.21547, 1.38208)
+texture = SubResource("GradientTexture2D_835mq")
+polygon = PackedVector2Array(20.9098, 13.0836, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 20.3495, -35.4927, 25.4578, 2.8175)
+uv = PackedVector2Array(58.3333, 64.2857, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 70.2381, 11.9048, 66.6667, 41.6667)
+polygons = [PackedInt32Array(0, 1, 2, 3)]
+
+[node name="Crystal15" type="Node2D" parent="BG/BG5"]
+z_index = 1
+position = Vector2(-16.6578, 22.2711)
+rotation = 2.43509
+scale = Vector2(0.0171139, 0.0405599)
+skew = -0.775921
+
+[node name="Rock1" type="Polygon2D" parent="BG/BG5/Crystal15"]
+z_index = -1
+position = Vector2(-412.829, 573.983)
+rotation = -1.02498
+scale = Vector2(4.93219, 1.58566)
+color = Color(0.592157, 0.592157, 0.592157, 1)
+texture = SubResource("GradientTexture2D_835mq")
+polygon = PackedVector2Array(22.6078, -63.8625, 21.9434, -32.259, 20.7839, 7.68817, 2.09373, -19.5336, 2.43314, -98.6098)
+polygons = [PackedInt32Array(0, 1, 2, 3)]
+
+[node name="Rock3" type="Polygon2D" parent="BG/BG5/Crystal15"]
+z_index = -1
+position = Vector2(-510.098, 423.303)
+rotation = -4.00587
+scale = Vector2(4.93219, 1.58566)
+color = Color(0.592157, 0.592157, 0.592157, 1)
+texture = SubResource("GradientTexture2D_835mq")
+polygon = PackedVector2Array(20.1906, -36.1901, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 20.3495, -35.4927, 25.4578, 2.8175)
+uv = PackedVector2Array(58.3333, 64.2857, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 70.2381, 11.9048, 66.6667, 41.6667)
+polygons = [PackedInt32Array(0, 1, 2, 3)]
+
+[node name="Rock2" type="Polygon2D" parent="BG/BG5/Crystal15"]
+z_index = -1
+position = Vector2(-485.057, 432.19)
+rotation = -1.53878
+scale = Vector2(7.21547, 1.38208)
+texture = SubResource("GradientTexture2D_835mq")
+polygon = PackedVector2Array(20.9098, 13.0836, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 20.3495, -35.4927, 25.4578, 2.8175)
+uv = PackedVector2Array(58.3333, 64.2857, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 70.2381, 11.9048, 66.6667, 41.6667)
+polygons = [PackedInt32Array(0, 1, 2, 3)]
+
+[node name="Crystal16" type="Node2D" parent="BG/BG5"]
+z_index = 1
+position = Vector2(-0.994911, 24.5005)
+rotation = 1.58718
+scale = Vector2(0.0116739, 0.0424466)
+skew = -0.0151476
+
+[node name="Rock1" type="Polygon2D" parent="BG/BG5/Crystal16"]
+z_index = -1
+position = Vector2(-400.486, 558.81)
+rotation = -1.02498
+scale = Vector2(4.93219, 1.58566)
+color = Color(0.592157, 0.592157, 0.592157, 1)
+texture = SubResource("GradientTexture2D_835mq")
+polygon = PackedVector2Array(32, 32, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 20.3495, -35.4927, 25.4578, 2.8175)
+uv = PackedVector2Array(58.3333, 64.2857, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 70.2381, 11.9048, 66.6667, 41.6667)
+polygons = [PackedInt32Array(0, 1, 2, 3)]
+
+[node name="Rock3" type="Polygon2D" parent="BG/BG5/Crystal16"]
+z_index = -1
+position = Vector2(-535, 436)
+rotation = -4.00587
+scale = Vector2(4.93219, 1.58566)
+color = Color(0.592157, 0.592157, 0.592157, 1)
+texture = SubResource("GradientTexture2D_835mq")
+polygon = PackedVector2Array(20.1906, -36.1901, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 20.3495, -35.4927, 25.4578, 2.8175)
+uv = PackedVector2Array(58.3333, 64.2857, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 70.2381, 11.9048, 66.6667, 41.6667)
+polygons = [PackedInt32Array(0, 1, 2, 3)]
+
+[node name="Rock2" type="Polygon2D" parent="BG/BG5/Crystal16"]
+z_index = -1
+position = Vector2(-512.651, 522.316)
+rotation = -1.86084
+scale = Vector2(7.21547, 1.38208)
+texture = SubResource("GradientTexture2D_835mq")
+polygon = PackedVector2Array(20.9098, 13.0836, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 20.3495, -35.4927, 25.4578, 2.8175)
+uv = PackedVector2Array(58.3333, 64.2857, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 70.2381, 11.9048, 66.6667, 41.6667)
+polygons = [PackedInt32Array(0, 1, 2, 3)]
+
+[node name="BG6" type="Sprite2D" parent="BG"]
+z_index = -1
+position = Vector2(-4.2891, 148.31)
+scale = Vector2(1, 1)
+texture = SubResource("GradientTexture2D_ylkpd")
+
+[node name="Crystal" type="Node2D" parent="BG/BG6"]
+z_index = 1
+position = Vector2(-1.81185, -10.2059)
+rotation = 1.5708
+scale = Vector2(0.0116724, 0.042447)
+
+[node name="Rock1" type="Polygon2D" parent="BG/BG6/Crystal"]
+z_index = -1
+position = Vector2(-428, 591)
+rotation = -1.02498
+scale = Vector2(4.93219, 1.58566)
+color = Color(0.592157, 0.592157, 0.592157, 1)
+texture = SubResource("GradientTexture2D_835mq")
+polygon = PackedVector2Array(32, 32, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 20.3495, -35.4927, 25.4578, 2.8175)
+uv = PackedVector2Array(58.3333, 64.2857, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 70.2381, 11.9048, 66.6667, 41.6667)
+polygons = [PackedInt32Array(0, 1, 2, 3)]
+
+[node name="Rock3" type="Polygon2D" parent="BG/BG6/Crystal"]
+z_index = -1
+position = Vector2(-535, 436)
+rotation = -4.00587
+scale = Vector2(4.93219, 1.58566)
+color = Color(0.592157, 0.592157, 0.592157, 1)
+texture = SubResource("GradientTexture2D_835mq")
+polygon = PackedVector2Array(20.1906, -36.1901, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 20.3495, -35.4927, 25.4578, 2.8175)
+uv = PackedVector2Array(58.3333, 64.2857, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 70.2381, 11.9048, 66.6667, 41.6667)
+polygons = [PackedInt32Array(0, 1, 2, 3)]
+
+[node name="Rock2" type="Polygon2D" parent="BG/BG6/Crystal"]
+z_index = -1
+position = Vector2(-471, 507)
+rotation = -1.57797
+scale = Vector2(7.21547, 1.38208)
+texture = SubResource("GradientTexture2D_835mq")
+polygon = PackedVector2Array(20.9098, 13.0836, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 20.3495, -35.4927, 25.4578, 2.8175)
+uv = PackedVector2Array(58.3333, 64.2857, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 70.2381, 11.9048, 66.6667, 41.6667)
+polygons = [PackedInt32Array(0, 1, 2, 3)]
+
+[node name="Crystal2" type="Node2D" parent="BG/BG6"]
+z_index = 1
+position = Vector2(-1.98164, -6.01546)
+rotation = 1.58718
+scale = Vector2(0.0116739, 0.0424466)
+skew = -0.0151476
+
+[node name="Rock1" type="Polygon2D" parent="BG/BG6/Crystal2"]
+z_index = -1
+position = Vector2(-400.486, 558.81)
+rotation = -1.02498
+scale = Vector2(4.93219, 1.58566)
+color = Color(0.592157, 0.592157, 0.592157, 1)
+texture = SubResource("GradientTexture2D_835mq")
+polygon = PackedVector2Array(32, 32, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 20.3495, -35.4927, 25.4578, 2.8175)
+uv = PackedVector2Array(58.3333, 64.2857, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 70.2381, 11.9048, 66.6667, 41.6667)
+polygons = [PackedInt32Array(0, 1, 2, 3)]
+
+[node name="Rock3" type="Polygon2D" parent="BG/BG6/Crystal2"]
+z_index = -1
+position = Vector2(-535, 436)
+rotation = -4.00587
+scale = Vector2(4.93219, 1.58566)
+color = Color(0.592157, 0.592157, 0.592157, 1)
+texture = SubResource("GradientTexture2D_835mq")
+polygon = PackedVector2Array(20.1906, -36.1901, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 20.3495, -35.4927, 25.4578, 2.8175)
+uv = PackedVector2Array(58.3333, 64.2857, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 70.2381, 11.9048, 66.6667, 41.6667)
+polygons = [PackedInt32Array(0, 1, 2, 3)]
+
+[node name="Rock2" type="Polygon2D" parent="BG/BG6/Crystal2"]
+z_index = -1
+position = Vector2(-512.651, 522.316)
+rotation = -1.86084
+scale = Vector2(7.21547, 1.38208)
+texture = SubResource("GradientTexture2D_835mq")
+polygon = PackedVector2Array(20.9098, 13.0836, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 20.3495, -35.4927, 25.4578, 2.8175)
+uv = PackedVector2Array(58.3333, 64.2857, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 70.2381, 11.9048, 66.6667, 41.6667)
+polygons = [PackedInt32Array(0, 1, 2, 3)]
+
+[node name="Crystal3" type="Node2D" parent="BG/BG6"]
+z_index = 1
+position = Vector2(-8.9005, -1.68499)
+rotation = 1.58718
+scale = Vector2(0.0116739, 0.0424466)
+skew = -0.0151476
+
+[node name="Rock1" type="Polygon2D" parent="BG/BG6/Crystal3"]
+z_index = -1
+position = Vector2(-400.486, 558.81)
+rotation = -1.02498
+scale = Vector2(4.93219, 1.58566)
+color = Color(0.592157, 0.592157, 0.592157, 1)
+texture = SubResource("GradientTexture2D_835mq")
+polygon = PackedVector2Array(32, 32, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 20.3495, -35.4927, 25.4578, 2.8175)
+uv = PackedVector2Array(58.3333, 64.2857, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 70.2381, 11.9048, 66.6667, 41.6667)
+polygons = [PackedInt32Array(0, 1, 2, 3)]
+
+[node name="Rock3" type="Polygon2D" parent="BG/BG6/Crystal3"]
+z_index = -1
+position = Vector2(-535, 436)
+rotation = -4.00587
+scale = Vector2(4.93219, 1.58566)
+color = Color(0.592157, 0.592157, 0.592157, 1)
+texture = SubResource("GradientTexture2D_835mq")
+polygon = PackedVector2Array(20.1906, -36.1901, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 20.3495, -35.4927, 25.4578, 2.8175)
+uv = PackedVector2Array(58.3333, 64.2857, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 70.2381, 11.9048, 66.6667, 41.6667)
+polygons = [PackedInt32Array(0, 1, 2, 3)]
+
+[node name="Rock2" type="Polygon2D" parent="BG/BG6/Crystal3"]
+z_index = -1
+position = Vector2(-512.651, 522.316)
+rotation = -1.86084
+scale = Vector2(7.21547, 1.38208)
+texture = SubResource("GradientTexture2D_835mq")
+polygon = PackedVector2Array(20.9098, 13.0836, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 20.3495, -35.4927, 25.4578, 2.8175)
+uv = PackedVector2Array(58.3333, 64.2857, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 70.2381, 11.9048, 66.6667, 41.6667)
+polygons = [PackedInt32Array(0, 1, 2, 3)]
+
+[node name="Crystal4" type="Node2D" parent="BG/BG6"]
+z_index = 1
+position = Vector2(-11.7444, 4.24462)
+rotation = 1.58718
+scale = Vector2(0.0116739, 0.0424466)
+skew = -0.0151476
+
+[node name="Rock1" type="Polygon2D" parent="BG/BG6/Crystal4"]
+z_index = -1
+position = Vector2(-412.829, 573.983)
+rotation = -1.02498
+scale = Vector2(4.93219, 1.58566)
+color = Color(0.592157, 0.592157, 0.592157, 1)
+texture = SubResource("GradientTexture2D_835mq")
+polygon = PackedVector2Array(22.6078, -63.8625, 21.9434, -32.259, 20.7839, 7.68817, 2.09373, -19.5336, 2.43314, -98.6098)
+polygons = [PackedInt32Array(0, 1, 2, 3)]
+
+[node name="Rock3" type="Polygon2D" parent="BG/BG6/Crystal4"]
+z_index = -1
+position = Vector2(-510.098, 423.303)
+rotation = -4.00587
+scale = Vector2(4.93219, 1.58566)
+color = Color(0.592157, 0.592157, 0.592157, 1)
+texture = SubResource("GradientTexture2D_835mq")
+polygon = PackedVector2Array(20.1906, -36.1901, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 20.3495, -35.4927, 25.4578, 2.8175)
+uv = PackedVector2Array(58.3333, 64.2857, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 70.2381, 11.9048, 66.6667, 41.6667)
+polygons = [PackedInt32Array(0, 1, 2, 3)]
+
+[node name="Rock2" type="Polygon2D" parent="BG/BG6/Crystal4"]
+z_index = -1
+position = Vector2(-485.057, 432.19)
+rotation = -1.53878
+scale = Vector2(7.21547, 1.38208)
+texture = SubResource("GradientTexture2D_835mq")
+polygon = PackedVector2Array(20.9098, 13.0836, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 20.3495, -35.4927, 25.4578, 2.8175)
+uv = PackedVector2Array(58.3333, 64.2857, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 70.2381, 11.9048, 66.6667, 41.6667)
+polygons = [PackedInt32Array(0, 1, 2, 3)]
+
+[node name="Crystal5" type="Node2D" parent="BG/BG6"]
+z_index = 1
+position = Vector2(-11.4049, 12.5554)
+rotation = 1.58718
+scale = Vector2(0.0116739, 0.0424466)
+skew = -0.0151476
+
+[node name="Rock1" type="Polygon2D" parent="BG/BG6/Crystal5"]
+z_index = -1
+position = Vector2(-412.829, 573.983)
+rotation = -1.02498
+scale = Vector2(4.93219, 1.58566)
+color = Color(0.592157, 0.592157, 0.592157, 1)
+texture = SubResource("GradientTexture2D_835mq")
+polygon = PackedVector2Array(22.6078, -63.8625, 21.9434, -32.259, 20.7839, 7.68817, 2.09373, -19.5336, 2.43314, -98.6098)
+polygons = [PackedInt32Array(0, 1, 2, 3)]
+
+[node name="Rock3" type="Polygon2D" parent="BG/BG6/Crystal5"]
+z_index = -1
+position = Vector2(-510.098, 423.303)
+rotation = -4.00587
+scale = Vector2(4.93219, 1.58566)
+color = Color(0.592157, 0.592157, 0.592157, 1)
+texture = SubResource("GradientTexture2D_835mq")
+polygon = PackedVector2Array(20.1906, -36.1901, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 20.3495, -35.4927, 25.4578, 2.8175)
+uv = PackedVector2Array(58.3333, 64.2857, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 70.2381, 11.9048, 66.6667, 41.6667)
+polygons = [PackedInt32Array(0, 1, 2, 3)]
+
+[node name="Rock2" type="Polygon2D" parent="BG/BG6/Crystal5"]
+z_index = -1
+position = Vector2(-485.057, 432.19)
+rotation = -1.53878
+scale = Vector2(7.21547, 1.38208)
+texture = SubResource("GradientTexture2D_835mq")
+polygon = PackedVector2Array(20.9098, 13.0836, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 20.3495, -35.4927, 25.4578, 2.8175)
+uv = PackedVector2Array(58.3333, 64.2857, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 70.2381, 11.9048, 66.6667, 41.6667)
+polygons = [PackedInt32Array(0, 1, 2, 3)]
+
+[node name="Crystal6" type="Node2D" parent="BG/BG6"]
+z_index = 1
+position = Vector2(-14.7582, 16.0455)
+rotation = 2.43509
+scale = Vector2(0.0171139, 0.0405599)
+skew = -0.775921
+
+[node name="Rock1" type="Polygon2D" parent="BG/BG6/Crystal6"]
+z_index = -1
+position = Vector2(-412.829, 573.983)
+rotation = -1.02498
+scale = Vector2(4.93219, 1.58566)
+color = Color(0.592157, 0.592157, 0.592157, 1)
+texture = SubResource("GradientTexture2D_835mq")
+polygon = PackedVector2Array(22.6078, -63.8625, 21.9434, -32.259, 20.7839, 7.68817, 2.09373, -19.5336, 2.43314, -98.6098)
+polygons = [PackedInt32Array(0, 1, 2, 3)]
+
+[node name="Rock3" type="Polygon2D" parent="BG/BG6/Crystal6"]
+z_index = -1
+position = Vector2(-510.098, 423.303)
+rotation = -4.00587
+scale = Vector2(4.93219, 1.58566)
+color = Color(0.592157, 0.592157, 0.592157, 1)
+texture = SubResource("GradientTexture2D_835mq")
+polygon = PackedVector2Array(20.1906, -36.1901, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 20.3495, -35.4927, 25.4578, 2.8175)
+uv = PackedVector2Array(58.3333, 64.2857, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 70.2381, 11.9048, 66.6667, 41.6667)
+polygons = [PackedInt32Array(0, 1, 2, 3)]
+
+[node name="Rock2" type="Polygon2D" parent="BG/BG6/Crystal6"]
+z_index = -1
+position = Vector2(-485.057, 432.19)
+rotation = -1.53878
+scale = Vector2(7.21547, 1.38208)
+texture = SubResource("GradientTexture2D_835mq")
+polygon = PackedVector2Array(20.9098, 13.0836, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 20.3495, -35.4927, 25.4578, 2.8175)
+uv = PackedVector2Array(58.3333, 64.2857, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 70.2381, 11.9048, 66.6667, 41.6667)
+polygons = [PackedInt32Array(0, 1, 2, 3)]
+
+[node name="Crystal7" type="Node2D" parent="BG/BG6"]
+z_index = 1
+position = Vector2(-14.7582, 16.0455)
+rotation = 2.43509
+scale = Vector2(0.0171139, 0.0405599)
+skew = -0.775921
+
+[node name="Rock1" type="Polygon2D" parent="BG/BG6/Crystal7"]
+z_index = -1
+position = Vector2(-412.829, 573.983)
+rotation = -1.02498
+scale = Vector2(4.93219, 1.58566)
+color = Color(0.592157, 0.592157, 0.592157, 1)
+texture = SubResource("GradientTexture2D_835mq")
+polygon = PackedVector2Array(22.6078, -63.8625, 21.9434, -32.259, 20.7839, 7.68817, 2.09373, -19.5336, 2.43314, -98.6098)
+polygons = [PackedInt32Array(0, 1, 2, 3)]
+
+[node name="Rock3" type="Polygon2D" parent="BG/BG6/Crystal7"]
+z_index = -1
+position = Vector2(-510.098, 423.303)
+rotation = -4.00587
+scale = Vector2(4.93219, 1.58566)
+color = Color(0.592157, 0.592157, 0.592157, 1)
+texture = SubResource("GradientTexture2D_835mq")
+polygon = PackedVector2Array(20.1906, -36.1901, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 20.3495, -35.4927, 25.4578, 2.8175)
+uv = PackedVector2Array(58.3333, 64.2857, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 70.2381, 11.9048, 66.6667, 41.6667)
+polygons = [PackedInt32Array(0, 1, 2, 3)]
+
+[node name="Rock2" type="Polygon2D" parent="BG/BG6/Crystal7"]
+z_index = -1
+position = Vector2(-485.057, 432.19)
+rotation = -1.53878
+scale = Vector2(7.21547, 1.38208)
+texture = SubResource("GradientTexture2D_835mq")
+polygon = PackedVector2Array(20.9098, 13.0836, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 20.3495, -35.4927, 25.4578, 2.8175)
+uv = PackedVector2Array(58.3333, 64.2857, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 70.2381, 11.9048, 66.6667, 41.6667)
+polygons = [PackedInt32Array(0, 1, 2, 3)]
+
+[node name="Crystal8" type="Node2D" parent="BG/BG6"]
+z_index = 1
+position = Vector2(0.904748, 18.2749)
+rotation = 1.58718
+scale = Vector2(0.0116739, 0.0424466)
+skew = -0.0151476
+
+[node name="Rock1" type="Polygon2D" parent="BG/BG6/Crystal8"]
+z_index = -1
+position = Vector2(-400.486, 558.81)
+rotation = -1.02498
+scale = Vector2(4.93219, 1.58566)
+color = Color(0.592157, 0.592157, 0.592157, 1)
+texture = SubResource("GradientTexture2D_835mq")
+polygon = PackedVector2Array(32, 32, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 20.3495, -35.4927, 25.4578, 2.8175)
+uv = PackedVector2Array(58.3333, 64.2857, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 70.2381, 11.9048, 66.6667, 41.6667)
+polygons = [PackedInt32Array(0, 1, 2, 3)]
+
+[node name="Rock3" type="Polygon2D" parent="BG/BG6/Crystal8"]
+z_index = -1
+position = Vector2(-535, 436)
+rotation = -4.00587
+scale = Vector2(4.93219, 1.58566)
+color = Color(0.592157, 0.592157, 0.592157, 1)
+texture = SubResource("GradientTexture2D_835mq")
+polygon = PackedVector2Array(20.1906, -36.1901, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 20.3495, -35.4927, 25.4578, 2.8175)
+uv = PackedVector2Array(58.3333, 64.2857, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 70.2381, 11.9048, 66.6667, 41.6667)
+polygons = [PackedInt32Array(0, 1, 2, 3)]
+
+[node name="Rock2" type="Polygon2D" parent="BG/BG6/Crystal8"]
+z_index = -1
+position = Vector2(-512.651, 522.316)
+rotation = -1.86084
+scale = Vector2(7.21547, 1.38208)
+texture = SubResource("GradientTexture2D_835mq")
+polygon = PackedVector2Array(20.9098, 13.0836, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 20.3495, -35.4927, 25.4578, 2.8175)
+uv = PackedVector2Array(58.3333, 64.2857, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 70.2381, 11.9048, 66.6667, 41.6667)
+polygons = [PackedInt32Array(0, 1, 2, 3)]
+
+[node name="Crystal9" type="Node2D" parent="BG/BG6"]
+z_index = 1
+position = Vector2(-3.71151, -3.98025)
+rotation = 1.5708
+scale = Vector2(0.0116724, 0.042447)
+
+[node name="Rock1" type="Polygon2D" parent="BG/BG6/Crystal9"]
+z_index = -1
+position = Vector2(-428, 591)
+rotation = -1.02498
+scale = Vector2(4.93219, 1.58566)
+color = Color(0.592157, 0.592157, 0.592157, 1)
+texture = SubResource("GradientTexture2D_835mq")
+polygon = PackedVector2Array(32, 32, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 20.3495, -35.4927, 25.4578, 2.8175)
+uv = PackedVector2Array(58.3333, 64.2857, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 70.2381, 11.9048, 66.6667, 41.6667)
+polygons = [PackedInt32Array(0, 1, 2, 3)]
+
+[node name="Rock3" type="Polygon2D" parent="BG/BG6/Crystal9"]
+z_index = -1
+position = Vector2(-535, 436)
+rotation = -4.00587
+scale = Vector2(4.93219, 1.58566)
+color = Color(0.592157, 0.592157, 0.592157, 1)
+texture = SubResource("GradientTexture2D_835mq")
+polygon = PackedVector2Array(20.1906, -36.1901, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 20.3495, -35.4927, 25.4578, 2.8175)
+uv = PackedVector2Array(58.3333, 64.2857, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 70.2381, 11.9048, 66.6667, 41.6667)
+polygons = [PackedInt32Array(0, 1, 2, 3)]
+
+[node name="Rock2" type="Polygon2D" parent="BG/BG6/Crystal9"]
+z_index = -1
+position = Vector2(-471, 507)
+rotation = -1.57797
+scale = Vector2(7.21547, 1.38208)
+texture = SubResource("GradientTexture2D_835mq")
+polygon = PackedVector2Array(20.9098, 13.0836, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 20.3495, -35.4927, 25.4578, 2.8175)
+uv = PackedVector2Array(58.3333, 64.2857, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 70.2381, 11.9048, 66.6667, 41.6667)
+polygons = [PackedInt32Array(0, 1, 2, 3)]
+
+[node name="Crystal10" type="Node2D" parent="BG/BG6"]
+z_index = 1
+position = Vector2(-3.8813, 0.210161)
+rotation = 1.58718
+scale = Vector2(0.0116739, 0.0424466)
+skew = -0.0151476
+
+[node name="Rock1" type="Polygon2D" parent="BG/BG6/Crystal10"]
+z_index = -1
+position = Vector2(-400.486, 558.81)
+rotation = -1.02498
+scale = Vector2(4.93219, 1.58566)
+color = Color(0.592157, 0.592157, 0.592157, 1)
+texture = SubResource("GradientTexture2D_835mq")
+polygon = PackedVector2Array(32, 32, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 20.3495, -35.4927, 25.4578, 2.8175)
+uv = PackedVector2Array(58.3333, 64.2857, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 70.2381, 11.9048, 66.6667, 41.6667)
+polygons = [PackedInt32Array(0, 1, 2, 3)]
+
+[node name="Rock3" type="Polygon2D" parent="BG/BG6/Crystal10"]
+z_index = -1
+position = Vector2(-535, 436)
+rotation = -4.00587
+scale = Vector2(4.93219, 1.58566)
+color = Color(0.592157, 0.592157, 0.592157, 1)
+texture = SubResource("GradientTexture2D_835mq")
+polygon = PackedVector2Array(20.1906, -36.1901, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 20.3495, -35.4927, 25.4578, 2.8175)
+uv = PackedVector2Array(58.3333, 64.2857, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 70.2381, 11.9048, 66.6667, 41.6667)
+polygons = [PackedInt32Array(0, 1, 2, 3)]
+
+[node name="Rock2" type="Polygon2D" parent="BG/BG6/Crystal10"]
+z_index = -1
+position = Vector2(-512.651, 522.316)
+rotation = -1.86084
+scale = Vector2(7.21547, 1.38208)
+texture = SubResource("GradientTexture2D_835mq")
+polygon = PackedVector2Array(20.9098, 13.0836, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 20.3495, -35.4927, 25.4578, 2.8175)
+uv = PackedVector2Array(58.3333, 64.2857, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 70.2381, 11.9048, 66.6667, 41.6667)
+polygons = [PackedInt32Array(0, 1, 2, 3)]
+
+[node name="Crystal11" type="Node2D" parent="BG/BG6"]
+z_index = 1
+position = Vector2(-10.8002, 4.54064)
+rotation = 1.58718
+scale = Vector2(0.0116739, 0.0424466)
+skew = -0.0151476
+
+[node name="Rock1" type="Polygon2D" parent="BG/BG6/Crystal11"]
+z_index = -1
+position = Vector2(-400.486, 558.81)
+rotation = -1.02498
+scale = Vector2(4.93219, 1.58566)
+color = Color(0.592157, 0.592157, 0.592157, 1)
+texture = SubResource("GradientTexture2D_835mq")
+polygon = PackedVector2Array(32, 32, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 20.3495, -35.4927, 25.4578, 2.8175)
+uv = PackedVector2Array(58.3333, 64.2857, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 70.2381, 11.9048, 66.6667, 41.6667)
+polygons = [PackedInt32Array(0, 1, 2, 3)]
+
+[node name="Rock3" type="Polygon2D" parent="BG/BG6/Crystal11"]
+z_index = -1
+position = Vector2(-535, 436)
+rotation = -4.00587
+scale = Vector2(4.93219, 1.58566)
+color = Color(0.592157, 0.592157, 0.592157, 1)
+texture = SubResource("GradientTexture2D_835mq")
+polygon = PackedVector2Array(20.1906, -36.1901, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 20.3495, -35.4927, 25.4578, 2.8175)
+uv = PackedVector2Array(58.3333, 64.2857, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 70.2381, 11.9048, 66.6667, 41.6667)
+polygons = [PackedInt32Array(0, 1, 2, 3)]
+
+[node name="Rock2" type="Polygon2D" parent="BG/BG6/Crystal11"]
+z_index = -1
+position = Vector2(-512.651, 522.316)
+rotation = -1.86084
+scale = Vector2(7.21547, 1.38208)
+texture = SubResource("GradientTexture2D_835mq")
+polygon = PackedVector2Array(20.9098, 13.0836, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 20.3495, -35.4927, 25.4578, 2.8175)
+uv = PackedVector2Array(58.3333, 64.2857, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 70.2381, 11.9048, 66.6667, 41.6667)
+polygons = [PackedInt32Array(0, 1, 2, 3)]
+
+[node name="Crystal12" type="Node2D" parent="BG/BG6"]
+z_index = 1
+position = Vector2(-13.6441, 10.4702)
+rotation = 1.58718
+scale = Vector2(0.0116739, 0.0424466)
+skew = -0.0151476
+
+[node name="Rock1" type="Polygon2D" parent="BG/BG6/Crystal12"]
+z_index = -1
+position = Vector2(-412.829, 573.983)
+rotation = -1.02498
+scale = Vector2(4.93219, 1.58566)
+color = Color(0.592157, 0.592157, 0.592157, 1)
+texture = SubResource("GradientTexture2D_835mq")
+polygon = PackedVector2Array(22.6078, -63.8625, 21.9434, -32.259, 20.7839, 7.68817, 2.09373, -19.5336, 2.43314, -98.6098)
+polygons = [PackedInt32Array(0, 1, 2, 3)]
+
+[node name="Rock3" type="Polygon2D" parent="BG/BG6/Crystal12"]
+z_index = -1
+position = Vector2(-510.098, 423.303)
+rotation = -4.00587
+scale = Vector2(4.93219, 1.58566)
+color = Color(0.592157, 0.592157, 0.592157, 1)
+texture = SubResource("GradientTexture2D_835mq")
+polygon = PackedVector2Array(20.1906, -36.1901, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 20.3495, -35.4927, 25.4578, 2.8175)
+uv = PackedVector2Array(58.3333, 64.2857, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 70.2381, 11.9048, 66.6667, 41.6667)
+polygons = [PackedInt32Array(0, 1, 2, 3)]
+
+[node name="Rock2" type="Polygon2D" parent="BG/BG6/Crystal12"]
+z_index = -1
+position = Vector2(-485.057, 432.19)
+rotation = -1.53878
+scale = Vector2(7.21547, 1.38208)
+texture = SubResource("GradientTexture2D_835mq")
+polygon = PackedVector2Array(20.9098, 13.0836, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 20.3495, -35.4927, 25.4578, 2.8175)
+uv = PackedVector2Array(58.3333, 64.2857, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 70.2381, 11.9048, 66.6667, 41.6667)
+polygons = [PackedInt32Array(0, 1, 2, 3)]
+
+[node name="Crystal13" type="Node2D" parent="BG/BG6"]
+z_index = 1
+position = Vector2(-13.3045, 18.781)
+rotation = 1.58718
+scale = Vector2(0.0116739, 0.0424466)
+skew = -0.0151476
+
+[node name="Rock1" type="Polygon2D" parent="BG/BG6/Crystal13"]
+z_index = -1
+position = Vector2(-412.829, 573.983)
+rotation = -1.02498
+scale = Vector2(4.93219, 1.58566)
+color = Color(0.592157, 0.592157, 0.592157, 1)
+texture = SubResource("GradientTexture2D_835mq")
+polygon = PackedVector2Array(22.6078, -63.8625, 21.9434, -32.259, 20.7839, 7.68817, 2.09373, -19.5336, 2.43314, -98.6098)
+polygons = [PackedInt32Array(0, 1, 2, 3)]
+
+[node name="Rock3" type="Polygon2D" parent="BG/BG6/Crystal13"]
+z_index = -1
+position = Vector2(-510.098, 423.303)
+rotation = -4.00587
+scale = Vector2(4.93219, 1.58566)
+color = Color(0.592157, 0.592157, 0.592157, 1)
+texture = SubResource("GradientTexture2D_835mq")
+polygon = PackedVector2Array(20.1906, -36.1901, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 20.3495, -35.4927, 25.4578, 2.8175)
+uv = PackedVector2Array(58.3333, 64.2857, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 70.2381, 11.9048, 66.6667, 41.6667)
+polygons = [PackedInt32Array(0, 1, 2, 3)]
+
+[node name="Rock2" type="Polygon2D" parent="BG/BG6/Crystal13"]
+z_index = -1
+position = Vector2(-485.057, 432.19)
+rotation = -1.53878
+scale = Vector2(7.21547, 1.38208)
+texture = SubResource("GradientTexture2D_835mq")
+polygon = PackedVector2Array(20.9098, 13.0836, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 20.3495, -35.4927, 25.4578, 2.8175)
+uv = PackedVector2Array(58.3333, 64.2857, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 70.2381, 11.9048, 66.6667, 41.6667)
+polygons = [PackedInt32Array(0, 1, 2, 3)]
+
+[node name="Crystal14" type="Node2D" parent="BG/BG6"]
+z_index = 1
+position = Vector2(-16.6578, 22.2711)
+rotation = 2.43509
+scale = Vector2(0.0171139, 0.0405599)
+skew = -0.775921
+
+[node name="Rock1" type="Polygon2D" parent="BG/BG6/Crystal14"]
+z_index = -1
+position = Vector2(-412.829, 573.983)
+rotation = -1.02498
+scale = Vector2(4.93219, 1.58566)
+color = Color(0.592157, 0.592157, 0.592157, 1)
+texture = SubResource("GradientTexture2D_835mq")
+polygon = PackedVector2Array(22.6078, -63.8625, 21.9434, -32.259, 20.7839, 7.68817, 2.09373, -19.5336, 2.43314, -98.6098)
+polygons = [PackedInt32Array(0, 1, 2, 3)]
+
+[node name="Rock3" type="Polygon2D" parent="BG/BG6/Crystal14"]
+z_index = -1
+position = Vector2(-510.098, 423.303)
+rotation = -4.00587
+scale = Vector2(4.93219, 1.58566)
+color = Color(0.592157, 0.592157, 0.592157, 1)
+texture = SubResource("GradientTexture2D_835mq")
+polygon = PackedVector2Array(20.1906, -36.1901, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 20.3495, -35.4927, 25.4578, 2.8175)
+uv = PackedVector2Array(58.3333, 64.2857, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 70.2381, 11.9048, 66.6667, 41.6667)
+polygons = [PackedInt32Array(0, 1, 2, 3)]
+
+[node name="Rock2" type="Polygon2D" parent="BG/BG6/Crystal14"]
+z_index = -1
+position = Vector2(-485.057, 432.19)
+rotation = -1.53878
+scale = Vector2(7.21547, 1.38208)
+texture = SubResource("GradientTexture2D_835mq")
+polygon = PackedVector2Array(20.9098, 13.0836, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 20.3495, -35.4927, 25.4578, 2.8175)
+uv = PackedVector2Array(58.3333, 64.2857, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 70.2381, 11.9048, 66.6667, 41.6667)
+polygons = [PackedInt32Array(0, 1, 2, 3)]
+
+[node name="Crystal15" type="Node2D" parent="BG/BG6"]
+z_index = 1
+position = Vector2(-16.6578, 22.2711)
+rotation = 2.43509
+scale = Vector2(0.0171139, 0.0405599)
+skew = -0.775921
+
+[node name="Rock1" type="Polygon2D" parent="BG/BG6/Crystal15"]
+z_index = -1
+position = Vector2(-412.829, 573.983)
+rotation = -1.02498
+scale = Vector2(4.93219, 1.58566)
+color = Color(0.592157, 0.592157, 0.592157, 1)
+texture = SubResource("GradientTexture2D_835mq")
+polygon = PackedVector2Array(22.6078, -63.8625, 21.9434, -32.259, 20.7839, 7.68817, 2.09373, -19.5336, 2.43314, -98.6098)
+polygons = [PackedInt32Array(0, 1, 2, 3)]
+
+[node name="Rock3" type="Polygon2D" parent="BG/BG6/Crystal15"]
+z_index = -1
+position = Vector2(-510.098, 423.303)
+rotation = -4.00587
+scale = Vector2(4.93219, 1.58566)
+color = Color(0.592157, 0.592157, 0.592157, 1)
+texture = SubResource("GradientTexture2D_835mq")
+polygon = PackedVector2Array(20.1906, -36.1901, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 20.3495, -35.4927, 25.4578, 2.8175)
+uv = PackedVector2Array(58.3333, 64.2857, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 70.2381, 11.9048, 66.6667, 41.6667)
+polygons = [PackedInt32Array(0, 1, 2, 3)]
+
+[node name="Rock2" type="Polygon2D" parent="BG/BG6/Crystal15"]
+z_index = -1
+position = Vector2(-485.057, 432.19)
+rotation = -1.53878
+scale = Vector2(7.21547, 1.38208)
+texture = SubResource("GradientTexture2D_835mq")
+polygon = PackedVector2Array(20.9098, 13.0836, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 20.3495, -35.4927, 25.4578, 2.8175)
+uv = PackedVector2Array(58.3333, 64.2857, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 70.2381, 11.9048, 66.6667, 41.6667)
+polygons = [PackedInt32Array(0, 1, 2, 3)]
+
+[node name="Crystal16" type="Node2D" parent="BG/BG6"]
+z_index = 1
+position = Vector2(-0.994911, 24.5005)
+rotation = 1.58718
+scale = Vector2(0.0116739, 0.0424466)
+skew = -0.0151476
+
+[node name="Rock1" type="Polygon2D" parent="BG/BG6/Crystal16"]
+z_index = -1
+position = Vector2(-400.486, 558.81)
+rotation = -1.02498
+scale = Vector2(4.93219, 1.58566)
+color = Color(0.592157, 0.592157, 0.592157, 1)
+texture = SubResource("GradientTexture2D_835mq")
+polygon = PackedVector2Array(32, 32, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 20.3495, -35.4927, 25.4578, 2.8175)
+uv = PackedVector2Array(58.3333, 64.2857, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 70.2381, 11.9048, 66.6667, 41.6667)
+polygons = [PackedInt32Array(0, 1, 2, 3)]
+
+[node name="Rock3" type="Polygon2D" parent="BG/BG6/Crystal16"]
+z_index = -1
+position = Vector2(-535, 436)
+rotation = -4.00587
+scale = Vector2(4.93219, 1.58566)
+color = Color(0.592157, 0.592157, 0.592157, 1)
+texture = SubResource("GradientTexture2D_835mq")
+polygon = PackedVector2Array(20.1906, -36.1901, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 20.3495, -35.4927, 25.4578, 2.8175)
+uv = PackedVector2Array(58.3333, 64.2857, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 70.2381, 11.9048, 66.6667, 41.6667)
+polygons = [PackedInt32Array(0, 1, 2, 3)]
+
+[node name="Rock2" type="Polygon2D" parent="BG/BG6/Crystal16"]
+z_index = -1
+position = Vector2(-512.651, 522.316)
+rotation = -1.86084
+scale = Vector2(7.21547, 1.38208)
+texture = SubResource("GradientTexture2D_835mq")
+polygon = PackedVector2Array(20.9098, 13.0836, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 20.3495, -35.4927, 25.4578, 2.8175)
+uv = PackedVector2Array(58.3333, 64.2857, -32, 32, -32, -32, 12.2016, -82.0799, 16.3892, -58.1362, 70.2381, 11.9048, 66.6667, 41.6667)
+polygons = [PackedInt32Array(0, 1, 2, 3)]
+
 [node name="Floor" type="StaticBody2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Floor"]
-position = Vector2(636, 640)
+position = Vector2(2548, 675)
+scale = Vector2(4.76, 1)
 shape = SubResource("RectangleShape2D_6x4rf")
 
 [node name="Floor" type="Sprite2D" parent="Floor/CollisionShape2D"]
@@ -668,6 +3815,7 @@ texture = SubResource("GradientTexture2D_mhd6r")
 [node name="CollisionShape2D4" type="CollisionShape2D" parent="Floor"]
 position = Vector2(658, -362)
 rotation = 3.14159
+scale = Vector2(3.52, 1)
 shape = SubResource("RectangleShape2D_6x4rf")
 
 [node name="Floor" type="Sprite2D" parent="Floor/CollisionShape2D4"]
@@ -676,20 +3824,148 @@ rotation = -1.5708
 scale = Vector2(14.0997, 85.7349)
 texture = SubResource("GradientTexture2D_mhd6r")
 
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="Floor"]
-position = Vector2(-750, 137)
-shape = SubResource("RectangleShape2D_oce0a")
-
-[node name="CollisionShape2D3" type="CollisionShape2D" parent="Floor"]
-position = Vector2(2052, 140)
-shape = SubResource("RectangleShape2D_oce0a")
-
 [node name="Player" parent="." instance=ExtResource("1_asd2u")]
-position = Vector2(707, 544)
+position = Vector2(-2966, 395)
 
-[node name="RocketShip" parent="." instance=ExtResource("2_nn0n2")]
-position = Vector2(1492, 402)
+[node name="Music" type="AudioStreamPlayer2D" parent="Player"]
+position = Vector2(2, -30)
+stream = ExtResource("7_1culb")
+autoplay = true
+bus = &"Music"
+
+[node name="RocketShip" type="CharacterBody2D" parent="."]
+position = Vector2(10010, 391)
+
+[node name="RocketShip2" parent="RocketShip" instance=ExtResource("2_nn0n2")]
+position = Vector2(5, 4)
 scale = Vector2(7, 7)
 
-[node name="Transitioner" parent="RocketShip" instance=ExtResource("3_lfdpp")]
-Scene = "res://src/scenes/spaceExploration.tscn"
+[node name="Transitioner" parent="RocketShip/RocketShip2" instance=ExtResource("3_lfdpp")]
+Scene = 1
+
+[node name="Spawners" type="Node2D" parent="."]
+position = Vector2(-3608, 351)
+
+[node name="Spawner" parent="Spawners" node_paths=PackedStringArray("Positions", "Targets", "ParentNode", "NextSpawner") instance=ExtResource("6_w4rbu")]
+position = Vector2(1030, -255)
+Entity = ExtResource("5_ipvrh")
+Positions = [NodePath("SpawnLocs/Pos1"), NodePath("SpawnLocs/Pos2"), NodePath("SpawnLocs/Pos3")]
+Targets = [NodePath("../../RocketShip")]
+ParentNode = NodePath("../..")
+MaxSpawns = 15
+NextSpawner = NodePath("../Spawner2")
+CanActivate = true
+
+[node name="SpawnLocs" type="Node2D" parent="Spawners/Spawner"]
+position = Vector2(4438, 118)
+
+[node name="Pos1" type="Marker2D" parent="Spawners/Spawner/SpawnLocs"]
+position = Vector2(-6467, 391)
+
+[node name="Pos2" type="Marker2D" parent="Spawners/Spawner/SpawnLocs"]
+position = Vector2(-6156, 382)
+
+[node name="Pos3" type="Marker2D" parent="Spawners/Spawner/SpawnLocs"]
+position = Vector2(-5799, 386)
+
+[node name="Spawner2" parent="Spawners" node_paths=PackedStringArray("Positions", "Targets", "ParentNode", "NextSpawner") instance=ExtResource("6_w4rbu")]
+position = Vector2(1030, -255)
+Entity = ExtResource("5_ipvrh")
+Positions = [NodePath("SpawnLocs2/Pos1"), NodePath("SpawnLocs2/Pos2"), NodePath("SpawnLocs2/Pos3")]
+Targets = [NodePath("../../RocketShip")]
+ParentNode = NodePath("../..")
+MaxSpawns = 15
+NextSpawner = NodePath("../Spawner3")
+
+[node name="SpawnLocs2" type="Node2D" parent="Spawners/Spawner2"]
+position = Vector2(4665, 415)
+
+[node name="Pos1" type="Marker2D" parent="Spawners/Spawner2/SpawnLocs2"]
+position = Vector2(-4076, 57)
+
+[node name="Pos2" type="Marker2D" parent="Spawners/Spawner2/SpawnLocs2"]
+position = Vector2(-3802, 57)
+
+[node name="Pos3" type="Marker2D" parent="Spawners/Spawner2/SpawnLocs2"]
+position = Vector2(-3574, 57)
+
+[node name="Spawner3" parent="Spawners" node_paths=PackedStringArray("Positions", "Targets", "ParentNode", "NextSpawner") instance=ExtResource("6_w4rbu")]
+position = Vector2(4976, -255)
+Entity = ExtResource("5_ipvrh")
+Positions = [NodePath("SpawnLocs2/Pos1"), NodePath("SpawnLocs2/Pos2"), NodePath("SpawnLocs2/Pos3")]
+Targets = [NodePath("../../RocketShip")]
+ParentNode = NodePath("../..")
+MaxSpawns = 15
+NextSpawner = NodePath("../Spawner4")
+
+[node name="SpawnLocs2" type="Node2D" parent="Spawners/Spawner3"]
+position = Vector2(4665, 415)
+
+[node name="Pos1" type="Marker2D" parent="Spawners/Spawner3/SpawnLocs2"]
+position = Vector2(-4665, 35)
+
+[node name="Pos2" type="Marker2D" parent="Spawners/Spawner3/SpawnLocs2"]
+position = Vector2(-4388, 35)
+
+[node name="Pos3" type="Marker2D" parent="Spawners/Spawner3/SpawnLocs2"]
+position = Vector2(-4135, 35)
+
+[node name="Spawner4" parent="Spawners" node_paths=PackedStringArray("Positions", "Targets", "ParentNode") instance=ExtResource("6_w4rbu")]
+position = Vector2(8465, -295)
+Entity = ExtResource("5_ipvrh")
+Positions = [NodePath("SpawnLocs2/Pos1"), NodePath("SpawnLocs2/Pos2"), NodePath("SpawnLocs2/Pos3")]
+Targets = [NodePath("../../RocketShip")]
+ParentNode = NodePath("../..")
+MaxSpawns = 15
+
+[node name="SpawnLocs2" type="Node2D" parent="Spawners/Spawner4"]
+position = Vector2(4665, 415)
+
+[node name="Pos1" type="Marker2D" parent="Spawners/Spawner4/SpawnLocs2"]
+position = Vector2(-4665, 35)
+
+[node name="Pos2" type="Marker2D" parent="Spawners/Spawner4/SpawnLocs2"]
+position = Vector2(-4388, 35)
+
+[node name="Pos3" type="Marker2D" parent="Spawners/Spawner4/SpawnLocs2"]
+position = Vector2(-4135, 35)
+
+[node name="Turrets" type="Node2D" parent="."]
+position = Vector2(0, 56)
+
+[node name="Tower1" parent="Turrets" node_paths=PackedStringArray("Spawner") instance=ExtResource("4_dabnt")]
+position = Vector2(-2578, 298)
+Spawner = NodePath("../../Spawners/Spawner")
+
+[node name="Tower2" parent="Turrets" node_paths=PackedStringArray("Spawner") instance=ExtResource("4_dabnt")]
+position = Vector2(915, 298)
+Spawner = NodePath("../../Spawners/Spawner2")
+
+[node name="Tower3" parent="Turrets" node_paths=PackedStringArray("Spawner") instance=ExtResource("4_dabnt")]
+position = Vector2(4252, 298)
+Spawner = NodePath("../../Spawners/Spawner3")
+
+[node name="Tower4" parent="Turrets" node_paths=PackedStringArray("Spawner") instance=ExtResource("4_dabnt")]
+position = Vector2(7810, 298)
+Spawner = NodePath("../../Spawners/Spawner4")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_urmxl")
+}
+autoplay = "StartIntro"
+
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="Text" type="RichTextLabel" parent="UI"]
+visible = false
+self_modulate = Color(1, 1, 1, 0)
+offset_left = 135.0
+offset_top = 391.0
+offset_right = 1472.0
+offset_bottom = 987.0
+rotation = -0.261799
+scale = Vector2(2, 2)
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/normal_font_size = 80
+text = "Get To The Space Ship !"

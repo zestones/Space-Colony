@@ -1,0 +1,15 @@
+[gd_scene load_steps=2 format=3 uid="uid://cva0bd8hengsa"]
+
+[ext_resource type="Script" path="res://src/Combat/Spawners/NodeSpawner.gd" id="1_hvy7f"]
+
+[node name="NodeSpawner" type="Node2D"]
+script = ExtResource("1_hvy7f")
+
+[node name="SpawnTimer" type="Timer" parent="."]
+autostart = true
+
+[node name="DownTime" type="Timer" parent="."]
+one_shot = true
+
+[connection signal="timeout" from="SpawnTimer" to="." method="_on_spawn_timer_timeout"]
+[connection signal="timeout" from="DownTime" to="." method="_on_down_time_timeout"]

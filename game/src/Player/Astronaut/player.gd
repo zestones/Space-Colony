@@ -6,7 +6,7 @@ const SPEED = 300.0
 const JUMP_VELOCITY = -400.0
 
 #Player Stats
-var Hp = 100
+@export var Hp: int = 10
 
 #Physics
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
@@ -25,11 +25,12 @@ const BULLET = preload("res://src/Combat/Bullet/bullet.tscn")
 @onready var world = $".."
 
 @onready var bullet_spawner = $bulletSpawner
+@onready var animator = $AnimationPlayer
 
 #This variable is used to define is the player is allowed to move or not
 var UnderControl = true
 
-
+var Dammage = 0.12
 var currrentDirection = 1
 func _physics_process(delta):
 
@@ -37,10 +38,11 @@ func _physics_process(delta):
 	if not is_on_floor():
 		velocity.y += gravity * delta
 	
-
-	if Hp <= 0:
+	$HUD/UI/Hp.value = Hp
+	if Hp < 1:
 		#Stop the player from moving
 		UnderControl = false
+		$Transitioner.Transition()
 		
 	
 	#Check if the player is alowed to control their character
@@ -48,6 +50,7 @@ func _physics_process(delta):
 		#Allow the player to jump and wall jump
 		if is_on_floor() or is_on_wall():
 			if  Input.is_action_just_pressed("Up"):
+				$JumpEffect.play()
 				velocity.y = JUMP_VELOCITY
 				
 		#Check if the player is shooting		
@@ -57,6 +60,7 @@ func _physics_process(delta):
 			bullet.position = bullet_spawner.global_position
 			bullet.target = get_global_mouse_position()
 			get_tree().root.add_child(bullet)
+			$ShootEffect.play()
 			
 
 		#Player Movement

@@ -5,6 +5,8 @@ const SPEED = 230.0
 @export var Targets : Array[CharacterBody2D]
 var InstanceTarget
 @onready var animator = $Graphics/AnimationPlayer
+var CanAttack = true
+var obj
 
 func _ready():
 	InstanceTarget = Targets.pick_random()
@@ -12,6 +14,8 @@ func _ready():
 
 func _physics_process(delta):
 	if Hp <= 0:
+		$Killed.play()
+		await $Killed.finished
 		queue_free()
 	if InstanceTarget != null:
 		var distance = InstanceTarget.global_position - global_position
@@ -19,9 +23,43 @@ func _physics_process(delta):
 	else:
 		queue_free()
 		
+	if obj != null and CanAttack:
+		if obj.Hp >= 0.1:
+			obj.animator.play("Hit")
+			obj.Hp -= obj.Dammage
+			CanAttack = false
+		
 	move_and_slide()
 
 
-func _on_detector_area_entered(area):
-	if area.is_in_group("Tower"):
-		area.get_parent().Hp -= 1
+
+
+
+func _on_detector_body_entered(body):
+
+	if body.is_in_group("Dammagable"):
+		obj = body
+		$AttackRate.start()
+		
+func _on_detector_body_exited(body):
+	if body.is_in_group("Dammagable"):
+		obj = null
+		$AttackRate.stop()
+		
+func _on_attack_rate_timeout():
+	CanAttack = true
+
+
+
+
+func _on_detector_area_entered(body):
+
+	if body.is_in_group("Dammagable"):
+		obj = body
+		$AttackRate.start()
+
+
+func _on_detector_area_exited(body):
+	if body.is_in_group("Dammagable"):
+		obj = null
+		$AttackRate.stop()

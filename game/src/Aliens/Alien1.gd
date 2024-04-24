@@ -27,6 +27,7 @@ func _physics_process(delta):
 		if obj.Hp >= 0.1:
 			obj.animator.play("Hit")
 			obj.Hp -= obj.Dammage
+			CanAttack = false
 		
 	move_and_slide()
 
@@ -46,7 +47,7 @@ func _on_detector_body_exited(body):
 		$AttackRate.stop()
 		
 func _on_attack_rate_timeout():
-	CanAttack = not CanAttack
+	CanAttack = true
 
 
 

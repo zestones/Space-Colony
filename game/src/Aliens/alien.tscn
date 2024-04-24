@@ -114,7 +114,6 @@ shape = SubResource("RectangleShape2D_x1i1v")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Detector"]
 position = Vector2(9.99991, 35.7143)
-scale = Vector2(1, 1)
 shape = SubResource("RectangleShape2D_hwfcw")
 
 [node name="Killed" type="AudioStreamPlayer2D" parent="."]

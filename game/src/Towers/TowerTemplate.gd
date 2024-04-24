@@ -1,4 +1,4 @@
-extends StaticBody2D
+extends Area2D
 
 var queue = []
 var CurrentTarget = 0
@@ -8,11 +8,18 @@ const BULLET = preload("res://src/Combat/Bullet/bullet.tscn")
 var player
 var activated = false
 @export var Spawner : Node2D
+@onready var animator = $Graphics/AnimationPlayer
+
 var Hp = 100
+var Battery = 100
+var Dammage = 0.2
 func _process(delta):
+	$Battery.value = Battery
 	$Health.value = Hp
-	if Hp <= 0:
-		queue_free()
+	$Graphics/Head/VSlider.value = Hp
+	if Hp <= 0 and activated:
+		$Graphics/AnimationPlayer.play("Death")
+		activated = false
 		
 	if queue.size() > 0 and activated:
 		$Graphics/Head.look_at(queue[CurrentTarget].global_position)
@@ -27,14 +34,23 @@ func _process(delta):
 	else:
 		$Graphics/Head.global_rotation = 0
 		
+	if is_instance_valid(Spawner):
+		if not Spawner.Finished:
+			$Border/Collider.disabled = false
+		else:
+			$Border/Collider.disabled = true
+	else:
+		$Border/Collider.disabled = true
+		
 	if player != null:
 		if abs(player.global_position - global_position).length() < 300:
 			$TextPopUp.visible = true
 			if Input.is_action_just_pressed("Interact"):
-				Spawner.paused = false
+				$EnabledEffect.play()
+				if is_instance_valid(Spawner):
+					Spawner.paused = false
 				$TextPopUp/ColorRect.color = Color(0.098, 0.812, 0.584)
 				$TextPopUp/RichTextLabel.text = "Tower Enabled"
-				print("Tower Activated")
 				activated = true
 		else:
 			$TextPopUp.visible = false
@@ -43,6 +59,8 @@ func _process(delta):
 		
 func Shoot():
 	$Graphics/AnimationPlayer.play("Shot")
+	$ShootEffect.play()
+	Battery -= 2
 	var bullet = BULLET.instantiate()
 	get_tree().root.add_child(bullet)
 	bullet.Dammage = 50
@@ -68,3 +86,12 @@ func _on_range_body_exited(body):
 
 func _on_shoot_rate_timeout():
 	CanShoot = true
+
+
+func _on_player_detector_body_entered(body):
+	if body.is_in_group("Player"):
+		if is_instance_valid(Spawner):
+			if not Spawner.Finished:
+				animator.play("WaveToExit")
+		else:
+			animator.play("WaveToExit")

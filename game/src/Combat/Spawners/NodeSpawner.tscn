@@ -1,6 +1,66 @@
-[gd_scene load_steps=2 format=3 uid="uid://cva0bd8hengsa"]
+[gd_scene load_steps=5 format=3 uid="uid://cva0bd8hengsa"]
 
 [ext_resource type="Script" path="res://src/Combat/Spawners/NodeSpawner.gd" id="1_hvy7f"]
+
+[sub_resource type="Animation" id="Animation_ik1vr"]
+resource_name = "WaveCompleted"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("RichTextLabel:text")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": ["Wave Ending !"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("RichTextLabel:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.9),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(0, 1, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_p0sgk"]
+resource_name = "WaveStarting"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("RichTextLabel:text")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": ["Wave Starting!"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("RichTextLabel:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 0.0313726, 0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_57hxe"]
+_data = {
+"WaveCompleted": SubResource("Animation_ik1vr"),
+"WaveStarting": SubResource("Animation_p0sgk")
+}
 
 [node name="NodeSpawner" type="Node2D"]
 script = ExtResource("1_hvy7f")
@@ -10,6 +70,29 @@ autostart = true
 
 [node name="DownTime" type="Timer" parent="."]
 one_shot = true
+
+[node name="WaveUI" type="CanvasLayer" parent="."]
+
+[node name="RichTextLabel" type="RichTextLabel" parent="WaveUI"]
+modulate = Color(1, 1, 1, 0)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -312.0
+offset_top = -59.0
+offset_right = 326.0
+offset_bottom = 123.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/normal_font_size = 65
+text = "Wave Ending !"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="WaveUI"]
+libraries = {
+"": SubResource("AnimationLibrary_57hxe")
+}
 
 [connection signal="timeout" from="SpawnTimer" to="." method="_on_spawn_timer_timeout"]
 [connection signal="timeout" from="DownTime" to="." method="_on_down_time_timeout"]

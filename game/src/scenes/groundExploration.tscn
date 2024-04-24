@@ -1,12 +1,12 @@
 [gd_scene load_steps=17 format=3 uid="uid://d0n8e2vj61dbl"]
 
 [ext_resource type="PackedScene" uid="uid://dchsqd1xaupl1" path="res://src/Player/Astronaut/player.tscn" id="1_asd2u"]
+[ext_resource type="AudioStream" uid="uid://clu06bwm86ti" path="res://assets/audio/GroundCombat.wav" id="2_l138s"]
 [ext_resource type="PackedScene" uid="uid://bvvkkr4g68138" path="res://src/Player/Astronaut/Rocket/rocket_ship.tscn" id="2_nn0n2"]
 [ext_resource type="PackedScene" uid="uid://ckinev5mjn2in" path="res://src/Player/Transitions/sceneTransitioner.tscn" id="3_lfdpp"]
 [ext_resource type="PackedScene" uid="uid://c0vix722etvnd" path="res://src/Towers/Tower_1/tower_1.tscn" id="4_dabnt"]
 [ext_resource type="PackedScene" uid="uid://dep4i5w0uyvl2" path="res://src/Aliens/alien.tscn" id="5_ipvrh"]
 [ext_resource type="PackedScene" uid="uid://cva0bd8hengsa" path="res://src/Combat/Spawners/NodeSpawner.tscn" id="6_w4rbu"]
-[ext_resource type="AudioStream" uid="uid://3qcrmhc1p1ra" path="res://assets/audio/GroundScene.wav" id="7_1culb"]
 
 [sub_resource type="Gradient" id="Gradient_x0nn5"]
 colors = PackedColorArray(0.221705, 0.380652, 0.295309, 1, 1, 1, 1, 1)
@@ -702,7 +702,6 @@ polygons = [PackedInt32Array(0, 1, 2, 3)]
 [node name="BG2" type="Sprite2D" parent="BG"]
 z_index = -1
 position = Vector2(0.764849, -61.0002)
-scale = Vector2(1, 1)
 texture = SubResource("GradientTexture2D_ylkpd")
 
 [node name="Crystal" type="Node2D" parent="BG/BG2"]
@@ -1322,7 +1321,6 @@ polygons = [PackedInt32Array(0, 1, 2, 3)]
 [node name="BG3" type="Sprite2D" parent="BG"]
 z_index = -1
 position = Vector2(-4.28563, -115.09)
-scale = Vector2(1, 1)
 texture = SubResource("GradientTexture2D_ylkpd")
 
 [node name="Crystal" type="Node2D" parent="BG/BG3"]
@@ -1942,7 +1940,6 @@ polygons = [PackedInt32Array(0, 1, 2, 3)]
 [node name="BG4" type="Sprite2D" parent="BG"]
 z_index = -1
 position = Vector2(0.678405, 56.7047)
-scale = Vector2(1, 1)
 texture = SubResource("GradientTexture2D_ylkpd")
 
 [node name="Crystal" type="Node2D" parent="BG/BG4"]
@@ -2562,7 +2559,6 @@ polygons = [PackedInt32Array(0, 1, 2, 3)]
 [node name="BG5" type="Sprite2D" parent="BG"]
 z_index = -1
 position = Vector2(-4.28862, 112.359)
-scale = Vector2(1, 1)
 texture = SubResource("GradientTexture2D_ylkpd")
 
 [node name="Crystal" type="Node2D" parent="BG/BG5"]
@@ -3182,7 +3178,6 @@ polygons = [PackedInt32Array(0, 1, 2, 3)]
 [node name="BG6" type="Sprite2D" parent="BG"]
 z_index = -1
 position = Vector2(-4.2891, 148.31)
-scale = Vector2(1, 1)
 texture = SubResource("GradientTexture2D_ylkpd")
 
 [node name="Crystal" type="Node2D" parent="BG/BG6"]
@@ -3829,7 +3824,7 @@ position = Vector2(-2966, 395)
 
 [node name="Music" type="AudioStreamPlayer2D" parent="Player"]
 position = Vector2(2, -30)
-stream = ExtResource("7_1culb")
+stream = ExtResource("2_l138s")
 autoplay = true
 bus = &"Music"
 
@@ -3842,6 +3837,7 @@ scale = Vector2(7, 7)
 
 [node name="Transitioner" parent="RocketShip/RocketShip2" instance=ExtResource("3_lfdpp")]
 Scene = 1
+metadata/_edit_use_anchors_ = true
 
 [node name="Spawners" type="Node2D" parent="."]
 position = Vector2(-3608, 351)
@@ -3965,7 +3961,6 @@ offset_top = 391.0
 offset_right = 1472.0
 offset_bottom = 987.0
 rotation = -0.261799
-scale = Vector2(2, 2)
 theme_override_colors/default_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/normal_font_size = 80
 text = "Get To The Space Ship !"

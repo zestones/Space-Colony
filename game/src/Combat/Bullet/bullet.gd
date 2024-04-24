@@ -22,6 +22,8 @@ func _on_body_entered(body):
 	if body.is_in_group("Alien"):
 		body.Hp -= Dammage
 		body.animator.play("Hurt")
+		$Hit.play()
+		await $Hit.finished 
 		queue_free()
-	if not body.is_in_group("Player"):
+	elif not body.is_in_group("Player"):
 		queue_free()

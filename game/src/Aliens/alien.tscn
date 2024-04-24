@@ -1,8 +1,9 @@
-[gd_scene load_steps=9 format=3 uid="uid://dep4i5w0uyvl2"]
+[gd_scene load_steps=10 format=3 uid="uid://dep4i5w0uyvl2"]
 
 [ext_resource type="Texture2D" uid="uid://c2a7gxxh35dvk" path="res://assets/environment/props/Aliens/Leg_Left.png" id="1_6mu7r"]
 [ext_resource type="Script" path="res://src/Aliens/Alien1.gd" id="1_f7u7r"]
 [ext_resource type="Texture2D" uid="uid://c8jv6tlh04pj4" path="res://assets/environment/props/Aliens/Body.png" id="2_1358m"]
+[ext_resource type="AudioStream" uid="uid://bywflgwslslnc" path="res://assets/audio/SFX/EnemyKilled.wav" id="5_hie10"]
 
 [sub_resource type="Animation" id="Animation_bm6ay"]
 resource_name = "Hurt"
@@ -71,7 +72,7 @@ _data = {
 size = Vector2(402, 213)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hwfcw"]
-size = Vector2(405.714, 211.429)
+size = Vector2(465.715, 254.286)
 
 [node name="Alien" type="CharacterBody2D" node_paths=PackedStringArray("Targets") groups=["Alien"]]
 texture_filter = 1
@@ -112,8 +113,19 @@ shape = SubResource("RectangleShape2D_x1i1v")
 [node name="Detector" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Detector"]
-position = Vector2(11.4286, 34.2857)
+position = Vector2(9.99991, 35.7143)
 scale = Vector2(1, 1)
 shape = SubResource("RectangleShape2D_hwfcw")
 
+[node name="Killed" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("5_hie10")
+bus = &"SFX"
+
+[node name="AttackRate" type="Timer" parent="."]
+wait_time = 2.0
+
 [connection signal="area_entered" from="Detector" to="." method="_on_detector_area_entered"]
+[connection signal="area_exited" from="Detector" to="." method="_on_detector_area_exited"]
+[connection signal="body_entered" from="Detector" to="." method="_on_detector_body_entered"]
+[connection signal="body_exited" from="Detector" to="." method="_on_detector_body_exited"]
+[connection signal="timeout" from="AttackRate" to="." method="_on_attack_rate_timeout"]

@@ -138,6 +138,7 @@ size = Vector2(65.5, 722)
 
 [node name="Tower1" type="Area2D" groups=["Dammagable", "Tower"]]
 script = ExtResource("1_tb706")
+batteryPerShot = 10
 
 [node name="Collider" type="CollisionPolygon2D" parent="."]
 visible = false

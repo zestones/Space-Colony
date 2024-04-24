@@ -3821,6 +3821,7 @@ texture = SubResource("GradientTexture2D_mhd6r")
 
 [node name="Player" parent="." instance=ExtResource("1_asd2u")]
 position = Vector2(-2966, 395)
+Hp = 100
 
 [node name="Music" type="AudioStreamPlayer2D" parent="Player"]
 position = Vector2(2, -30)

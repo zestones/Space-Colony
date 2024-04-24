@@ -6,7 +6,7 @@ const SPEED = 300.0
 const JUMP_VELOCITY = -400.0
 
 #Player Stats
-var Hp = 10
+@export var Hp: int = 10
 
 #Physics
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")

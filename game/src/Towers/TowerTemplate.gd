@@ -10,13 +10,14 @@ var activated = false
 @export var Spawner : Node2D
 @onready var animator = $Graphics/AnimationPlayer
 
-var Hp = 100
-var Battery = 100
-var Dammage = 0.2
+@export var Hp: int = 100
+@export var BatteryCapacity: int = 100
+@export var batteryPerShot: int = 2
+@export var Dammage: float = 0.2
 func _process(delta):
-	$Battery.value = Battery
+	$Battery.value = BatteryCapacity
 	$Health.value = Hp
-	$Graphics/Head/VSlider.value = Hp
+	$Graphics/Head/VSlider.value = BatteryCapacity
 	if Hp <= 0 and activated:
 		$Graphics/AnimationPlayer.play("Death")
 		activated = false
@@ -26,7 +27,7 @@ func _process(delta):
 		$Graphics/Head.global_rotation += deg_to_rad(180)
 		$Graphics/Head.global_rotation = clampf($Graphics/Head.global_rotation,deg_to_rad(-40),deg_to_rad(40))
 		if rad_to_deg($Graphics/Head.global_rotation) > -40:
-			if CanShoot:
+			if CanShoot and BatteryCapacity > 0:
 				Shoot()
 				CanShoot = false
 		else:
@@ -60,7 +61,7 @@ func _process(delta):
 func Shoot():
 	$Graphics/AnimationPlayer.play("Shot")
 	$ShootEffect.play()
-	Battery -= 2
+	BatteryCapacity -= batteryPerShot
 	var bullet = BULLET.instantiate()
 	get_tree().root.add_child(bullet)
 	bullet.Dammage = 50

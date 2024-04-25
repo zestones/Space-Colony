@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://cy3cr71j3f0bi"]
+[gd_scene load_steps=5 format=3 uid="uid://cy3cr71j3f0bi"]
 
 [ext_resource type="Script" path="res://src/Combat/Bullet/bullet.gd" id="1_a5lc3"]
 [ext_resource type="Texture2D" uid="uid://dkxbpjurxheu1" path="res://assets/environment/props/bulletPlaceholder.png" id="1_togtc"]
+[ext_resource type="AudioStream" uid="uid://bi8xrqg1emvng" path="res://assets/audio/SFX/enemyHit.wav" id="3_ca4nd"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_fs6fl"]
 radius = 11.0
@@ -15,5 +16,9 @@ texture = ExtResource("1_togtc")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_fs6fl")
+
+[node name="Hit" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_ca4nd")
+bus = &"SFX"
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

@@ -16,7 +16,7 @@ config/features=PackedStringArray("4.2", "Mobile")
 
 [autoload]
 
-SceneTransitioner="*res://src/Player/Transitions/sceneTransitioner.gd"
+GlobalSingleton="*res://src/Globals/GlobalSingleton.gd"
 
 [display]
 

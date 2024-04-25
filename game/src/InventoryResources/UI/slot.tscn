@@ -1,0 +1,46 @@
+[gd_scene load_steps=5 format=3 uid="uid://u4t5f8eqahnh"]
+
+[ext_resource type="Script" path="res://src/InventoryResources/Slot.gd" id="1_5mit0"]
+[ext_resource type="Texture2D" uid="uid://14qrk12t1qrf" path="res://assets/ui/ItemOutline.png" id="2_igfjf"]
+
+[sub_resource type="Gradient" id="Gradient_aubdi"]
+colors = PackedColorArray(0.625597, 0.625597, 0.625597, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_1fdlf"]
+gradient = SubResource("Gradient_aubdi")
+
+[node name="Slot" type="Panel"]
+self_modulate = Color(0, 0, 0, 1)
+texture_filter = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -1.0
+offset_top = -19.0
+offset_right = -1245.0
+offset_bottom = -703.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(2.59201, 2.59933)
+pivot_offset = Vector2(0.638939, 18.2306)
+script = ExtResource("1_5mit0")
+
+[node name="Icon" type="Sprite2D" parent="."]
+position = Vector2(18.1393, 16.9877)
+scale = Vector2(0.443183, 0.45698)
+texture = SubResource("GradientTexture2D_1fdlf")
+
+[node name="Total" type="RichTextLabel" parent="."]
+layout_mode = 0
+offset_left = 21.0
+offset_right = 41.0
+offset_bottom = 14.0
+theme_override_colors/default_color = Color(0, 0, 0.952941, 1)
+theme_override_font_sizes/normal_font_size = 10
+text = "0"
+
+[node name="ItemOutline" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(17.7535, 17.3724)
+scale = Vector2(0.31045, 0.31462)
+texture = ExtResource("2_igfjf")

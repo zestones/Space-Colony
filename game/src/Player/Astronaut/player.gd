@@ -7,6 +7,7 @@ const JUMP_VELOCITY = -400.0
 
 #Player Stats
 @export var Hp: int = 10
+var CanShoot = false
 
 #Physics
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
@@ -54,14 +55,14 @@ func _physics_process(delta):
 				velocity.y = JUMP_VELOCITY
 				
 		#Check if the player is shooting		
-		if Input.is_action_just_pressed("Fire"):
+		if Input.is_action_just_pressed("Fire") and CanShoot:
 			#Instantiate and shoot the bullet
 			var bullet = BULLET.instantiate()
 			bullet.position = bullet_spawner.global_position
 			bullet.target = get_global_mouse_position()
 			get_tree().root.add_child(bullet)
 			$ShootEffect.play()
-			
+			CanShoot = false
 
 		#Player Movement
 		var direction = Input.get_axis("Left", "Right")
@@ -84,3 +85,7 @@ func _physics_process(delta):
 
 	move_and_slide()
 
+
+
+func _on_shoot_rate_timeout():
+	CanShoot = true

@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://cva0bd8hengsa"]
+[gd_scene load_steps=5 format=3 uid="uid://dsjlraobs8b5c"]
 
 [ext_resource type="Script" path="res://src/Combat/Spawners/NodeSpawner.gd" id="1_hvy7f"]
 

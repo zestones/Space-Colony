@@ -9,8 +9,8 @@
 size = Vector2(95, 93)
 
 [sub_resource type="Gradient" id="Gradient_7m3y3"]
-offsets = PackedFloat32Array(0, 0.214286, 0.474026, 0.590909, 1)
-colors = PackedColorArray(1, 1, 1, 1, 0.847151, 0.86527, 0.800564, 1, 0.752044, 0.781438, 0.67647, 1, 0.696914, 0.732843, 0.604537, 1, 0.643129, 0.685434, 0.534358, 1)
+offsets = PackedFloat32Array(0)
+colors = PackedColorArray(0.990372, 0.791837, 0.733011, 1)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_mkn1k"]
 gradient = SubResource("Gradient_7m3y3")
@@ -53,8 +53,7 @@ debug_color = Color(0.690196, 0.482353, 0.290196, 0.419608)
 [node name="bulletSpawner" type="Marker2D" parent="."]
 
 [node name="Camera2D" type="Camera2D" parent="."]
-visible = false
-position = Vector2(116, -202)
+position = Vector2(0, -273)
 position_smoothing_enabled = true
 
 [node name="ShootEffect" type="AudioStreamPlayer2D" parent="."]

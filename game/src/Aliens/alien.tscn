@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://dep4i5w0uyvl2"]
+[gd_scene load_steps=10 format=3 uid="uid://ci1sig2adpxef"]
 
 [ext_resource type="Texture2D" uid="uid://c2a7gxxh35dvk" path="res://assets/environment/props/Aliens/Leg_Left.png" id="1_6mu7r"]
 [ext_resource type="Script" path="res://src/Aliens/Alien1.gd" id="1_f7u7r"]

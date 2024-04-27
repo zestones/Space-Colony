@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://c0vix722etvnd"]
+[gd_scene load_steps=16 format=3 uid="uid://cbt73akmakrxo"]
 
 [ext_resource type="Texture2D" uid="uid://d0ppjnj7yctfe" path="res://assets/environment/props/Turret/Head.png" id="1_687li"]
 [ext_resource type="Script" path="res://src/Towers/TowerTemplate.gd" id="1_tb706"]
@@ -247,7 +247,7 @@ hue_variation_min = -1.0
 hue_variation_max = 0.97
 
 [node name="SmokeParticles" type="CPUParticles2D" parent="."]
-position = Vector2(146, 149)
+position = Vector2(149, 146)
 emitting = false
 amount = 32
 lifetime = 2.0

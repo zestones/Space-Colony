@@ -3,7 +3,7 @@ extends Node2D
 
 @export var Entity : PackedScene
 @export var Positions : Array[Marker2D]
-@export var Targets : Array[CharacterBody2D]
+@export var Targets : Array[Area2D]
 @export var ParentNode : Node2D
 @export var MaxSpawns : int = 10
 @export var NextSpawner : Node2D

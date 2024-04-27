@@ -53,7 +53,7 @@ debug_color = Color(0.690196, 0.482353, 0.290196, 0.419608)
 [node name="bulletSpawner" type="Marker2D" parent="."]
 
 [node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2(0, -273)
+position = Vector2(0, -218)
 position_smoothing_enabled = true
 
 [node name="ShootEffect" type="AudioStreamPlayer2D" parent="."]

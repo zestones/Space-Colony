@@ -2,7 +2,7 @@ extends CharacterBody2D
 
 var Hp = 100
 const SPEED = 230.0
-@export var Targets : Array[CharacterBody2D]
+@export var Targets : Array[Area2D]
 var InstanceTarget
 @onready var animator = $Graphics/AnimationPlayer
 var CanAttack = true

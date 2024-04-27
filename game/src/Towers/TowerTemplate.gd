@@ -45,14 +45,26 @@ func _process(delta):
 		
 	if player != null:
 		if abs(player.global_position - global_position).length() < 300:
-			$TextPopUp.visible = true
-			if Input.is_action_just_pressed("Interact"):
-				$EnabledEffect.play()
-				if is_instance_valid(Spawner):
-					Spawner.paused = false
-				$TextPopUp/ColorRect.color = Color(0.098, 0.812, 0.584)
-				$TextPopUp/RichTextLabel.text = "Tower Enabled"
-				activated = true
+			if BatteryCapacity > 0:
+				$TextPopUp/RichTextLabel.text = "E to Enable"
+				$TextPopUp.visible = true
+				if Input.is_action_just_pressed("Interact"):
+					$EnabledEffect.play()
+					if is_instance_valid(Spawner):
+						Spawner.paused = false
+					$TextPopUp/ColorRect.color = Color(0.098, 0.812, 0.584)
+					$TextPopUp/RichTextLabel.text = "Tower Enabled"
+					activated = true
+			else:
+				$TextPopUp/ColorRect.color = Color(0.776, 0.545, 0.871)
+				$TextPopUp/RichTextLabel.text = "E to Recharge"
+				$TextPopUp.visible = true
+				if Input.is_action_just_pressed("Interact"):
+					$EnabledEffect.play()
+					BatteryCapacity = 100
+					$TextPopUp/ColorRect.color = Color(0.098, 0.812, 0.584)
+					$TextPopUp/RichTextLabel.text = "Tower Enabled"
+					BatteryCapacity = 100
 		else:
 			$TextPopUp.visible = false
 		

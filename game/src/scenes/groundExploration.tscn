@@ -7,10 +7,10 @@
 [ext_resource type="PackedScene" uid="uid://cbt73akmakrxo" path="res://src/Towers/Tower_1/tower_1.tscn" id="4_dabnt"]
 [ext_resource type="PackedScene" uid="uid://ci1sig2adpxef" path="res://src/Aliens/alien.tscn" id="5_ipvrh"]
 [ext_resource type="PackedScene" uid="uid://dsjlraobs8b5c" path="res://src/Combat/Spawners/NodeSpawner.tscn" id="6_w4rbu"]
-[ext_resource type="Texture2D" path="res://assets/environment/background/Pralax/ParalaxLayer1.png" id="8_fpkt4"]
-[ext_resource type="Texture2D" path="res://assets/environment/background/Pralax/ParalaxLayer2.png" id="9_npykc"]
-[ext_resource type="Texture2D" path="res://assets/environment/background/Pralax/ParalaxLayer3.png" id="10_aop4l"]
-[ext_resource type="Texture2D" path="res://assets/environment/background/Pralax/ParalaxLayer4.png" id="11_cooah"]
+[ext_resource type="Texture2D" uid="uid://bt2sy0rbdgdp3" path="res://assets/environment/background/Pralax/ParalaxLayer1.png" id="8_fpkt4"]
+[ext_resource type="Texture2D" uid="uid://hh4b24ard1kk" path="res://assets/environment/background/Pralax/ParalaxLayer2.png" id="9_npykc"]
+[ext_resource type="Texture2D" uid="uid://nau1rl08jq18" path="res://assets/environment/background/Pralax/ParalaxLayer3.png" id="10_aop4l"]
+[ext_resource type="Texture2D" uid="uid://vohhwb0fhsxe" path="res://assets/environment/background/Pralax/ParalaxLayer4.png" id="11_cooah"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6x4rf"]
 size = Vector2(3649.09, 59)
@@ -250,7 +250,7 @@ follow_viewport_scale = 0.001
 z_index = -2
 position = Vector2(3309, -367)
 rotation = 1.57076
-scale = Vector2(29.9167, 311.69)
+scale = Vector2(34.4535, 391.002)
 skew = 2.86102e-05
 texture = SubResource("GradientTexture2D_mhd6r")
 

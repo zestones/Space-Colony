@@ -33,6 +33,7 @@ var UnderControl = true
 
 var Dammage = 0.12
 var currrentDirection = 1
+var KillScore = 0
 func _physics_process(delta):
 
 	#Gravity
@@ -40,6 +41,7 @@ func _physics_process(delta):
 		velocity.y += gravity * delta
 	
 	$HUD/UI/Hp.value = Hp
+	$HUD/UI/KillLable.text = "Attack Points : " + str(round(KillScore))
 	if Hp < 1:
 		#Stop the player from moving
 		UnderControl = false
@@ -58,6 +60,7 @@ func _physics_process(delta):
 		if Input.is_action_just_pressed("Fire") and CanShoot:
 			#Instantiate and shoot the bullet
 			var bullet = BULLET.instantiate()
+			bullet.Owner = self
 			bullet.position = bullet_spawner.global_position
 			bullet.target = get_global_mouse_position()
 			get_tree().root.add_child(bullet)

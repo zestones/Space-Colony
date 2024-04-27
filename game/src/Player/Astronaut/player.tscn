@@ -122,7 +122,22 @@ theme_override_constants/outline_size = 7
 theme_override_font_sizes/normal_font_size = 32
 text = "Health : "
 
+[node name="KillLable" type="RichTextLabel" parent="HUD/UI"]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = -1
+offset_left = 7.0
+offset_top = 76.0
+offset_right = 387.0
+offset_bottom = 122.0
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 12
+theme_override_constants/outline_size = 7
+theme_override_font_sizes/normal_font_size = 32
+text = "Attack Points : 0"
+
 [node name="ShootRate" type="Timer" parent="."]
+wait_time = 0.6
 autostart = true
 
 [connection signal="timeout" from="ShootRate" to="." method="_on_shoot_rate_timeout"]

@@ -96,7 +96,7 @@ shape = SubResource("RectangleShape2D_6x4rf")
 
 [node name="Player" parent="." instance=ExtResource("1_asd2u")]
 z_index = 1
-position = Vector2(-2966, 395)
+position = Vector2(-3608, 122)
 Hp = 100
 
 [node name="Music" type="AudioStreamPlayer2D" parent="Player"]
@@ -123,7 +123,7 @@ position = Vector2(-3608, 351)
 position = Vector2(1030, -255)
 Entity = ExtResource("5_ipvrh")
 Positions = [NodePath("SpawnLocs/Pos1"), NodePath("SpawnLocs/Pos2"), NodePath("SpawnLocs/Pos3")]
-Targets = [NodePath("../../RocketShip")]
+Targets = [NodePath("../../Turrets/Tower1")]
 ParentNode = NodePath("../..")
 MaxSpawns = 15
 NextSpawner = NodePath("../Spawner2")
@@ -145,7 +145,7 @@ position = Vector2(-6071, 97)
 position = Vector2(1030, -255)
 Entity = ExtResource("5_ipvrh")
 Positions = [NodePath("SpawnLocs2/Pos1"), NodePath("SpawnLocs2/Pos2"), NodePath("SpawnLocs2/Pos3")]
-Targets = [NodePath("../../RocketShip")]
+Targets = [NodePath("../../Turrets/Tower2")]
 ParentNode = NodePath("../..")
 MaxSpawns = 20
 NextSpawner = NodePath("../Spawner3")
@@ -166,7 +166,7 @@ position = Vector2(-3600, -46)
 position = Vector2(4976, -255)
 Entity = ExtResource("5_ipvrh")
 Positions = [NodePath("SpawnLocs2/Pos1"), NodePath("SpawnLocs2/Pos2"), NodePath("SpawnLocs2/Pos3")]
-Targets = [NodePath("../../RocketShip")]
+Targets = [NodePath("../../Turrets/Tower3")]
 ParentNode = NodePath("../..")
 MaxSpawns = 25
 NextSpawner = NodePath("../Spawner4")
@@ -187,7 +187,7 @@ position = Vector2(-4135, 35)
 position = Vector2(8465, -295)
 Entity = ExtResource("5_ipvrh")
 Positions = [NodePath("SpawnLocs2/Pos1"), NodePath("SpawnLocs2/Pos2"), NodePath("SpawnLocs2/Pos3")]
-Targets = [NodePath("../../RocketShip")]
+Targets = [NodePath("../../Turrets/Tower4")]
 ParentNode = NodePath("../..")
 MaxSpawns = 35
 
@@ -239,7 +239,7 @@ offset_right = 1472.0
 offset_bottom = 987.0
 rotation = -0.261799
 scale = Vector2(2, 2)
-theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_colors/default_color = Color(1, 1, 1, 1)
 theme_override_font_sizes/normal_font_size = 80
 text = "Get To The Space Ship !"
 

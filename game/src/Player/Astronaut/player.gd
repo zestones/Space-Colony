@@ -31,7 +31,7 @@ const BULLET = preload("res://src/Combat/Bullet/bullet.tscn")
 #This variable is used to define is the player is allowed to move or not
 var UnderControl = true
 
-var Dammage = 0.12
+var Dammage = 1
 var currrentDirection = 1
 var KillScore = 0
 func _physics_process(delta):

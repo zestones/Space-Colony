@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://cmgsvrgq4y7sj"]
+[gd_scene load_steps=16 format=3 uid="uid://cmgsvrgq4y7sj"]
 
 [ext_resource type="PackedScene" uid="uid://dm4635q7ek573" path="res://src/Player/Spaceship/spaceshipRevised.tscn" id="1_3gb66"]
 [ext_resource type="Texture2D" uid="uid://cl87qgtufqlvk" path="res://assets/environment/background/spaceExploration.png" id="2_h654r"]
@@ -16,6 +16,52 @@ b = Vector2(4000, 0)
 
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_x25mi"]
 b = Vector2(0, 720)
+
+[sub_resource type="Animation" id="Animation_3mf25"]
+resource_name = "Congrats"
+length = 2.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CanvasLayer2/RichTextLabel:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0.0625), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_o5j0j"]
+_data = {
+"Congrats": SubResource("Animation_3mf25")
+}
+
+[sub_resource type="Gradient" id="Gradient_aompm"]
+colors = PackedColorArray(0, 0.521569, 0, 1, 1, 1, 0.509804, 1)
+
+[sub_resource type="Animation" id="Animation_t1yn3"]
+resource_name = "Text"
+length = 5.5
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CPUParticles2D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.8, 1.3, 1.8, 2.3, 2.7, 5.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(1413, 174), Vector2(1508, 304), Vector2(1701, 438), Vector2(2025, 404), Vector2(2271, 295), Vector2(2437, 167), Vector2(2503, 102), Vector2(1413, 174)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_x6i2d"]
+_data = {
+"Text": SubResource("Animation_t1yn3")
+}
 
 [node name="Node2D" type="Node2D"]
 
@@ -77,10 +123,61 @@ travelPopup = NodePath("../CanvasLayer/TravelPopup")
 layer = 5
 
 [node name="TravelPopup" parent="CanvasLayer" instance=ExtResource("4_xn80w")]
-visible = false
 
 [node name="Planet" parent="." node_paths=PackedStringArray("transitioner") instance=ExtResource("5_qlj8x")]
 position = Vector2(1828, 175)
 transitioner = NodePath("Transitioner")
 
 [node name="Transitioner" parent="Planet" instance=ExtResource("6_ltb23")]
+
+[node name="ParticleAnimator" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_o5j0j")
+}
+autoplay = "Congrats"
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+position = Vector2(1451.55, 226.755)
+amount = 32
+emission_shape = 3
+emission_rect_extents = Vector2(1, 1)
+direction = Vector2(0, -1)
+gravity = Vector2(0, -10)
+scale_amount_min = 15.0
+scale_amount_max = 50.0
+color_ramp = SubResource("Gradient_aompm")
+hue_variation_min = -0.19
+hue_variation_max = 0.17
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_x6i2d")
+}
+autoplay = "Text"
+
+[node name="CanvasLayer2" type="CanvasLayer" parent="."]
+
+[node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer2"]
+modulate = Color(1, 1, 1, 0.0625)
+z_index = 3
+offset_left = 132.0
+offset_top = 496.0
+offset_right = 2904.0
+offset_bottom = 1013.0
+theme_override_font_sizes/normal_font_size = 45
+text = "            You've Completed The Demo !
+      Not Satisfied ? Wanna see more ?
+ Join us and Contribute to our next Levels of success !"
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="CanvasLayer2"]
+position = Vector2(3954.55, 328.755)
+amount = 32
+emission_shape = 3
+emission_rect_extents = Vector2(1, 1)
+direction = Vector2(0, -1)
+gravity = Vector2(0, -10)
+scale_amount_min = 15.0
+scale_amount_max = 50.0
+color_ramp = SubResource("Gradient_aompm")
+hue_variation_min = -0.19
+hue_variation_max = 0.17

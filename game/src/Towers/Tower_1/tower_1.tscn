@@ -129,7 +129,7 @@ _data = {
 }
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_pub82"]
-size = Vector2(492, 297)
+size = Vector2(547, 297)
 
 [sub_resource type="Gradient" id="Gradient_uahsc"]
 
@@ -137,6 +137,7 @@ size = Vector2(492, 297)
 size = Vector2(65.5, 722)
 
 [node name="Tower1" type="Area2D" groups=["Dammagable", "Tower"]]
+texture_filter = 1
 script = ExtResource("1_tb706")
 batteryPerShot = 10
 
@@ -151,7 +152,6 @@ polygon = PackedVector2Array(3, 306, 4, 288, 50, 289, 51, 258, 67, 257, 66, 224,
 z_index = 1
 texture_filter = 1
 position = Vector2(175.938, 114.489)
-rotation = 0.0121474
 scale = Vector2(9, 9)
 texture = ExtResource("1_687li")
 offset = Vector2(-6.29706, -3.11443)
@@ -170,8 +170,13 @@ offset_right = 63.4349
 offset_bottom = 60.5073
 scale = Vector2(0.128636, 0.127237)
 theme_override_constants/center_grabber = 100
+metadata/_edit_use_anchors_ = true
 
 [node name="Base" type="Sprite2D" parent="Graphics"]
+position = Vector2(99, 49)
+texture = ExtResource("2_fanxn")
+
+[node name="Base2" type="Sprite2D" parent="Graphics"]
 position = Vector2(99, 49)
 texture = ExtResource("2_fanxn")
 
@@ -181,10 +186,9 @@ libraries = {
 }
 
 [node name="Range" type="Area2D" parent="."]
-visible = false
 
 [node name="Collider" type="CollisionShape2D" parent="Range"]
-position = Vector2(-218, 156)
+position = Vector2(-170.5, 155)
 shape = SubResource("RectangleShape2D_pub82")
 
 [node name="ShootRate" type="Timer" parent="."]
@@ -210,7 +214,7 @@ offset_right = 223.0
 offset_bottom = -49.0
 grow_horizontal = 2
 grow_vertical = 0
-color = Color(1, 0.0909423, 0.0594644, 1)
+color = Color(0.572549, 0.168627, 0.0823529, 1)
 
 [node name="RichTextLabel" type="RichTextLabel" parent="TextPopUp"]
 layout_mode = 1
@@ -296,7 +300,8 @@ scale = Vector2(0.35, 0.35)
 texture = ExtResource("5_pcv0i")
 
 [node name="Border" type="StaticBody2D" parent="."]
-visible = false
+position = Vector2(-9, 76)
+scale = Vector2(1.0231, 0.751005)
 
 [node name="Collider" type="CollisionShape2D" parent="Border"]
 position = Vector2(677, -55)

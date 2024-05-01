@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://d0n8e2vj61dbl"]
+[gd_scene load_steps=25 format=3 uid="uid://d0n8e2vj61dbl"]
 
 [ext_resource type="PackedScene" uid="uid://dchsqd1xaupl1" path="res://src/Player/Astronaut/player.tscn" id="1_asd2u"]
 [ext_resource type="AudioStream" uid="uid://clu06bwm86ti" path="res://assets/audio/GroundCombat.wav" id="2_l138s"]
@@ -11,6 +11,10 @@
 [ext_resource type="Texture2D" uid="uid://hh4b24ard1kk" path="res://assets/environment/background/Pralax/ParalaxLayer2.png" id="9_npykc"]
 [ext_resource type="Texture2D" uid="uid://nau1rl08jq18" path="res://assets/environment/background/Pralax/ParalaxLayer3.png" id="10_aop4l"]
 [ext_resource type="Texture2D" uid="uid://vohhwb0fhsxe" path="res://assets/environment/background/Pralax/ParalaxLayer4.png" id="11_cooah"]
+[ext_resource type="Texture2D" uid="uid://dyryurepvdraa" path="res://assets/environment/props/Icons/enemyRocketShip.png" id="12_hhus7"]
+[ext_resource type="Texture2D" uid="uid://cvwb6eyupf1rk" path="res://assets/environment/props/Aliens/Spawner.png" id="13_d5aqh"]
+[ext_resource type="Texture2D" uid="uid://d06ktm8osljaa" path="res://assets/environment/props/Icons/EarthText.png" id="14_lj7db"]
+[ext_resource type="Texture2D" uid="uid://b1bixlq06c6jl" path="res://assets/environment/props/Icons/TextStyle-1.png" id="15_tcvlr"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6x4rf"]
 size = Vector2(3649.09, 59)
@@ -24,42 +28,126 @@ gradient = SubResource("Gradient_pbiv3")
 
 [sub_resource type="Animation" id="Animation_c3oxc"]
 resource_name = "StartIntro"
-length = 2.0
+length = 6.0
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("UI/Text:self_modulate")
+tracks/0/path = NodePath("IntroUI/EnemyRocketShip:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.5, 2),
-"transitions": PackedFloat32Array(1, 1, 1),
+"times": PackedFloat32Array(0.1, 1.9),
+"transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+"values": [Vector2(-3164, -381), Vector2(-6962, -294)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("UI/Text:scale")
+tracks/1/path = NodePath("IntroUI/EnemyRocketShip:rotation")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0.1, 0.2, 1.1, 1.7),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
+"times": PackedFloat32Array(0.1, 2.1),
+"transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Vector2(2, 2), Vector2(1, 1), Vector2(1.2, 1.2), Vector2(1, 1)]
+"values": [-1.5708, -1.74533]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("UI/Text:visible")
+tracks/2/path = NodePath("IntroUI/EnemyRocketShip:visible")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0.1, 1.9),
+"times": PackedFloat32Array(0.1, 2.3),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
 "values": [true, false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Player/Camera2D:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 1.3, 1.9, 2.5, 4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(181, -531), Vector2(-2129, -552), Vector2(-922, -26), Vector2(-10, -361), Vector2(0, -190)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Player/Camera2D:zoom")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 1.9, 4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(0.6, 0.6), Vector2(1, 1)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("IntroUI/Spawner:position")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(1, 2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(-4968, -255), Vector2(-4603, 450)]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("IntroUI/Spawner:visible")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("IntroUI/Spawner:frame")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(5, 5.1, 5.2, 5.3, 5.7),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 1, 0]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("IntroUI/LightFlash:visible")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0, 5.4, 5.7),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, true, false]
+}
+tracks/9/type = "value"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("UI/EarthText:modulate")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = {
+"times": PackedFloat32Array(2.3, 4, 5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_urmxl"]
@@ -72,6 +160,12 @@ colors = PackedColorArray(0.419813, 0.419813, 0.419813, 1, 0.14902, 0.14902, 0.2
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_mhd6r"]
 gradient = SubResource("Gradient_v8uby")
+
+[sub_resource type="Gradient" id="Gradient_rlkca"]
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_igpsn"]
+gradient = SubResource("Gradient_rlkca")
 
 [node name="GroundScene" type="Node2D"]
 
@@ -96,11 +190,15 @@ shape = SubResource("RectangleShape2D_6x4rf")
 
 [node name="Player" parent="." instance=ExtResource("1_asd2u")]
 z_index = 1
-position = Vector2(-3608, 122)
+position = Vector2(-3608, 146)
 Hp = 100
 
-[node name="Music" type="AudioStreamPlayer2D" parent="Player"]
-position = Vector2(2, -30)
+[node name="Camera2D" type="Camera2D" parent="Player"]
+position = Vector2(181, -531)
+position_smoothing_enabled = true
+
+[node name="Music" type="AudioStreamPlayer2D" parent="Player/Camera2D"]
+position = Vector2(2, 160)
 stream = ExtResource("2_l138s")
 autoplay = true
 bus = &"Music"
@@ -209,18 +307,22 @@ position = Vector2(20, -50)
 [node name="Tower1" parent="Turrets" node_paths=PackedStringArray("Spawner") instance=ExtResource("4_dabnt")]
 position = Vector2(-2578, 298)
 Spawner = NodePath("../../Spawners/Spawner")
+Index = 1
 
 [node name="Tower2" parent="Turrets" node_paths=PackedStringArray("Spawner") instance=ExtResource("4_dabnt")]
 position = Vector2(915, 298)
 Spawner = NodePath("../../Spawners/Spawner2")
+Index = 2
 
 [node name="Tower3" parent="Turrets" node_paths=PackedStringArray("Spawner") instance=ExtResource("4_dabnt")]
 position = Vector2(4252, 298)
 Spawner = NodePath("../../Spawners/Spawner3")
+Index = 3
 
 [node name="Tower4" parent="Turrets" node_paths=PackedStringArray("Spawner") instance=ExtResource("4_dabnt")]
 position = Vector2(7810, 298)
 Spawner = NodePath("../../Spawners/Spawner4")
+Index = 4
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -242,6 +344,20 @@ scale = Vector2(2, 2)
 theme_override_colors/default_color = Color(1, 1, 1, 1)
 theme_override_font_sizes/normal_font_size = 80
 text = "Get To The Space Ship !"
+
+[node name="EarthText" type="Sprite2D" parent="UI"]
+modulate = Color(1, 1, 1, 0)
+position = Vector2(646, 351)
+texture = ExtResource("14_lj7db")
+
+[node name="TextStyle-1" type="Sprite2D" parent="UI/EarthText"]
+position = Vector2(30, 99)
+texture = ExtResource("15_tcvlr")
+
+[node name="TextStyle-2" type="Sprite2D" parent="UI/EarthText"]
+position = Vector2(28, -68)
+texture = ExtResource("15_tcvlr")
+flip_v = true
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
 follow_viewport_scale = 0.001
@@ -336,3 +452,50 @@ centered = false
 [node name="DirectionalLight2D" type="DirectionalLight2D" parent="."]
 position = Vector2(2108, -2049)
 energy = 0.2
+
+[node name="IntroUI" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="EnemyRocketShip" type="Sprite2D" parent="IntroUI"]
+visible = false
+z_index = 2
+position = Vector2(-3164, -381)
+rotation = -1.5708
+scale = Vector2(2, 2)
+texture = ExtResource("12_hhus7")
+
+[node name="Spawner" type="Sprite2D" parent="IntroUI"]
+visible = false
+position = Vector2(-4968, -255)
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("13_d5aqh")
+hframes = 4
+
+[node name="Spawner2" type="Sprite2D" parent="IntroUI"]
+position = Vector2(1766, 437)
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("13_d5aqh")
+hframes = 4
+
+[node name="Spawner3" type="Sprite2D" parent="IntroUI"]
+position = Vector2(4956, 437)
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("13_d5aqh")
+hframes = 4
+
+[node name="Spawner4" type="Sprite2D" parent="IntroUI"]
+position = Vector2(-1769, 437)
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("13_d5aqh")
+hframes = 4
+
+[node name="LightFlash" type="Sprite2D" parent="IntroUI"]
+visible = false
+position = Vector2(-4604.5, 19)
+scale = Vector2(1.01562, 898.914)
+texture = SubResource("GradientTexture1D_igpsn")
+hframes = 4
+frame = 1

@@ -9,7 +9,7 @@ var player
 var activated = false
 @export var Spawner : Node2D
 @onready var animator = $Graphics/AnimationPlayer
-
+@export var Index : int
 @export var Hp: int = 100
 @export var BatteryCapacity: int = 100
 @export var batteryPerShot: int = 2
@@ -45,6 +45,14 @@ func _process(delta):
 		
 	if player != null:
 		if abs(player.global_position - global_position).length() < 300:
+			
+			if Index < 4:
+				player.CurrentObjective = 1
+				player.Update_Objective()
+			else:
+				player.CurrentObjective = 2
+				player.Update_Objective()
+			
 			if BatteryCapacity > 0:
 				$TextPopUp/RichTextLabel.text = "E to Enable"
 				$TextPopUp.visible = true

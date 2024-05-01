@@ -34,6 +34,20 @@ var UnderControl = true
 var Dammage = 1
 var currrentDirection = 1
 var KillScore = 0
+var CurrentObjective = 0
+var Objectives = [
+	"Get to the Tower to your right !",
+	"Kill All Enemies !!!",
+	"Get into Space !"
+]
+
+func _ready():
+	Update_Objective()
+
+func Update_Objective():
+	$HUD/UI/ObjectiveSys/Objective.text = Objectives[CurrentObjective]
+	
+	
 func _physics_process(delta):
 
 	#Gravity
@@ -92,3 +106,8 @@ func _physics_process(delta):
 
 func _on_shoot_rate_timeout():
 	CanShoot = true
+
+
+func _on_settings_pressed():
+	UnderControl = false
+	$HUD/Settings_Screen.visible = true

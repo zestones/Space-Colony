@@ -1,9 +1,12 @@
-[gd_scene load_steps=12 format=3 uid="uid://dchsqd1xaupl1"]
+[gd_scene load_steps=15 format=3 uid="uid://dchsqd1xaupl1"]
 
 [ext_resource type="Script" path="res://src/Player/Astronaut/player.gd" id="1_secmd"]
 [ext_resource type="AudioStream" uid="uid://db72xv76uw2al" path="res://assets/audio/SFX/PlayerShoot.wav" id="2_ngw4y"]
 [ext_resource type="AudioStream" uid="uid://jude3rtfr2k0" path="res://assets/audio/SFX/PlayerJump.wav" id="3_m4v1s"]
 [ext_resource type="PackedScene" uid="uid://ckinev5mjn2in" path="res://src/Player/Transitions/sceneTransitioner.tscn" id="4_4jeyn"]
+[ext_resource type="Texture2D" uid="uid://cf3himx2e0b8u" path="res://assets/environment/props/Icons/Settings_PlaceHolder.png" id="5_rjcuu"]
+[ext_resource type="Texture2D" uid="uid://demlmuxw2fcpc" path="res://assets/environment/props/Icons/Objective.png" id="6_jt2lf"]
+[ext_resource type="PackedScene" uid="uid://bspvb06d3skqx" path="res://src/UI/settings_screen.tscn" id="6_lyhc8"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_w1fxn"]
 size = Vector2(95, 93)
@@ -51,10 +54,6 @@ shape = SubResource("RectangleShape2D_w1fxn")
 debug_color = Color(0.690196, 0.482353, 0.290196, 0.419608)
 
 [node name="bulletSpawner" type="Marker2D" parent="."]
-
-[node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2(0, -218)
-position_smoothing_enabled = true
 
 [node name="ShootEffect" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("2_ngw4y")
@@ -136,8 +135,45 @@ theme_override_constants/outline_size = 7
 theme_override_font_sizes/normal_font_size = 32
 text = "Attack Points : 0"
 
+[node name="Settings" type="TextureButton" parent="HUD/UI"]
+modulate = Color(0.380392, 0.168627, 0.478431, 1)
+layout_mode = 0
+offset_left = 20.0
+offset_top = 644.0
+offset_right = 84.0
+offset_bottom = 708.0
+texture_normal = ExtResource("5_rjcuu")
+
+[node name="Objective2" type="Sprite2D" parent="HUD/UI"]
+position = Vector2(1128, 41)
+texture = ExtResource("6_jt2lf")
+
+[node name="ObjectiveSys" type="Label" parent="HUD/UI"]
+layout_mode = 0
+offset_left = 993.0
+offset_top = 21.0
+offset_right = 1100.0
+offset_bottom = 59.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 23
+text = "Objective
+"
+
+[node name="Objective" type="RichTextLabel" parent="HUD/UI/ObjectiveSys"]
+layout_mode = 0
+offset_left = 138.0
+offset_top = -5.0
+offset_right = 275.0
+offset_bottom = 51.0
+theme_override_colors/default_color = Color(1, 1, 1, 1)
+text = "Get to the Tower and enable it !"
+
+[node name="Settings_Screen" parent="HUD" instance=ExtResource("6_lyhc8")]
+visible = false
+
 [node name="ShootRate" type="Timer" parent="."]
 wait_time = 0.6
 autostart = true
 
+[connection signal="pressed" from="HUD/UI/Settings" to="." method="_on_settings_pressed"]
 [connection signal="timeout" from="ShootRate" to="." method="_on_shoot_rate_timeout"]

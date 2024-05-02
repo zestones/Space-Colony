@@ -1,0 +1,81 @@
+[gd_scene load_steps=4 format=3 uid="uid://bspvb06d3skqx"]
+
+[ext_resource type="Script" path="res://src/UI/Settings_Screen.gd" id="1_gakbj"]
+
+[sub_resource type="Gradient" id="Gradient_iswf5"]
+colors = PackedColorArray(0, 0, 0, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_ee31n"]
+gradient = SubResource("Gradient_iswf5")
+
+[node name="Settings_Screen" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_bottom = -10.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_gakbj")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 1, 0.85098)
+position = Vector2(623, 372.25)
+scale = Vector2(5.86719, 745.5)
+texture = SubResource("GradientTexture1D_ee31n")
+
+[node name="ExitBtn" type="Button" parent="."]
+layout_mode = 0
+anchor_left = 0.028125
+anchor_top = 0.0619718
+anchor_right = 0.1125
+anchor_bottom = 0.14507
+theme_override_font_sizes/font_size = 37
+text = "Exit"
+metadata/_edit_use_anchors_ = true
+
+[node name="Music" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.276563
+anchor_top = 0.0422535
+anchor_right = 0.377344
+anchor_bottom = 0.132394
+offset_top = -1.52588e-05
+theme_override_font_sizes/font_size = 46
+text = "Music"
+metadata/_edit_use_anchors_ = true
+
+[node name="HSlider" type="HSlider" parent="Music"]
+layout_mode = 0
+offset_left = 148.0
+offset_top = 25.0
+offset_right = 519.0
+offset_bottom = 50.0
+max_value = 1.0
+step = 0.01
+
+[node name="Sound" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.283594
+anchor_top = 0.246479
+anchor_right = 0.355312
+anchor_bottom = 0.33662
+offset_bottom = -3.05176e-05
+theme_override_font_sizes/font_size = 46
+text = "SFX"
+metadata/_edit_use_anchors_ = true
+
+[node name="SFX" type="HSlider" parent="Sound"]
+layout_mode = 0
+offset_left = 148.0
+offset_top = 25.0
+offset_right = 519.0
+offset_bottom = 50.0
+max_value = 1.0
+step = 0.01
+
+[connection signal="pressed" from="ExitBtn" to="." method="_on_exit_btn_pressed"]
+[connection signal="value_changed" from="Music/HSlider" to="." method="_on_h_slider_value_changed"]
+[connection signal="value_changed" from="Sound/SFX" to="." method="_on_sfx_value_changed"]

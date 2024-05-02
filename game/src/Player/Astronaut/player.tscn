@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://dchsqd1xaupl1"]
+[gd_scene load_steps=16 format=3 uid="uid://dchsqd1xaupl1"]
 
 [ext_resource type="Script" path="res://src/Player/Astronaut/player.gd" id="1_secmd"]
 [ext_resource type="AudioStream" uid="uid://db72xv76uw2al" path="res://assets/audio/SFX/PlayerShoot.wav" id="2_ngw4y"]
@@ -13,33 +13,20 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_w1fxn"]
 size = Vector2(42, 103)
 
-[sub_resource type="Gradient" id="Gradient_7m3y3"]
-offsets = PackedFloat32Array(0)
-colors = PackedColorArray(0.990372, 0.791837, 0.733011, 1)
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_mkn1k"]
-gradient = SubResource("Gradient_7m3y3")
-
-[sub_resource type="Gradient" id="Gradient_d874u"]
-colors = PackedColorArray(1, 0, 0, 1, 1, 0, 0, 1)
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_ammke"]
-gradient = SubResource("Gradient_d874u")
-
 [sub_resource type="Animation" id="Animation_atukx"]
 resource_name = "Hit"
 length = 0.2
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Player/Body:texture")
+tracks/0/path = NodePath("Player/Body:modulate")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.1, 0.2),
 "transitions": PackedFloat32Array(1, 1, 1),
-"update": 1,
-"values": [SubResource("GradientTexture2D_mkn1k"), SubResource("GradientTexture2D_ammke"), SubResource("GradientTexture2D_mkn1k")]
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 0, 0, 1), Color(1, 1, 1, 1)]
 }
 
 [sub_resource type="Animation" id="Animation_a5exd"]
@@ -134,7 +121,6 @@ scale = Vector2(3.5, 3.495)
 texture = ExtResource("5_twsge")
 hframes = 4
 vframes = 3
-frame = 8
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {

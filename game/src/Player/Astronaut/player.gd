@@ -14,7 +14,7 @@ var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 
 #References
 @onready var Camera = $Camera2D
-@onready var player = $Player
+@onready var player = $Player/Body
 @export var Inventory : UniversalInventory
 
 
@@ -52,7 +52,18 @@ func _physics_process(delta):
 
 	#Gravity
 	if not is_on_floor():
+		$AnimationPlayer.play("Jump")
 		velocity.y += gravity * delta
+		
+	if $Gun.visible:
+		$Gun.look_at(get_global_mouse_position())
+		if get_global_mouse_position().x > global_position.x:
+			$Gun.flip_h = false
+			$Gun.flip_v = false
+		if get_global_mouse_position().x < global_position.x:
+			$Gun.flip_v = true
+			$Gun.flip_h = false
+		
 	
 	$HUD/UI/Hp.value = Hp
 	$HUD/UI/KillLable.text = "Attack Points : " + str(round(KillScore))
@@ -84,20 +95,26 @@ func _physics_process(delta):
 		#Player Movement
 		var direction = Input.get_axis("Left", "Right")
 		if direction:
+			$Gun.show()
+			$AnimationPlayer.play("Walk")
 			velocity.x = direction * SPEED
 			if direction > 0:
 				currrentDirection = 1
-				player.flip_v = false
+				player.flip_h = false
 			if direction < 0: 
 				currrentDirection = -1
-				player.flip_v = true
+				player.flip_h = true
 		else:
+			$AnimationPlayer.play("Idle")
+			$Gun.hide()
 			velocity.x = move_toward(velocity.x, 0, SPEED)
 
 	
 	#If the player has stopped / they are now allowed to control the sprite, slow it down and play the idle animation
 	else:
-			velocity.x = move_toward(velocity.x, 0, SPEED)
+		$Gun.hide()
+		$AnimationPlayer.play("Idle")
+		velocity.x = move_toward(velocity.x, 0, SPEED)
 
 
 	move_and_slide()

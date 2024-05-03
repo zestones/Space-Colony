@@ -1,0 +1,21 @@
+[gd_scene load_steps=5 format=3 uid="uid://c5m4uc7uwh683"]
+
+[ext_resource type="Script" path="res://src/Systems/IntEventListener.cs" id="1_xp6st"]
+[ext_resource type="Resource" uid="uid://by1quvt44sbjv" path="res://src/Systems/IntChannel.tres" id="2_ndnuo"]
+[ext_resource type="Script" path="res://src/Systems/TestEmitter.cs" id="3_ryrwp"]
+[ext_resource type="Script" path="res://src/Systems/ChangeValue.cs" id="5_2pgo3"]
+
+[node name="Node2D" type="Node2D"]
+
+[node name="Listner" type="Node" parent="."]
+script = ExtResource("1_xp6st")
+eventChannel = ExtResource("2_ndnuo")
+
+[node name="Emitter" type="Node" parent="."]
+script = ExtResource("3_ryrwp")
+intEventChannel = ExtResource("2_ndnuo")
+
+[node name="ChangedValue" type="Node" parent="."]
+script = ExtResource("5_2pgo3")
+
+[connection signal="response" from="Listner" to="ChangedValue" method="_on_listner_response"]

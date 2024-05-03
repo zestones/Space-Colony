@@ -23,6 +23,7 @@ GlobalSingleton="*res://src/Globals/GlobalSingleton.gd"
 window/size/viewport_width=1280
 window/size/viewport_height=720
 window/stretch/mode="viewport"
+mouse_cursor/custom_image="res://assets/environment/props/Icons/Cursor.png"
 
 [dotnet]
 

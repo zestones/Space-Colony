@@ -2,7 +2,7 @@ using Godot;
 
 namespace Events
 {
-    public abstract partial class EventListener<T> : Node
+    public abstract partial class EventListener<T> : Node where T : IEventData
     {
         [Export] private EventChannel<T> eventChannel;
         [Signal] public delegate void responseEventHandler();
@@ -25,7 +25,7 @@ namespace Events
         }
     }
 
-    public partial class EventData<T> : GodotObject
+    public partial class EventData<T> : GodotObject where T : IEventData
     {
         public T Value { get; private set; }
 
@@ -34,4 +34,6 @@ namespace Events
             Value = value;
         }
     }
+
+    public interface IEventData { }
 }

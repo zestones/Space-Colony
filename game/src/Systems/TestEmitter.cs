@@ -14,6 +14,6 @@ public partial class TestEmitter : Node
     private void PublishEvent()
     {
         if (intEventChannel != null)
-            intEventChannel.Invoke(value);
+            intEventChannel.Invoke(new IntEvent(value));
     }
 }

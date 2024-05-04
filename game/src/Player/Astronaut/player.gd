@@ -128,3 +128,7 @@ func _on_shoot_rate_timeout():
 func _on_settings_pressed():
 	UnderControl = false
 	$HUD/Settings_Screen.visible = true
+
+
+func _on_animation_player_animation_finished(anim_name):
+	print(anim_name)

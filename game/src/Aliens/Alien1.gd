@@ -24,8 +24,10 @@ func _physics_process(delta):
 		queue_free()
 		
 	if obj != null and CanAttack:
+		obj.animator.play("Hit")
 		if obj.Hp >= 0.1:
-			obj.animator.play("Hit")
+			if obj.is_in_group("Player"):
+				obj.get_node("HitEffect").play()
 			obj.Hp -= obj.Dammage
 			CanAttack = false
 		

@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://cdojsau7hjqp3"
+path="res://.godot/imported/MSC-Space Explo-LOOP-DEMO.wav-3f0d4a8765a7171dde5a6ed5f4232b52.sample"
+
+[deps]
+
+source_file="res://assets/audio/MSC-Space Explo-LOOP-DEMO.wav"
+dest_files=["res://.godot/imported/MSC-Space Explo-LOOP-DEMO.wav-3f0d4a8765a7171dde5a6ed5f4232b52.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

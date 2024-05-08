@@ -9,13 +9,11 @@ namespace Events
     {
         private readonly HashSet<EventListener<T>> observers = new();
 
-        public void Invoke(T _value, Dictionary _dics)
+        public void Invoke(T _value)
         {
             foreach (EventListener<T> observer in observers)
             {
-                GD.Print(observer.Name);
-
-                observer.Raise(_value, _dics);
+                observer.Raise(_value);
             }
         }
 

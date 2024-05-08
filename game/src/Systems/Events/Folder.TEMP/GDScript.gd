@@ -1,14 +1,7 @@
-extends Node
-
-@export var intChannel : IntEventChannel
-@export var dataDic : Dictionary
-@export var intValue : int
-
-func _ready() -> void:
-	intChannel.callv("Invoke", [dataDic])
-	intChannel
+extends HSlider
 
 
-func _on_response(data : Object, dics : Dictionary) -> void:
-	print("Called from gdscript")
-	print(dics)
+func _on_middleman(intData : int) -> void:
+	print("This is from gdscript working with the middleman")
+	print(intData)
+	value += intData

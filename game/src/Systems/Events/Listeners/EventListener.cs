@@ -18,11 +18,11 @@ namespace Events
             eventChannel.Deregister(this);
         }
 
-        public void Raise(T _value, Dictionary _dics)
+        public void Raise(T _value)
         {
             GD.Print("Event being raised");
 
-            EmitSignal(SignalName.response, new EventData<T>(_value), _dics);
+            EmitSignal(SignalName.response, args: new EventData<T>(_value));
         }
     }
 

@@ -1,32 +1,64 @@
-[gd_scene load_steps=6 format=3 uid="uid://c5m4uc7uwh683"]
+[gd_scene load_steps=7 format=3 uid="uid://c5m4uc7uwh683"]
 
 [ext_resource type="Script" path="res://src/Systems/Events/Listeners/IntEventListener.cs" id="1_xp6st"]
 [ext_resource type="Resource" uid="uid://by1quvt44sbjv" path="res://src/Systems/Events/Resources/HealthChangedEvent.tres" id="2_ndnuo"]
 [ext_resource type="Script" path="res://src/Systems/Events/Folder.TEMP/TestEmitter.cs" id="3_ryrwp"]
 [ext_resource type="Script" path="res://src/Systems/Events/Folder.TEMP/ChangeValue.cs" id="5_2pgo3"]
 [ext_resource type="Script" path="res://src/Systems/Events/Folder.TEMP/GDScript.gd" id="5_qprfr"]
+[ext_resource type="Script" path="res://src/Systems/Events/Listeners/MiddleMan/IntEventMiddleMan.cs" id="6_7rc4l"]
 
 [node name="Node2D" type="Node2D"]
 
-[node name="Listner" type="Node" parent="."]
+[node name="Emitter" type="Node" parent="."]
+script = ExtResource("3_ryrwp")
+value = 10
+intEventChannel = ExtResource("2_ndnuo")
+
+[node name="Timer" type="Timer" parent="Emitter"]
+autostart = true
+
+[node name="UI" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 script = ExtResource("1_xp6st")
 eventChannel = ExtResource("2_ndnuo")
 
-[node name="Emitter" type="Node" parent="."]
-script = ExtResource("3_ryrwp")
-dicValues = {
-"Ints": 12,
-"Strings": &"Random Word"
-}
-intEventChannel = ExtResource("2_ndnuo")
+[node name="Middleman" type="Node" parent="UI"]
+script = ExtResource("6_7rc4l")
 
-[node name="ChangedValue" type="Node" parent="."]
+[node name="GDScript" type="HSlider" parent="UI/Middleman"]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -282.0
+offset_top = -108.0
+offset_right = 310.0
+offset_bottom = -32.0
+grow_horizontal = 2
+grow_vertical = 0
+size_flags_horizontal = 4
+size_flags_vertical = 4
+script = ExtResource("5_qprfr")
+
+[node name="CSlider" type="HSlider" parent="UI"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = 445.0
+offset_top = 53.0
+offset_right = 825.0
+offset_bottom = 131.0
+grow_horizontal = 2
 script = ExtResource("5_2pgo3")
 
-[node name="GDScript" type="Node" parent="."]
-script = ExtResource("5_qprfr")
-intChannel = ExtResource("2_ndnuo")
-intValue = 5
-
-[connection signal="response" from="Listner" to="ChangedValue" method="_on_response"]
-[connection signal="response" from="Listner" to="GDScript" method="_on_response"]
+[connection signal="timeout" from="Emitter/Timer" to="Emitter" method="_on_timer_timeout"]
+[connection signal="response" from="UI" to="UI/Middleman" method="OnResponse"]
+[connection signal="response" from="UI" to="UI/CSlider" method="_on_response"]
+[connection signal="Middleman" from="UI/Middleman" to="UI/Middleman/GDScript" method="_on_middleman"]

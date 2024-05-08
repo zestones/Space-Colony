@@ -14,9 +14,8 @@ autostart = true
 
 [node name="Reciver" type="Node" parent="."]
 script = ExtResource("2_bwgn7")
-Channel = 3
 
-[node name="C#Listener" type="Node" parent="."]
+[node name="C#Listener" type="Node2D" parent="."]
 script = ExtResource("3_uaa17")
 Channel = 1
 

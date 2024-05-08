@@ -2,20 +2,22 @@ using Godot;
 using System;
 
 
-public partial class CListener : Node
+public partial class CListener : Node2D
 {
 	[Export]
-	private int Channel;
+	public int Channel;
 
 	public override void _Ready()
-	{
-		var global = GetNode("/root/GlobalEvents");
-		global.Connect("SendData", new Callable(this,nameof(Recv)));
+	{	
+		var Reference = GD.Load<GDScript>("res://src/Systems/Events/GDscript/GlobalEvents.gd");
+		var Script = (GodotObject)Reference.New();
+		var signal = (Signal)Script.Get("SendData");
+		
 	}
-
 
 	public void Recv(object data, int chan)
 	{
+		GD.Print("Called");
 		if (chan == Channel)
 		{
 			GD.Print(data);

@@ -7,7 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://cf3himx2e0b8u" path="res://assets/environment/props/Icons/Settings_PlaceHolder.png" id="5_rjcuu"]
 [ext_resource type="Texture2D" uid="uid://0untm1f0ms31" path="res://assets/environment/props/PlayerSpriteSheet.png" id="5_twsge"]
 [ext_resource type="Texture2D" uid="uid://demlmuxw2fcpc" path="res://assets/environment/props/Icons/Objective.png" id="6_jt2lf"]
-[ext_resource type="PackedScene" uid="uid://bspvb06d3skqx" path="res://src/UI/settings_screen.tscn" id="6_lyhc8"]
+[ext_resource type="PackedScene" uid="uid://dhb1pcvrg6e4c" path="res://src/UI/settings_screen.tscn" id="6_lyhc8"]
 [ext_resource type="Texture2D" uid="uid://ckvw3y70b34bs" path="res://assets/environment/props/Gun.png" id="9_npm5a"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_w1fxn"]

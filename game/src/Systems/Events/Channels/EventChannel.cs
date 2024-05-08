@@ -1,4 +1,5 @@
 using Godot;
+using Godot.Collections;
 using System.Collections.Generic;
 
 namespace Events
@@ -8,11 +9,13 @@ namespace Events
     {
         private readonly HashSet<EventListener<T>> observers = new();
 
-        public void Invoke(T _value)
+        public void Invoke(T _value, Dictionary _dics)
         {
             foreach (EventListener<T> observer in observers)
             {
-                observer.Raise(_value);
+                GD.Print(observer.Name);
+
+                observer.Raise(_value, _dics);
             }
         }
 

@@ -1,4 +1,5 @@
 using Godot;
+using Godot.Collections;
 
 namespace Events
 {
@@ -17,11 +18,11 @@ namespace Events
             eventChannel.Deregister(this);
         }
 
-        public void Raise(T _value)
+        public void Raise(T _value, Dictionary _dics)
         {
             GD.Print("Event being raised");
 
-            EmitSignal(SignalName.response, args: new EventData<T>(_value));
+            EmitSignal(SignalName.response, new EventData<T>(_value), _dics);
         }
     }
 

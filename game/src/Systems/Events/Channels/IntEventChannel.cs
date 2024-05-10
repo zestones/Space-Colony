@@ -3,13 +3,13 @@ using Godot;
 namespace Events
 {
     [GlobalClass]
-    public partial class IntEventChannel : EventChannel<IntEvent> { }
+    public partial class IntEventChannel : EventChannel<IntEventData> { }
 
-    public readonly struct IntEvent : IEventData
+    public readonly struct IntEventData : IEventData
     {
         public readonly int intValue;
 
-        public IntEvent(int _intValue)
+        public IntEventData(int _intValue)
         {
             intValue = _intValue;
         }

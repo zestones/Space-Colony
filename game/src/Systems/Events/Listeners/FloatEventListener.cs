@@ -1,4 +1,4 @@
 namespace Events
 {
-    public partial class FloatEventListener : EventListener<FloatEvent> { }
+    public partial class FloatEventListener : EventListener<FloatEventData> { }
 }

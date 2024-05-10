@@ -3,12 +3,12 @@ using Godot;
 namespace Events
 {
     [GlobalClass]
-    public partial class FloatEventChannel : EventChannel<FloatEvent> { }
-    public readonly struct FloatEvent : IEventData
+    public partial class FloatEventChannel : EventChannel<FloatEventData> { }
+    public struct FloatEventData : IEventData
     {
         public readonly float floatValue;
 
-        public FloatEvent(float _floatValue)
+        public FloatEventData(float _floatValue)
         {
             floatValue = _floatValue;
         }

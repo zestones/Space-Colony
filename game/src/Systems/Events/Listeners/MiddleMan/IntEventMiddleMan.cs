@@ -1,12 +1,15 @@
+
+
 using Godot;
 
 namespace Events
 {
-    public partial class IntEventMiddleMan : EventMiddleMan<EventData<IntEvent>>
+    public partial class IntEventMiddleMan : EventMiddleMan<EventData<IntEventData>>
     {
-        public override void OnResponse(EventData<IntEvent> _data)
-        {
-            EmitSignal(SignalName.Middleman, _data.Value.intValue);
-        }
+        [Export] private IntEventChannel intChannel;
+
+        public void EmitEvent(int _int) => intChannel?.Invoke(new IntEventData(_int));
+
+        public override void OnResponse(EventData<IntEventData> _data) => EmitSignal(SignalName.Middleman, _data.Value.intValue);
     }
 }

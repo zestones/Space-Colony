@@ -15,8 +15,7 @@ var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 #References
 @onready var Camera = $Camera2D
 @onready var player = $Player/Body
-@export var Inventory : UniversalInventory
-
+@export var Emitter : Node
 
 #Preload bullet scene/prefab
 const BULLET = preload("res://src/Combat/Bullet/bullet.tscn")
@@ -45,11 +44,13 @@ func _ready():
 	Update_Objective()
 
 func Update_Objective():
-	$HUD/UI/ObjectiveSys/Objective.text = Objectives[CurrentObjective]
+	pass
+	#$HUD/UI/ObjectiveSys/Objective.text = Objectives[CurrentObjective]
 	
 	
 func _physics_process(delta):
-
+	Emitter.call("EmitEvent",["Test"])
+	
 	#Gravity
 	if not is_on_floor():
 		$AnimationPlayer.play("Jump")
@@ -65,8 +66,8 @@ func _physics_process(delta):
 			$Gun.flip_h = false
 		
 	
-	$HUD/UI/Hp.value = Hp
-	$HUD/UI/KillLable.text = "Attack Points : " + str(round(KillScore))
+	#$HUD/UI/Hp.value = Hp
+	#$HUD/UI/KillLable.text = "Attack Points : " + str(round(KillScore))
 	if Hp < 1:
 		#Stop the player from moving
 		UnderControl = false
@@ -127,4 +128,6 @@ func _on_shoot_rate_timeout():
 
 func _on_settings_pressed():
 	UnderControl = false
-	$HUD/Settings_Screen.visible = true
+	#$HUD/Settings_Screen.visible = true
+
+

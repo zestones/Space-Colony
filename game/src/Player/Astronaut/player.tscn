@@ -1,13 +1,12 @@
-[gd_scene load_steps=16 format=3 uid="uid://dchsqd1xaupl1"]
+[gd_scene load_steps=15 format=3 uid="uid://dchsqd1xaupl1"]
 
 [ext_resource type="Script" path="res://src/Player/Astronaut/player.gd" id="1_secmd"]
 [ext_resource type="AudioStream" uid="uid://db72xv76uw2al" path="res://assets/audio/SFX/PlayerShoot.wav" id="2_ngw4y"]
 [ext_resource type="AudioStream" uid="uid://jude3rtfr2k0" path="res://assets/audio/SFX/PlayerJump.wav" id="3_m4v1s"]
 [ext_resource type="PackedScene" uid="uid://ckinev5mjn2in" path="res://src/Player/Transitions/sceneTransitioner.tscn" id="4_4jeyn"]
-[ext_resource type="Texture2D" uid="uid://cf3himx2e0b8u" path="res://assets/environment/props/Icons/Settings_PlaceHolder.png" id="5_rjcuu"]
 [ext_resource type="Texture2D" uid="uid://0untm1f0ms31" path="res://assets/environment/props/PlayerSpriteSheet.png" id="5_twsge"]
-[ext_resource type="Texture2D" uid="uid://demlmuxw2fcpc" path="res://assets/environment/props/Icons/Objective.png" id="6_jt2lf"]
-[ext_resource type="PackedScene" uid="uid://dhb1pcvrg6e4c" path="res://src/UI/settings_screen.tscn" id="6_lyhc8"]
+[ext_resource type="Script" path="res://src/Systems/Events/Listeners/MiddleMan/PlayerDataEventMiddleman.cs" id="7_cloqk"]
+[ext_resource type="Resource" uid="uid://x03bywyp0dt6" path="res://src/Systems/Events/Resources/PlayerUIChannel.tres" id="8_c1wbe"]
 [ext_resource type="Texture2D" uid="uid://ckvw3y70b34bs" path="res://assets/environment/props/Gun.png" id="9_npm5a"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_w1fxn"]
@@ -87,8 +86,9 @@ _data = {
 "Walk": SubResource("Animation_a5exd")
 }
 
-[node name="Player" type="CharacterBody2D" groups=["Dammagable", "Player"]]
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("Emitter") groups=["Dammagable", "Player"]]
 script = ExtResource("1_secmd")
+Emitter = NodePath("Emitter")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-6, 4.5)
@@ -127,96 +127,6 @@ libraries = {
 "": SubResource("AnimationLibrary_o6ac5")
 }
 
-[node name="HUD" type="CanvasLayer" parent="."]
-
-[node name="UI" type="Control" parent="HUD"]
-texture_filter = 1
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="Hp" type="ProgressBar" parent="HUD/UI"]
-modulate = Color(1, 1, 0.811765, 1)
-texture_filter = 1
-layout_mode = 1
-offset_left = 136.0
-offset_top = 19.0
-offset_right = 394.0
-offset_bottom = 54.0
-theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 6
-theme_override_font_sizes/font_size = 22
-step = 1.0
-value = 100.0
-rounded = true
-
-[node name="HpLable" type="RichTextLabel" parent="HUD/UI"]
-texture_filter = 1
-layout_mode = 0
-offset_left = 6.0
-offset_top = 15.0
-offset_right = 185.0
-offset_bottom = 61.0
-theme_override_colors/default_color = Color(0, 0, 0, 1)
-theme_override_constants/shadow_offset_x = 12
-theme_override_constants/outline_size = 7
-theme_override_font_sizes/normal_font_size = 32
-text = "Health : "
-
-[node name="KillLable" type="RichTextLabel" parent="HUD/UI"]
-texture_filter = 1
-layout_mode = 1
-anchors_preset = -1
-offset_left = 7.0
-offset_top = 76.0
-offset_right = 387.0
-offset_bottom = 122.0
-theme_override_colors/default_color = Color(0, 0, 0, 1)
-theme_override_constants/shadow_offset_x = 12
-theme_override_constants/outline_size = 7
-theme_override_font_sizes/normal_font_size = 32
-text = "Attack Points : 0"
-
-[node name="Settings" type="TextureButton" parent="HUD/UI"]
-modulate = Color(0.380392, 0.168627, 0.478431, 1)
-layout_mode = 0
-offset_left = 20.0
-offset_top = 644.0
-offset_right = 84.0
-offset_bottom = 708.0
-texture_normal = ExtResource("5_rjcuu")
-
-[node name="Objective2" type="Sprite2D" parent="HUD/UI"]
-position = Vector2(1128, 41)
-texture = ExtResource("6_jt2lf")
-
-[node name="ObjectiveSys" type="Label" parent="HUD/UI"]
-layout_mode = 0
-offset_left = 993.0
-offset_top = 21.0
-offset_right = 1100.0
-offset_bottom = 59.0
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 23
-text = "Objective
-"
-
-[node name="Objective" type="RichTextLabel" parent="HUD/UI/ObjectiveSys"]
-layout_mode = 0
-offset_left = 138.0
-offset_top = -5.0
-offset_right = 275.0
-offset_bottom = 51.0
-theme_override_colors/default_color = Color(1, 1, 1, 1)
-text = "Get to the Tower and enable it !"
-
-[node name="Settings_Screen" parent="HUD" instance=ExtResource("6_lyhc8")]
-visible = false
-
 [node name="ShootRate" type="Timer" parent="."]
 wait_time = 0.6
 autostart = true
@@ -225,5 +135,8 @@ autostart = true
 position = Vector2(-2, 0)
 texture = ExtResource("9_npm5a")
 
-[connection signal="pressed" from="HUD/UI/Settings" to="." method="_on_settings_pressed"]
+[node name="Emitter" type="Node" parent="."]
+script = ExtResource("7_cloqk")
+playerEventChannel = ExtResource("8_c1wbe")
+
 [connection signal="timeout" from="ShootRate" to="." method="_on_shoot_rate_timeout"]

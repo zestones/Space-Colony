@@ -1,0 +1,64 @@
+[gd_scene load_steps=7 format=3 uid="uid://c1egwbu2qckox"]
+
+[ext_resource type="Script" path="res://src/Systems/Events/Folder.TEMP/TestEmitter.cs" id="1_n2agj"]
+[ext_resource type="Resource" uid="uid://df4slqoxrc74d" path="res://src/Systems/Events/Resources/SliderEvent.tres" id="2_j4upp"]
+[ext_resource type="Script" path="res://src/Systems/Events/Listeners/FloatEventListener.cs" id="3_lkv31"]
+[ext_resource type="Script" path="res://src/Systems/Events/Listeners/MiddleMan/FloatEventMiddleMan.cs" id="4_kotv3"]
+[ext_resource type="Script" path="res://src/Systems/Events/Folder.TEMP/GDScript.gd" id="5_jj6g3"]
+[ext_resource type="Script" path="res://src/Systems/Events/Folder.TEMP/ChangeValue.cs" id="6_6v8jo"]
+
+[node name="TypeOne" type="Node"]
+
+[node name="CSEmitter" type="Node" parent="."]
+script = ExtResource("1_n2agj")
+value = 2.3
+intEventChannel = ExtResource("2_j4upp")
+
+[node name="Timer" type="Timer" parent="CSEmitter"]
+autostart = true
+
+[node name="UI" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("3_lkv31")
+eventChannel = ExtResource("2_j4upp")
+
+[node name="Middleman" type="Node" parent="UI"]
+script = ExtResource("4_kotv3")
+
+[node name="GDScript" type="HSlider" parent="UI/Middleman"]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -282.0
+offset_top = -108.0
+offset_right = 310.0
+offset_bottom = -32.0
+grow_horizontal = 2
+grow_vertical = 0
+size_flags_horizontal = 4
+size_flags_vertical = 4
+script = ExtResource("5_jj6g3")
+
+[node name="CSlider" type="HSlider" parent="UI"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -185.0
+offset_top = 107.0
+offset_right = 195.0
+offset_bottom = 185.0
+grow_horizontal = 2
+script = ExtResource("6_6v8jo")
+
+[connection signal="timeout" from="CSEmitter/Timer" to="CSEmitter" method="_on_timer_timeout"]
+[connection signal="response" from="UI" to="UI/Middleman" method="OnResponse"]
+[connection signal="response" from="UI" to="UI/CSlider" method="_on_response"]
+[connection signal="Middleman" from="UI/Middleman" to="UI/Middleman/GDScript" method="_on_middleman"]

@@ -1,0 +1,6 @@
+[gd_resource type="Resource" script_class="FloatEventChannel" load_steps=2 format=3 uid="uid://df4slqoxrc74d"]
+
+[ext_resource type="Script" path="res://src/Systems/Events/Channels/FloatEventChannel.cs" id="1_mjjjy"]
+
+[resource]
+script = ExtResource("1_mjjjy")

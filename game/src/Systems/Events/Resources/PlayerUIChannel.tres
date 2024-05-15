@@ -1,0 +1,6 @@
+[gd_resource type="Resource" load_steps=2 format=3 uid="uid://x03bywyp0dt6"]
+
+[ext_resource type="Script" path="res://src/Systems/Events/Channels/PlayerEventChannel.cs" id="1_akv6r"]
+
+[resource]
+script = ExtResource("1_akv6r")

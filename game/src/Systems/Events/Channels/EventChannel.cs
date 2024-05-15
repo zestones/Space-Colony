@@ -4,7 +4,6 @@ using System.Collections.Generic;
 
 namespace Events
 {
-
     public abstract partial class EventChannel<T> : Resource where T : IEventData
     {
         private readonly HashSet<EventListener<T>> observers = new();

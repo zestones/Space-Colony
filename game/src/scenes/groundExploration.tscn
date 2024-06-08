@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3 uid="uid://d0n8e2vj61dbl"]
+[gd_scene load_steps=30 format=3 uid="uid://d0n8e2vj61dbl"]
 
 [ext_resource type="PackedScene" uid="uid://dchsqd1xaupl1" path="res://src/Player/Astronaut/player.tscn" id="1_asd2u"]
 [ext_resource type="AudioStream" uid="uid://clu06bwm86ti" path="res://assets/audio/GroundCombat.wav" id="2_l138s"]
@@ -14,6 +14,7 @@
 [ext_resource type="Texture2D" uid="uid://dyryurepvdraa" path="res://assets/environment/props/Icons/enemyRocketShip.png" id="12_hhus7"]
 [ext_resource type="Texture2D" uid="uid://cvwb6eyupf1rk" path="res://assets/environment/props/Aliens/Spawner.png" id="13_d5aqh"]
 [ext_resource type="Texture2D" uid="uid://d06ktm8osljaa" path="res://assets/environment/props/Icons/EarthText.png" id="14_lj7db"]
+[ext_resource type="Texture2D" uid="uid://demlmuxw2fcpc" path="res://assets/environment/props/Icons/Objective.png" id="14_mdy1p"]
 [ext_resource type="Texture2D" uid="uid://b1bixlq06c6jl" path="res://assets/environment/props/Icons/TextStyle-1.png" id="15_tcvlr"]
 [ext_resource type="Script" path="res://src/Systems/Events/Listeners/PlayerDataEventListner.cs" id="16_imrnf"]
 [ext_resource type="Resource" uid="uid://x03bywyp0dt6" path="res://src/Systems/Events/Resources/PlayerUIChannel.tres" id="17_qxcxs"]
@@ -370,6 +371,58 @@ position = Vector2(28, -68)
 texture = ExtResource("15_tcvlr")
 flip_v = true
 
+[node name="Listener" type="Node" parent="HUD"]
+script = ExtResource("16_imrnf")
+eventChannel = ExtResource("17_qxcxs")
+
+[node name="DataConvertor" type="Node" parent="HUD/Listener"]
+script = ExtResource("18_yr15o")
+
+[node name="PlayerUI" type="Control" parent="HUD/Listener/DataConvertor" node_paths=PackedStringArray("ObjectiveDisplay", "Health")]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("19_cpp6d")
+ObjectiveDisplay = NodePath("ObjectiveSys/Objective")
+Health = NodePath("Health/Hp")
+
+[node name="ObjectiveSys" type="Sprite2D" parent="HUD/Listener/DataConvertor/PlayerUI"]
+position = Vector2(1123, 50)
+texture = ExtResource("14_mdy1p")
+
+[node name="Label" type="RichTextLabel" parent="HUD/Listener/DataConvertor/PlayerUI/ObjectiveSys"]
+offset_left = -140.0
+offset_top = -19.0
+offset_right = -6.0
+offset_bottom = 23.0
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/normal_font_size = 25
+text = "Objective"
+
+[node name="Objective" type="RichTextLabel" parent="HUD/Listener/DataConvertor/PlayerUI/ObjectiveSys"]
+offset_left = -4.0
+offset_top = -38.0
+offset_right = 147.0
+offset_bottom = 37.0
+theme_override_font_sizes/normal_font_size = 25
+text = "Objective"
+
+[node name="Health" type="Label" parent="HUD/Listener/DataConvertor/PlayerUI"]
+layout_mode = 0
+offset_right = 117.0
+offset_bottom = 45.0
+theme_override_font_sizes/font_size = 32
+text = "Health : "
+
+[node name="Hp" type="RichTextLabel" parent="HUD/Listener/DataConvertor/PlayerUI/Health"]
+offset_left = 122.0
+offset_top = 7.0
+offset_right = 256.0
+offset_bottom = 49.0
+theme_override_font_sizes/normal_font_size = 29
+text = "100"
+
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
 follow_viewport_scale = 0.001
 
@@ -511,19 +564,5 @@ texture = SubResource("GradientTexture1D_igpsn")
 hframes = 4
 frame = 1
 
-[node name="Listener" type="Node" parent="."]
-script = ExtResource("16_imrnf")
-eventChannel = ExtResource("17_qxcxs")
-
-[node name="DataConvertor" type="Node" parent="Listener"]
-script = ExtResource("18_yr15o")
-
-[node name="PlayerUI" type="Control" parent="Listener/DataConvertor"]
-layout_mode = 3
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
-script = ExtResource("19_cpp6d")
-
-[connection signal="response" from="Listener" to="Listener/DataConvertor" method="OnResponse"]
-[connection signal="Middleman" from="Listener/DataConvertor" to="Listener/DataConvertor/PlayerUI" method="_on_data_convertor_middleman"]
+[connection signal="response" from="HUD/Listener" to="HUD/Listener/DataConvertor" method="OnResponse"]
+[connection signal="Middleman" from="HUD/Listener/DataConvertor" to="HUD/Listener/DataConvertor/PlayerUI" method="_on_data_convertor_middleman"]

@@ -14,6 +14,7 @@ var activated = false
 @export var BatteryCapacity: int = 100
 @export var batteryPerShot: int = 2
 @export var Dammage: float = 0.2
+
 func _process(delta):
 	$Battery.value = BatteryCapacity
 	$Health.value = Hp
@@ -46,12 +47,15 @@ func _process(delta):
 	if player != null:
 		if abs(player.global_position - global_position).length() < 300:
 			
-			if Index < 4:
-				player.CurrentObjective = 1
-				player.Update_Objective()
-			else:
-				player.CurrentObjective = 2
-				player.Update_Objective()
+			"""
+			TEMP CODE
+			"""
+			#if Index < 4:
+				#player.CurrentObjective = 1
+				#player.Update_Objective()
+			#else:
+				#player.CurrentObjective = 2
+				#player.Update_Objective()
 			
 			if BatteryCapacity > 0:
 				$TextPopUp/RichTextLabel.text = "E to Enable"

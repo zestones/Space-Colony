@@ -25,12 +25,12 @@ const BULLET = preload("res://src/Combat/Bullet/bullet.tscn")
 @onready var world = $".."
 
 @onready var bullet_spawner = $bulletSpawner
-@onready var animator = $AnimationPlayer
+@onready var animator = $Mods
 
 #This variable is used to define is the player is allowed to move or not
 var UnderControl = true
 
-var Dammage = 1
+var Dammage = 5
 var currrentDirection = 1
 var KillScore = 0
 var CurrentObjective = 0
@@ -40,16 +40,14 @@ var Objectives = [
 	"Get into Space !"
 ]
 
-func _ready():
-	Update_Objective()
 
-func Update_Objective():
-	pass
-	#$HUD/UI/ObjectiveSys/Objective.text = Objectives[CurrentObjective]
-	
-	
+
 func _physics_process(delta):
-	Emitter.call("EmitEvent",["Test"])
+	
+	Emitter.EmitEvent([{
+		"Objective" : Objectives[CurrentObjective],
+		"Health" : str(Hp)
+	}])
 	
 	#Gravity
 	if not is_on_floor():
